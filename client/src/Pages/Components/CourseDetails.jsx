@@ -35,7 +35,7 @@ const BannerSection = styled.div`
   }
 
   > * {
-    position: relative
+    position: relative;
     z-index: 2;
   }
 
