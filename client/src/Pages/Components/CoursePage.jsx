@@ -1,11 +1,24 @@
 import React, { useState } from 'react';
 import CourseCard from './CourseCard';
 import { courses } from '../Data/CourseData';
+import styled from 'styled-components';
+
+const CourseGrid = styled.div`
+  display: grid;
+  gap: 2rem;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
 
 const CoursePage = () => {
   const [showAll, setShowAll] = useState(false);
 
-  const visibleCourses = showAll ? courses : courses.slice(0, 2);
+  const visibleCourses = showAll ? courses : courses.slice(0, 4);
 
   return (
     <div style={{ padding: '2rem' }}>
@@ -13,17 +26,11 @@ const CoursePage = () => {
         Explore Our Courses
       </h2>
 
-      <div
-        style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
-        }}
-      >
+      <CourseGrid>
         {visibleCourses.map((course) => (
           <CourseCard key={course.id} course={course} onViewDetails={(id) => console.log('View details for', id)} />
         ))}
-      </div>
+      </CourseGrid>
 
       {courses.length > 2 && (
         <div style={{ textAlign: 'center', marginTop: '2rem' }}>

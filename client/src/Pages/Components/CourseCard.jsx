@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const CategoryColors = {
   Technology: { bg: '#EBF5FF', border: '#2563EB', text: '#1E40AF' },
@@ -177,7 +178,9 @@ const CourseCard = ({ course, onViewDetails }) => {
           <Value>{course.students.toLocaleString()}</Value>
         </InfoRow>
         <ButtonGroup>
-          <OutlineButton onClick={() => onViewDetails(course.id)}>View Details</OutlineButton>
+          <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}>
+            <OutlineButton>View Details</OutlineButton>
+          </Link>
           <FillButton>Enroll Now</FillButton>
         </ButtonGroup>
       </Content>

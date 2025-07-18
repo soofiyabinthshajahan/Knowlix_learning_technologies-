@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Global.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 //import Header from "./Pages/Header"
 import AboutSection from "./Pages/About";
 import Home from "./Pages/Home";
@@ -8,7 +9,7 @@ import Syllabus from "./Pages/Syllabus";
 import TestimonialPage from "./Pages/Testimonial";
 import CoursePage from "./Pages/Components/CoursePage";
 // import CourseGrid from './Pages/Components/CoursePage';
-// import CourseDetails from './Pages/Components/CourseDetails';
+import CourseDetails from './Pages/Components/CourseDetails';
 // import { courses } from './Pages/Data/CourseData';
 
 function App() {
@@ -33,27 +34,38 @@ function App() {
 
   // // Otherwise, show the full homepage with all sections
   return (
-    <div>
-      <div id="home" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
-        <Home />
-      </div>
+    <Router>
+      <Routes>
+        {/* Home and all sections */}
+        <Route
+          path="/"
+          element={
+            <>
+              <div id="home" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
+                <Home />
+              </div>
 
-      <Syllabus />
+              <Syllabus />
 
-      <div id="about" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
-        <AboutSection />
-      </div>
+              <div id="about" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
+                <AboutSection />
+              </div>
 
-      <ServiceSection />
+              <ServiceSection />
 
-      {/* <CourseGrid courses={courses} onViewDetails={handleViewDetails} /> */}
-      <div id="courses" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
-        <CoursePage />
-      </div>
+              <div id="courses" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
+                <CoursePage />
+              </div>
 
-      <TestimonialPage />
+              <TestimonialPage />
+            </>
+          }
+        />
 
-    </div>
+        {/* Course details page */}
+        <Route path="/courses/:id" element={<CourseDetails />} />
+      </Routes>
+    </Router>
   );
 }
 
