@@ -40,8 +40,8 @@ const BannerSection = styled.div`
   }
 
   @media (max-width: 768px) {
-    height: 30vh;
-  }
+    height: auto;
+    padding: 2rem 1rem;
 `;
 
 const Path = styled.div`
@@ -113,6 +113,11 @@ const FacultyName = styled.a`
   &:hover {
     color: #477e6a;
     text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    padding-right: 0;
+    font-size: 1.1rem;
   }
 ;`
 
