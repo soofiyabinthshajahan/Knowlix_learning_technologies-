@@ -36,7 +36,7 @@ const BannerSection = styled.div`
 
   > * {
     position: relative;
-    z-index: 2
+    z-index: 2;
   }
 
   @media (max-width: 768px) {
