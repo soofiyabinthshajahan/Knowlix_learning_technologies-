@@ -30,7 +30,7 @@ const BannerSection = styled.div`
     width: 100%;
     height: 100%;
     backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.35);
     z-index: 1;
   }
 
