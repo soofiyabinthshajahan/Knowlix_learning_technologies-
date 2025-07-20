@@ -12,7 +12,7 @@ const BannerSection = styled.div`
   padding: 4rem;
   width: 100%;
   height: 46vh;
-  background-image: url("https://images.pexels.com/photos/5711948/pexels-photo-5711948.jpeg");
+  background-image: url("https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -29,8 +29,8 @@ const BannerSection = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.2);
     z-index: 1;
   }
 
@@ -56,19 +56,19 @@ const Path_1 = styled.a`
   text-decoration: none;
 
   &:hover {
-    color: #477e6a;
+    color: #158a68;
   }
 `;
 
 const Path_2 = styled.a`
-  color: #006c45;
+  color: #477e6a;
   font-size: 0.95rem;
   margin-bottom: 2rem;
   font-weight: 550;
   text-decoration: none;
 
   &:hover {
-    color: #477e6a;
+    color: #158a68;
   }
 `;
 
@@ -76,7 +76,7 @@ const Title = styled.h1`
   font-size: 2.2rem;
   font-weight: 600;
   margin-bottom: 0.5rem;
-  color: #006c45;
+  color: #477e6a;
 `;
 
 const SubTitleWrap = styled.div`
@@ -102,7 +102,7 @@ const FacultyInfo = styled.div`
 
 const FacultyName = styled.a`
   font-size: 1.3rem;
-  color: #006c45;
+  color: #477e6a;
   text-decoration: none;
   font-weight: 600;
   display: block;
@@ -111,7 +111,7 @@ const FacultyName = styled.a`
   padding-right: 20rem;
 
   &:hover {
-    color: #477e6a;
+    color: #158a68;
     text-decoration: underline;
   }
 
@@ -138,10 +138,13 @@ const InfoGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 16px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #333;
   padding: 1.5rem;
-  justify-items: center;
+  width: 60%;
+  margin: auto;
+  place-items: center;
+  text-align: center;
 `;
 
 const InfoItem = styled.div`
@@ -152,7 +155,7 @@ const InfoItem = styled.div`
   text-align: center;
 
   strong {
-    color: #006c45;
+    color: #477e6a;
   }
 `;
 
@@ -163,7 +166,7 @@ const Section = styled.section`
 const SectionTitle = styled.h2`
   font-size: 1.3rem;
   margin-bottom: 1rem;
-  color: #006c45;
+  color: #477e6a;
 `;
 
 const LearnList = styled.ul`
@@ -177,7 +180,7 @@ const LearnItem = styled.li`
   position: relative;
 
   &::before {
-    color: #006c45;
+    color: #477e6a;
     content: "✔";
     position: absolute;
     left: 0;
@@ -192,27 +195,29 @@ const SidebarWrapper = styled.div`
 `;
 
 const SidebarCard = styled.div`
-  border-radius: 30px;
-  box-shadow: 4px 4px 20px #bcbbbbff;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s;
   padding: 2rem;
-  background: #f7f8f9;
+  background: rgba(71, 126, 106, 0.1);
   margin-top: 2rem;
-  height: fir-content;
-  align-self: start;
-  text-decoration: none;
+  border-right: 4px solid #477e6a;
 
   h3, strong {
-    color: #006c45;
-    font-weight: 600;
+    color: #477e6a;
+    font-weight: 650;
   }
 
   ul li {
+    margin-bottom: 0.75rem;
     cursor: pointer;
-    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+    font-weight: 420;
   }
 
   ul li:hover {
-    color: #477e6a;
+    color: #407360ff;
+    transform: translateX(5px);
   }
 `;
 
@@ -242,7 +247,7 @@ const Button = styled.button`
   flex: 1;
   padding: 15px 25px;
   border: none;
-  border-radius: 15px;
+  border-radius: 12px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
@@ -251,11 +256,12 @@ const Button = styled.button`
   letter-spacing: 0.5px;
 
   &.primary {
-    background: #006c45;
+    background: #477e6a;
     color: white;
     box-shadow: 0 4px 15px rgba(71, 126, 106, 0.3);
 
     &:hover {
+      background: #158a68;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(71, 126, 106, 0.4);
     }
@@ -263,12 +269,13 @@ const Button = styled.button`
 
   &.secondary {
     background: transparent;
-    color: #747977ff;
-    border: 2px solid #a4a5a5ff;
+    color: #646a68ff;
+    border: 0.02rem solid #8f9090ff;
 
     &:hover {
-      color: #747977ff;
+      background: rgba(71, 126, 106, 0.13);
       transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
   }
 ;`
@@ -277,7 +284,7 @@ const SyllabusSection = styled.div`
 
   h3 {
     font-size: 1.5rem;
-    color: #006c45;
+    color: #477e6a;
     margin-bottom: 20px;
     font-weight: 600;
   }
@@ -308,7 +315,6 @@ const CompanyLogos = styled.div`
   img {
     height: 40px;
     width: auto;
-    filter: grayscale(100%);
     transition: filter 0.3s ease;
 
     &:hover {
@@ -447,6 +453,13 @@ const CoursePage = () => {
               <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
               <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" />
               <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/1199px-IBM_logo.svg.png?20250604110737" alt="IBM" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1200px-Razorpay_logo.svg.png?20171127075036" alt="Razorpay" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Intel_logo_2023.svg/768px-Intel_logo_2023.svg.png?20230330174340" alt="Intel" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/245px-Accenture.svg.png?20241209170218" alt="Accenture" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/768px-Wipro_new_logo.svg.png?20250425120007" alt="Wipro" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/600px-Infosys_logo.svg.png?20100302211036" alt="Infoys" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/EY_logo_2019.svg/104px-EY_logo_2019.svg.png?20200124061112" alt="EY" />
             </CompanyLogos>
           </CompaniesSection>
 
