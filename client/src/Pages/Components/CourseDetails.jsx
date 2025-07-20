@@ -1,334 +1,473 @@
-import React from 'react';
-import styled from 'styled-components';
-import { ArrowLeft, Clock, Users, BookOpen, Award, Star, Play, CheckCircle } from 'lucide-react';
+import React from "react";
+import styled from "styled-components";
+import WeekSection from "./WeekSection";
 
-const Container = styled.div`
+const Wrapper = styled.div`
+  width: 100%;
   min-height: 100vh;
-  background-color: #f9fafb;
+  background-color: #f8f9fa;
 `;
 
-const Header = styled.div`
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-`;
-
-const HeaderContent = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1rem 1rem;
+const BannerSection = styled.div`
+  padding: 4rem;
+  width: 100%;
+  height: 46vh;
+  background-image: url("https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px);
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 1;
+  }
+
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 768px) {
+    height: auto;
+    padding: 2rem 1rem;
 `;
 
-const BackButton = styled.button`
+const Path = styled.div`
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: #4B5563;
-  font-weight: 500;
-  transition: 0.2s;
+;`
+
+const Path_1 = styled.a`
+  color: #3d3d3dff;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  font-weight: 550;
+  text-decoration: none;
+
   &:hover {
-    color: #111827;
+    color: #158a68;
   }
 `;
 
-const Layout = styled.div`
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
+const Path_2 = styled.a`
+  color: #477e6a;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  font-weight: 550;
+  text-decoration: none;
 
-  @media(min-width: 1024px) {
-    grid-template-columns: 2fr 1fr;
+  &:hover {
+    color: #158a68;
   }
-`;
-
-const Card = styled.div`
-  background: white;
-  border-radius: 1.5rem;
-  padding: 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-`;
-
-const Badge = styled.div`
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 600;
-  border: 1px solid;
 `;
 
 const Title = styled.h1`
-  font-size: 2.25rem;
-  font-weight: bold;
-  color: #111827;
-  margin: 1rem 0;
+  font-size: 2.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #477e6a;
 `;
 
-const Description = styled.p`
-  font-size: 1.125rem;
-  color: #4B5563;
-  line-height: 1.75rem;
-  margin-bottom: 1.5rem;
-`;
-
-const InfoRow = styled.div`
+const SubTitleWrap = styled.div`
   display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  color: #4B5563;
-  font-size: 0.875rem;
 `;
 
-const ImageWrapper = styled.div`
-  position: relative;
-  border-radius: 1rem;
-  overflow: hidden;
+const SubTitle = styled.p`
+  color: #3d3d3dff;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+  text-decoration: underline;
 `;
 
-const CourseImage = styled.img`
-  width: 100%;
-  height: 20rem;
-  object-fit: cover;
-`;
-
-const Overlay = styled.div`
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const PlayButton = styled.button`
-  width: 5rem;
-  height: 5rem;
+const FacultyInfo = styled.div`
+  margin-bottom: 30px;
+  padding: 0.5rem;
   background: rgba(255, 255, 255, 0.9);
-  border-radius: 9999px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 0.2s;
+  border-radius: 6px;
+  border-left: 4px solid #477e6a;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+;`
+
+const FacultyName = styled.a`
+  font-size: 1.3rem;
+  color: #477e6a;
+  text-decoration: none;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  transition: color 0.3s ease;
+  padding-right: 20rem;
+
   &:hover {
-    background: white;
+    color: #158a68;
+    text-decoration: underline;
   }
+
+  @media (max-width: 768px) {
+    padding-right: 0;
+    font-size: 1.1rem;
+  }
+;`
+
+const FacultyQualifications = styled.a`
+  font-size: 1rem;
+  color: #666;
+  text-decoration: none;
+  font-style: italic;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: #477e6a;
+    text-decoration: underline;
+  }
+;`
+
+const InfoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 16px;
+  font-size: 1rem;
+  color: #333;
+  padding: 1.5rem;
+  width: 60%;
+  margin: auto;
+  place-items: center;
+  text-align: center;
+`;
+
+const InfoItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+  font-size: 15;
+  text-align: center;
+
+  strong {
+    color: #477e6a;
+  }
+`;
+
+const Section = styled.section`
+  margin-bottom: 3rem;
 `;
 
 const SectionTitle = styled.h2`
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #111827;
-  margin-bottom: 1.5rem;
-`;
-
-const Feature = styled.div`
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  color: #374151;
-`;
-
-const ModuleBox = styled.div`
-  border: 1px solid #e5e7eb;
-  border-radius: 0.75rem;
-`;
-
-const ModuleHeader = styled.div`
-  background: #f9fafb;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
-  font-weight: 600;
-  color: #111827;
-`;
-
-const LessonList = styled.div`
-  padding: 1.5rem;
-`;
-
-const Lesson = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #374151;
-  font-size: 0.875rem;
-`;
-
-const Price = styled.div`
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #111827;
-  margin-bottom: 0.5rem;
-`;
-
-const SidebarButton = styled.button`
-  width: 100%;
-  padding: 1rem 1.5rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  border-radius: 0.75rem;
+  font-size: 1.3rem;
   margin-bottom: 1rem;
-  transition: 0.2s;
+  color: #477e6a;
 `;
 
-const EnrollButton = styled(SidebarButton)`
-  background: #059669;
-  color: white;
-  &:hover {
-    background: #047857;
+const LearnList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+`;
+
+const LearnItem = styled.li`
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+
+  &::before {
+    color: #477e6a;
+    content: "✔";
+    position: absolute;
+    left: 0;
+    top: 0;
   }
 `;
 
-const WishlistButton = styled(SidebarButton)`
-  border: 2px solid #e5e7eb;
-  color: #374151;
-  background: white;
-  &:hover {
-    background: #f3f4f6;
+const SidebarWrapper = styled.div`
+  @media (max-width: 768px) {
+    order: -1;
   }
 `;
 
-const InstructorBadge = styled.div`
-  width: 4rem;
-  height: 4rem;
-  border-radius: 9999px;
-  background: linear-gradient(to bottom right, #34d399, #059669);
-  color: white;
-  font-weight: bold;
-  font-size: 1.25rem;
+const SidebarCard = styled.div`
+  border-radius: 1.5rem;
+  overflow: hidden;
+  transition: all 0.3s;
+  padding: 2rem;
+  background: rgba(71, 126, 106, 0.1);
+  margin-top: 2rem;
+  border-right: 4px solid #477e6a;
+
+  h3, strong {
+    color: #477e6a;
+    font-weight: 650;
+  }
+
+  ul li {
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 420;
+  }
+
+  ul li:hover {
+    color: #407360ff;
+    transform: translateX(5px);
+  }
+`;
+
+const ButtonGroup = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+;`
+
+const GridWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+  padding: 4rem;
+  background: #e9e9e9ff;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const CourseDetails = ({ course, onBack }) => {
-  const categoryColor = {
-    backgroundColor: course?.category && CategoryColors[course.category]?.bg,
-    borderColor: course?.category && CategoryColors[course.category]?.border,
-    color: course?.category && CategoryColors[course.category]?.text,
-  };
+const Button = styled.button`
+  flex: 1;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
+  &.primary {
+    background: #477e6a;
+    color: white;
+    box-shadow: 0 4px 15px rgba(71, 126, 106, 0.3);
+
+    &:hover {
+      background: #158a68;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(71, 126, 106, 0.4);
+    }
+  }
+
+  &.secondary {
+    background: transparent;
+    color: #646a68ff;
+    border: 0.02rem solid #8f9090ff;
+
+    &:hover {
+      background: rgba(71, 126, 106, 0.13);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+;`
+
+const SyllabusSection = styled.div`
+
+  h3 {
+    font-size: 1.5rem;
+    color: #477e6a;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+;`
+
+const CompaniesSection = styled.div`
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  h3 {
+    font-size: 1.3rem;
+    color: #006c45;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+;`
+
+const CompanyLogos = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  img {
+    height: 40px;
+    width: auto;
+    transition: filter 0.3s ease;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+  }
+;`
+
+const Footer = styled.div`
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 0.9rem;
+;`
+
+const CoursePage = () => {
   return (
-    <Container>
-      <Header>
-        <HeaderContent>
-          <BackButton onClick={onBack}>
-            <ArrowLeft size={20} /> Back to Courses
-          </BackButton>
-        </HeaderContent>
-      </Header>
-      <Layout>
+    <Wrapper>
+      <BannerSection>
+        <Path>
+          <Path_1 href="/">Courses</Path_1>
+          <p>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
+          <Path_2 href="">Python & Django</Path_2>
+        </Path>
+        <Title>Python & Django</Title>
+        <SubTitleWrap>
+          <SubTitle>Course on Knowlix</SubTitle>
+          <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
+          <SubTitle>By Knowlix Technologies</SubTitle>
+        </SubTitleWrap>
+        <FacultyInfo>
+          <FacultyName href="#faculty-profile">Dr. Sarah Johnson</FacultyName>
+          <FacultyQualifications href="#faculty-qualifications">
+            Ph.D. Computer Science, IIT
+          </FacultyQualifications>
+        </FacultyInfo>
+      </BannerSection>
+
+      <InfoGrid>
+        <InfoItem>
+          <strong>Duration</strong>
+          3 Weeks
+        </InfoItem>
+        <InfoItem>
+          <strong>Mode</strong>
+          Hybrid
+        </InfoItem>
+        <InfoItem>
+          <strong>Enrolled Students</strong>
+          400
+        </InfoItem>
+      </InfoGrid>
+
+      <GridWrapper>
         <div>
-          <Card>
-            <Badge style={categoryColor}>{course.category}</Badge>
-            <InfoRow>
-              <Star size={16} fill="#FACC15" color="#FACC15" /> {course.rating} Rating
-              <div>{course.level}</div>
-            </InfoRow>
-            <Title>{course.title}</Title>
-            <Description>{course.description}</Description>
-            <InfoRow>
-              <Users size={16} /> {course.students.toLocaleString()} students
-              <BookOpen size={16} /> {course.lessons} lessons
-              <Clock size={16} /> {course.duration}
-            </InfoRow>
-          </Card>
-
-          <Card>
-            <ImageWrapper>
-              <CourseImage src={course.image} alt={course.title} />
-              <Overlay>
-                <PlayButton>
-                  <Play size={32} color="#059669" />
-                </PlayButton>
-              </Overlay>
-            </ImageWrapper>
-          </Card>
-
-          <Card>
-            <SectionTitle>What's Included</SectionTitle>
-            {course.features.map((feature, index) => (
-              <Feature key={index}>
-                <CheckCircle size={20} color="#10B981" /> {feature}
-              </Feature>
-            ))}
-          </Card>
-
-          <Card>
-            <SectionTitle>Course Curriculum</SectionTitle>
-            {course.curriculum.map((mod, i) => (
-              <ModuleBox key={i}>
-                <ModuleHeader>Module {i + 1}: {mod.module}</ModuleHeader>
-                <LessonList>
-                  {mod.lessons.map((lesson, j) => (
-                    <Lesson key={j}>
-                      <Play size={16} color="#9CA3AF" /> {lesson}
-                    </Lesson>
-                  ))}
-                </LessonList>
-              </ModuleBox>
-            ))}
-          </Card>
-        </div>
-
-        <div>
-          <Card>
-            <Price>${course.price}</Price>
-            <div style={{ color: '#6B7280', textAlign: 'center', marginBottom: '1.5rem' }}>One-time payment</div>
-            <EnrollButton>Enroll Now</EnrollButton>
-            <WishlistButton>Add to Wishlist</WishlistButton>
-
-            <div style={{ fontSize: '0.875rem', color: '#374151', lineHeight: '1.5' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <span>Instructor</span><strong>{course.instructor}</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <span>Duration</span><strong>{course.duration}</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <span>Lessons</span><strong>{course.lessons}</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
-                <span>Level</span><strong>{course.level}</strong>
-              </div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <span>Certificate</span><Award size={16} color="#10B981" />
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <SectionTitle>About the Instructor</SectionTitle>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
-              <InstructorBadge>
-                {course.instructor.split(' ').map(n => n[0]).join('')}
-              </InstructorBadge>
-              <div>
-                <div style={{ fontWeight: '600', color: '#111827' }}>{course.instructor}</div>
-                <div style={{ fontSize: '0.875rem', color: '#6B7280' }}>Expert Instructor</div>
-              </div>
-            </div>
-            <p style={{ fontSize: '0.875rem', color: '#6B7280' }}>
-              Experienced professional with years of expertise in {course.category.toLowerCase()}.
-              Passionate about teaching and helping students achieve their learning goals.
+          <Section>
+            <SectionTitle id="about-course">About Course</SectionTitle>
+            <p>
+              This course, part of the Python & Django Track, equips you with the skills needed to become an 
+              entry-level <strong>Python & Django developer</strong>. You'll learn to design and build a mobile 
+              app backend and a responsive website focused on social good. You'll showcase all that you've learned 
+              by completing the full development process — from understanding user needs to testing. 
             </p>
-          </Card>
+          </Section>
+
+          <Section>
+            <SectionTitle id="what-you-will-learn">What will you learn</SectionTitle>
+            <LearnList>
+              <LearnItem>Full-Stack Web Development Fundamentals</LearnItem>
+              <LearnItem>Database Design and Management with Django ORM</LearnItem>
+              <LearnItem>Building Robust Features and Functionality</LearnItem>
+              <LearnItem>Practical Application Development and Deployment</LearnItem>
+            </LearnList>
+          </Section>
+
+        <Section>
+          <SyllabusSection id="syllabus-section">
+            <h3>Course Syllabus</h3>
+
+            <WeekSection
+              title="Week 1: Foundation & Setup"
+              topics={[
+                "Python Essentials & Web Development Basics",
+                "Django Project Structure",
+                "Djando App Structure",
+                "Version Control with GitHub"
+              ]}
+            />
+            <WeekSection
+              title="Week 2: Django Core Components"
+              topics={[
+                "Django Models & Database Interaction",
+                "Django Views & Request/Response Handling",
+                "Django Templates & Frontend Integration",
+                "URL Routing"
+              ]}
+            />
+            <WeekSection
+            title="Week 3: Advanced Django & API Development"
+            topics={[
+              "Advanced ORM Techniques",
+              "Django REST Framework (DRF) for APIs",
+              "Authentication & Permissions",
+              "Testing & Performance Optimization"
+            ]}
+            />
+          </SyllabusSection>
+        </Section>
         </div>
-      </Layout>
-    </Container>
+
+        <SidebarWrapper>
+          <SidebarCard>
+            <h3>Python & Django</h3>
+            <ul style={{ listStyleType: "none", padding: 0, marginTop: "1rem" }}>
+              <li onClick={() => document.getElementById("about-course").scrollIntoView({ behavior: "smooth" })}>
+                <strong>•</strong> About Course
+              </li>
+              <li onClick={() => document.getElementById("what-you-will-learn").scrollIntoView({ behavior: "smooth" })}>
+                <strong>•</strong> What will you learn
+              </li>
+              <li onClick={() => document.getElementById("syllabus-section").scrollIntoView({ behavior: "smooth" })}>
+                <strong>•</strong> Course Syllabus
+              </li>
+            </ul>
+            <ButtonGroup style={{ justifyContent: "flex-end" }}>
+              <Button className="secondary">Book a Demo</Button>
+              <Button className="primary">Enroll Now</Button>
+            </ButtonGroup>
+          </SidebarCard>
+          </SidebarWrapper>
+      </GridWrapper>
+
+          <CompaniesSection>
+            <h3>Our Alumni Work At</h3>
+            <CompanyLogos>
+              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/1199px-IBM_logo.svg.png?20250604110737" alt="IBM" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1200px-Razorpay_logo.svg.png?20171127075036" alt="Razorpay" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Intel_logo_2023.svg/768px-Intel_logo_2023.svg.png?20230330174340" alt="Intel" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/245px-Accenture.svg.png?20241209170218" alt="Accenture" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/768px-Wipro_new_logo.svg.png?20250425120007" alt="Wipro" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/600px-Infosys_logo.svg.png?20100302211036" alt="Infoys" />
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/EY_logo_2019.svg/104px-EY_logo_2019.svg.png?20200124061112" alt="EY" />
+            </CompanyLogos>
+          </CompaniesSection>
+
+          <Footer>
+            © 2025 Knowlix Learning. All rights reserved.
+          </Footer>
+    </Wrapper>
   );
 };
 
-export default CourseDetails;
-
-const CategoryColors = {
-  Technology: { bg: '#EBF5FF', border: '#2563EB', text: '#1E40AF' },
-  Languages: { bg: '#F3E8FF', border: '#7C3AED', text: '#6B21A8' },
-  Science: { bg: '#ECFDF5', border: '#10B981', text: '#047857' },
-  Creative: { bg: '#FFF7ED', border: '#F59E0B', text: '#D97706' },
-  Religious: { bg: '#FEF2F2', border: '#EF4444', text: '#DC2626' },
-};
+export default CoursePage;
