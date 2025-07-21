@@ -127,7 +127,8 @@ const FacultyQualifications = styled.a`
 ;`
 
 const CourseBanner = () => {
-    <BannerSection>
+    return (
+      <BannerSection>
         <Path>
             <Path_1 href="/">Courses</Path_1>
             <p>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
@@ -145,7 +146,8 @@ const CourseBanner = () => {
                 Ph.D. Computer Science, IIT
             </FacultyQualifications>
         </FacultyInfo>
-    </BannerSection>
+      </BannerSection>  
+    )
 }
 
 export default CourseBanner;
