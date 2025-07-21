@@ -1,11 +1,5 @@
 import styled from "styled-components";
 
-const Wrapper = styled.div`
-  width: 100%;
-  min-height: 100vh;
-  background-color: #f8f9fa;
-`;
-
 const BannerSection = styled.div`
   padding: 4rem;
   width: 100%;
@@ -133,27 +127,25 @@ const FacultyQualifications = styled.a`
 ;`
 
 const CourseBanner = () => {
-    <Wrapper>
-        <BannerSection>
-            <Path>
+    <BannerSection>
+        <Path>
             <Path_1 href="/">Courses</Path_1>
             <p>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
             <Path_2 href="">Python & Django</Path_2>
-            </Path>
-            <Title>Python & Django</Title>
-            <SubTitleWrap>
+        </Path>
+        <Title>Python & Django</Title>
+        <SubTitleWrap>
             <SubTitle>Course on Knowlix</SubTitle>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
             <SubTitle>By Knowlix Technologies</SubTitle>
-            </SubTitleWrap>
-            <FacultyInfo>
+        </SubTitleWrap>
+        <FacultyInfo>
             <FacultyName href="#faculty-profile">Dr. Sarah Johnson</FacultyName>
             <FacultyQualifications href="#faculty-qualifications">
                 Ph.D. Computer Science, IIT
             </FacultyQualifications>
-            </FacultyInfo>
-        </BannerSection>
-    </Wrapper>
+        </FacultyInfo>
+    </BannerSection>
 }
 
 export default CourseBanner;
