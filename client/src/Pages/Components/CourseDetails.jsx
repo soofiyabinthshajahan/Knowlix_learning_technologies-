@@ -58,7 +58,7 @@ const Footer = styled.div`
   text-align: center;
   padding: 20px;
   color: #666;
-  font-size: 0.9rem
+  font-size: 0.9rem;
 ;`
 
 const CoursePage = () => {
