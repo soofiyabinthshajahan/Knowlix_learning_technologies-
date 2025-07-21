@@ -80,11 +80,13 @@ const Button = styled.button`
   }
 ;`
 
-const CourseSidebarCard = () => {
+const CourseSidebarCard = ({
+    courseTitle
+}) => {
     return (
         <SidebarWrapper>
             <SidebarCard>
-                <h3>Python & Django</h3>
+                <h3>{courseTitle}</h3>
                 <ul style={{ listStyleType: "none", padding: 0, marginTop: "1rem" }}>
                     <li onClick={() => document.getElementById("about-course").scrollIntoView({ behavior: "smooth" })}>
                     <strong>•</strong> About Course

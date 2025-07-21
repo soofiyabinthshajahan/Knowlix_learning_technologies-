@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import WeekSection from "./WeekSection";
+import CourseBanner from "./CourseBanner";
+import CourseSidebarCard from "./CourseSideCard";
+import CourseInfoGrid from "./CourseInfoGrid";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -8,156 +11,7 @@ const Wrapper = styled.div`
   background-color: #f8f9fa;
 `;
 
-const BannerSection = styled.div`
-  padding: 4rem;
-  width: 100%;
-  height: 46vh;
-  background-image: url("https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(3px);
-    background-color: rgba(255, 255, 255, 0.2);
-    z-index: 1;
-  }
-
-  > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (max-width: 768px) {
-    height: auto;
-    padding: 2rem 1rem;
-`;
-
-const Path = styled.div`
-  display: flex;
-;`
-
-const Path_1 = styled.a`
-  color: #3d3d3dff;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-  font-weight: 550;
-  text-decoration: none;
-
-  &:hover {
-    color: #158a68;
-  }
-`;
-
-const Path_2 = styled.a`
-  color: #477e6a;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-  font-weight: 550;
-  text-decoration: none;
-
-  &:hover {
-    color: #158a68;
-  }
-`;
-
-const Title = styled.h1`
-  font-size: 2.2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #477e6a;
-`;
-
-const SubTitleWrap = styled.div`
-  display: flex;
-`;
-
-const SubTitle = styled.p`
-  color: #3d3d3dff;
-  font-size: 0.95rem;
-  margin-bottom: 2rem;
-  text-decoration: underline;
-`;
-
-const FacultyInfo = styled.div`
-  margin-bottom: 30px;
-  padding: 0.5rem;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 6px;
-  border-left: 4px solid #477e6a;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: fit-content;
-;`
-
-const FacultyName = styled.a`
-  font-size: 1.3rem;
-  color: #477e6a;
-  text-decoration: none;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 5px;
-  transition: color 0.3s ease;
-  padding-right: 20rem;
-
-  &:hover {
-    color: #158a68;
-    text-decoration: underline;
-  }
-
-  @media (max-width: 768px) {
-    padding-right: 0;
-    font-size: 1.1rem;
-  }
-;`
-
-const FacultyQualifications = styled.a`
-  font-size: 1rem;
-  color: #666;
-  text-decoration: none;
-  font-style: italic;
-  transition: color 0.3s ease;
-
-  &:hover {
-    color: #477e6a;
-    text-decoration: underline;
-  }
-;`
-
-const InfoGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 16px;
-  font-size: 1rem;
-  color: #333;
-  padding: 1.5rem;
-  width: 60%;
-  margin: auto;
-  place-items: center;
-  text-align: center;
-`;
-
-const InfoItem = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-weight: 500;
-  font-size: 15;
-  text-align: center;
-
-  strong {
-    color: #477e6a;
-  }
-`;
 
 const Section = styled.section`
   margin-bottom: 3rem;
@@ -188,49 +42,6 @@ const LearnItem = styled.li`
   }
 `;
 
-const SidebarWrapper = styled.div`
-  @media (max-width: 768px) {
-    order: -1;
-  }
-`;
-
-const SidebarCard = styled.div`
-  border-radius: 1.5rem;
-  overflow: hidden;
-  transition: all 0.3s;
-  padding: 2rem;
-  background: rgba(71, 126, 106, 0.1);
-  margin-top: 2rem;
-  border-right: 4px solid #477e6a;
-
-  h3, strong {
-    color: #477e6a;
-    font-weight: 650;
-  }
-
-  ul li {
-    margin-bottom: 0.75rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 420;
-  }
-
-  ul li:hover {
-    color: #407360ff;
-    transform: translateX(5px);
-  }
-`;
-
-const ButtonGroup = styled.div`
-  display: flex;
-  gap: 15px;
-  margin-top: 25px;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-;`
-
 const GridWrapper = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -242,43 +53,6 @@ const GridWrapper = styled.div`
     grid-template-columns: 1fr;
   }
 `;
-
-const Button = styled.button`
-  flex: 1;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-
-  &.primary {
-    background: #477e6a;
-    color: white;
-    box-shadow: 0 4px 15px rgba(71, 126, 106, 0.3);
-
-    &:hover {
-      background: #158a68;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(71, 126, 106, 0.4);
-    }
-  }
-
-  &.secondary {
-    background: transparent;
-    color: #646a68ff;
-    border: 0.02rem solid #8f9090ff;
-
-    &:hover {
-      background: rgba(71, 126, 106, 0.13);
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-  }
-;`
 
 const SyllabusSection = styled.div`
 
@@ -333,40 +107,17 @@ const Footer = styled.div`
 const CoursePage = () => {
   return (
     <Wrapper>
-      <BannerSection>
-        <Path>
-          <Path_1 href="/">Courses</Path_1>
-          <p>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
-          <Path_2 href="">Python & Django</Path_2>
-        </Path>
-        <Title>Python & Django</Title>
-        <SubTitleWrap>
-          <SubTitle>Course on Knowlix</SubTitle>
-          <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
-          <SubTitle>By Knowlix Technologies</SubTitle>
-        </SubTitleWrap>
-        <FacultyInfo>
-          <FacultyName href="#faculty-profile">Dr. Sarah Johnson</FacultyName>
-          <FacultyQualifications href="#faculty-qualifications">
-            Ph.D. Computer Science, IIT
-          </FacultyQualifications>
-        </FacultyInfo>
-      </BannerSection>
+      <CourseBanner 
+        courseTitle = "Python & Django"
+        facultyName = "Dr. Sarah Johnson"
+        facultyQualifications = "Ph.D. Computer Science, IIT Madras"
+      />
 
-      <InfoGrid>
-        <InfoItem>
-          <strong>Duration</strong>
-          3 Weeks
-        </InfoItem>
-        <InfoItem>
-          <strong>Mode</strong>
-          Hybrid
-        </InfoItem>
-        <InfoItem>
-          <strong>Enrolled Students</strong>
-          400
-        </InfoItem>
-      </InfoGrid>
+      <CourseInfoGrid
+        duration = "3 weeks"
+        mode = "Hybrid"
+        students = {400}
+      />
 
       <GridWrapper>
         <div>
@@ -425,26 +176,10 @@ const CoursePage = () => {
         </Section>
         </div>
 
-        <SidebarWrapper>
-          <SidebarCard>
-            <h3>Python & Django</h3>
-            <ul style={{ listStyleType: "none", padding: 0, marginTop: "1rem" }}>
-              <li onClick={() => document.getElementById("about-course").scrollIntoView({ behavior: "smooth" })}>
-                <strong>•</strong> About Course
-              </li>
-              <li onClick={() => document.getElementById("what-you-will-learn").scrollIntoView({ behavior: "smooth" })}>
-                <strong>•</strong> What will you learn
-              </li>
-              <li onClick={() => document.getElementById("syllabus-section").scrollIntoView({ behavior: "smooth" })}>
-                <strong>•</strong> Course Syllabus
-              </li>
-            </ul>
-            <ButtonGroup style={{ justifyContent: "flex-end" }}>
-              <Button className="secondary">Book a Demo</Button>
-              <Button className="primary">Enroll Now</Button>
-            </ButtonGroup>
-          </SidebarCard>
-          </SidebarWrapper>
+        <CourseSidebarCard 
+          courseTitle = "Python & Django"
+        />
+
       </GridWrapper>
 
           <CompaniesSection>
