@@ -4,23 +4,13 @@ import WeekSection from "./WeekSection";
 import CourseBanner from "./CourseBanner";
 import CourseSidebarCard from "./CourseSideCard";
 import CourseInfoGrid from "./CourseInfoGrid";
+import CourseSection from "./CourseSection";
+import CourseCompanies from "./CourseCompanies.jsx";
 
 const Wrapper = styled.div`
   width: 100%;
   min-height: 100vh;
   background-color: #f8f9fa;
-`;
-
-
-
-const Section = styled.section`
-  margin-bottom: 3rem;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
-  color: #477e6a;
 `;
 
 const LearnList = styled.ul`
@@ -64,39 +54,6 @@ const SyllabusSection = styled.div`
   }
 ;`
 
-const CompaniesSection = styled.div`
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 20px;
-  padding: 30px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-
-  h3 {
-    font-size: 1.3rem;
-    color: #006c45;
-    margin-bottom: 20px;
-    font-weight: 600;
-  }
-;`
-
-const CompanyLogos = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-
-  img {
-    height: 40px;
-    width: auto;
-    transition: filter 0.3s ease;
-
-    &:hover {
-      filter: grayscale(0%);
-    }
-  }
-;`
-
 const Footer = styled.div`
   text-align: center;
   padding: 20px;
@@ -121,29 +78,25 @@ const CoursePage = () => {
 
       <GridWrapper>
         <div>
-          <Section>
-            <SectionTitle id="about-course">About Course</SectionTitle>
+          <CourseSection id="about_course" title="About Course">
             <p>
               This course, part of the Python & Django Track, equips you with the skills needed to become an 
               entry-level <strong>Python & Django developer</strong>. You'll learn to design and build a mobile 
               app backend and a responsive website focused on social good. You'll showcase all that you've learned 
               by completing the full development process — from understanding user needs to testing. 
             </p>
-          </Section>
+          </CourseSection>
 
-          <Section>
-            <SectionTitle id="what-you-will-learn">What will you learn</SectionTitle>
+          <CourseSection id="what-you-will-learn" title = "What will you learn">
             <LearnList>
               <LearnItem>Full-Stack Web Development Fundamentals</LearnItem>
               <LearnItem>Database Design and Management with Django ORM</LearnItem>
-              <LearnItem>Building Robust Features and Functionality</LearnItem>
-              <LearnItem>Practical Application Development and Deployment</LearnItem>
+              <LearnItem>Building Robust Features and Functionality</LearnItem>                <LearnItem>Practical Application Development and Deployment</LearnItem>
             </LearnList>
-          </Section>
+          </CourseSection>
 
-        <Section>
-          <SyllabusSection id="syllabus-section">
-            <h3>Course Syllabus</h3>
+        <CourseSection id="syllabus-section" title="Course Syllabus">
+          <SyllabusSection>
 
             <WeekSection
               title="Week 1: Foundation & Setup"
@@ -173,7 +126,7 @@ const CoursePage = () => {
             ]}
             />
           </SyllabusSection>
-        </Section>
+        </CourseSection>
         </div>
 
         <CourseSidebarCard 
@@ -182,21 +135,7 @@ const CoursePage = () => {
 
       </GridWrapper>
 
-          <CompaniesSection>
-            <h3>Our Alumni Work At</h3>
-            <CompanyLogos>
-              <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/IBM_logo.svg/1199px-IBM_logo.svg.png?20250604110737" alt="IBM" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Razorpay_logo.svg/1200px-Razorpay_logo.svg.png?20171127075036" alt="Razorpay" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Intel_logo_2023.svg/768px-Intel_logo_2023.svg.png?20230330174340" alt="Intel" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Accenture.svg/245px-Accenture.svg.png?20241209170218" alt="Accenture" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Wipro_new_logo.svg/768px-Wipro_new_logo.svg.png?20250425120007" alt="Wipro" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Infosys_logo.svg/600px-Infosys_logo.svg.png?20100302211036" alt="Infoys" />
-              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/EY_logo_2019.svg/104px-EY_logo_2019.svg.png?20200124061112" alt="EY" />
-            </CompanyLogos>
-          </CompaniesSection>
+          <CourseCompanies />
 
           <Footer>
             © 2025 Knowlix Learning. All rights reserved.
