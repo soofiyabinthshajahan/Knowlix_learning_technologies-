@@ -126,24 +126,28 @@ const FacultyQualifications = styled.a`
   }
 ;`
 
-const CourseBanner = () => {
+const CourseBanner = ({
+  courseTitle,
+  facultyName,
+  facultyQualifications
+}) => {
     return (
       <BannerSection>
         <Path>
             <Path_1 href="/">Courses</Path_1>
             <p>&nbsp;&nbsp;&gt;&nbsp;&nbsp;</p>
-            <Path_2 href="">Python & Django</Path_2>
+            <Path_2 href="">{courseTitle}</Path_2>
         </Path>
-        <Title>Python & Django</Title>
+        <Title>{courseTitle}</Title>
         <SubTitleWrap>
             <SubTitle>Course on Knowlix</SubTitle>
             <p>&nbsp;&nbsp;|&nbsp;&nbsp;</p>
             <SubTitle>By Knowlix Technologies</SubTitle>
         </SubTitleWrap>
         <FacultyInfo>
-            <FacultyName href="#faculty-profile">Dr. Sarah Johnson</FacultyName>
+            <FacultyName href="#faculty-profile">{facultyName}</FacultyName>
             <FacultyQualifications href="#faculty-qualifications">
-                Ph.D. Computer Science, IIT
+                {facultyQualifications}
             </FacultyQualifications>
         </FacultyInfo>
       </BannerSection>  
