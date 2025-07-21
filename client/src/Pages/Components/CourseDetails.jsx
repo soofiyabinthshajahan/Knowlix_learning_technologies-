@@ -5,7 +5,7 @@ import CourseBanner from "./CourseBanner";
 import CourseSidebarCard from "./CourseSideCard";
 import CourseInfoGrid from "./CourseInfoGrid";
 import CourseSection from "./CourseSection";
-import CourseCompanies from "./CourseCompanies.jsx";
+import CourseCompanies from "./CourseCompanies..jsx";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -58,7 +58,7 @@ const Footer = styled.div`
   text-align: center;
   padding: 20px;
   color: #666;
-  font-size: 0.9rem;
+  font-size: 0.9rem
 ;`
 
 const CoursePage = () => {
