@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import WeekSection from "./WeekSection";
-import CourseBanner from "./CourseBanner";
-import CourseSidebarCard from "./CourseSideCard";
-import CourseInfoGrid from "./CourseInfoGrid";
-import CourseSection from "./CourseSection";
-import CourseCompanies from "./CourseCompanies..jsx";
+import WeekSection from "./WeekSeciton.js";
+import CourseBanner from "./CourseBanner.jsx";
+import CourseNavigator from "./CourseNavigator.jsx";
+import CourseStats from "./CourseStats.jsx";
+import SectionOutline from "./SectionOutline.jsx";
+import HiringPartners from "./HiringPartners.jsx";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -70,7 +70,7 @@ const CoursePage = () => {
         facultyQualifications = "Ph.D. Computer Science, IIT Madras"
       />
 
-      <CourseInfoGrid
+      <CourseStats
         duration = "3 weeks"
         mode = "Hybrid"
         students = {400}
@@ -78,24 +78,24 @@ const CoursePage = () => {
 
       <GridWrapper>
         <div>
-          <CourseSection id="about_course" title="About Course">
+          <SectionOutline id="about-course" title="About Course">
             <p>
               This course, part of the Python & Django Track, equips you with the skills needed to become an 
               entry-level <strong>Python & Django developer</strong>. You'll learn to design and build a mobile 
               app backend and a responsive website focused on social good. You'll showcase all that you've learned 
               by completing the full development process — from understanding user needs to testing. 
             </p>
-          </CourseSection>
+          </SectionOutline>
 
-          <CourseSection id="what-you-will-learn" title = "What will you learn">
+          <SectionOutline id="what-you-will-learn" title = "What will you learn">
             <LearnList>
               <LearnItem>Full-Stack Web Development Fundamentals</LearnItem>
               <LearnItem>Database Design and Management with Django ORM</LearnItem>
               <LearnItem>Building Robust Features and Functionality</LearnItem>                <LearnItem>Practical Application Development and Deployment</LearnItem>
             </LearnList>
-          </CourseSection>
+          </SectionOutline>
 
-        <CourseSection id="syllabus-section" title="Course Syllabus">
+        <SectionOutline id="syllabus-section" title="Course Syllabus">
           <SyllabusSection>
 
             <WeekSection
@@ -126,16 +126,16 @@ const CoursePage = () => {
             ]}
             />
           </SyllabusSection>
-        </CourseSection>
+        </SectionOutline>
         </div>
 
-        <CourseSidebarCard 
+        <CourseNavigator 
           courseTitle = "Python & Django"
         />
 
       </GridWrapper>
 
-          <CourseCompanies />
+          <HiringPartners />
 
           <Footer>
             © 2025 Knowlix Learning. All rights reserved.
