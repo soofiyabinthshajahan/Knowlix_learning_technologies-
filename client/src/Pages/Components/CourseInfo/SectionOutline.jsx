@@ -10,10 +10,10 @@ const SectionTitle = styled.h2`
   color: #477e6a;
 `;
 
-const CourseSection = ({ title, children }) => {
+const CourseSection = ({ id, title, children }) => {
     return (
         <Section>
-            <SectionTitle>{title}</SectionTitle>
+            <SectionTitle id={id}>{title}</SectionTitle>
             {children}
       </Section>
     )
