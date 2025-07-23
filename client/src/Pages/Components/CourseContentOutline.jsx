@@ -13,7 +13,7 @@ const SectionTitle = styled.h2`
 const CourseSection = ({ title, children }) => {
     return (
         <Section>
-            <SectionTitle id="about_course">{title}</SectionTitle>
+            <SectionTitle>{title}</SectionTitle>
             {children}
       </Section>
     )
