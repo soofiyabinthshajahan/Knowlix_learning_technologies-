@@ -26,6 +26,32 @@ const GlassCard = styled.div`
   max-width: 1300px;
 `;
 
+const InfoSection = styled.div`
+  flex: 1;
+  padding: 4rem 2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+`;
+
+const InfoContent = styled.div`
+  max-width: 400px;
+`;
+
+const InfoItem = styled.div`
+  margin-bottom: 2rem;
+  h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  p {
+    font-size: 0.95rem;
+    opacity: 0.8;
+  }
+`;
+
 const FormWrapper = styled.div`
   flex: 1.8;
   padding: 2rem;
@@ -105,6 +131,23 @@ const EnrollPage = () => {
   return (
     <PageWrapper>
       <GlassCard>
+
+        <InfoSection>
+          <InfoContent>
+            <InfoItem>
+              <h4>Top-tier Training</h4>
+              <p>Get mentored by the best in the industry and build real-world skills.</p>
+            </InfoItem>
+            <InfoItem>
+              <h4>Boost Your Career</h4>
+              <p>Unlock opportunities with verified certifications and practical experience.</p>
+            </InfoItem>
+            <InfoItem>
+              <h4>Flexible & Personalized</h4>
+              <p>Choose your path based on your background and learning goals.</p>
+            </InfoItem>
+          </InfoContent>
+        </InfoSection>
 
         <FormWrapper>
 
