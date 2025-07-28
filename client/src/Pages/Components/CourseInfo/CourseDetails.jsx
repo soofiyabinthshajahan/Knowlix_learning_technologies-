@@ -62,6 +62,7 @@ const Footer = styled.div`
 ;`
 
 const CoursePage = () => {
+
   return (
     <Wrapper>
       <CourseBanner 
@@ -129,9 +130,7 @@ const CoursePage = () => {
         </SectionOutline>
         </div>
 
-        <CourseNavigator 
-          courseTitle = "Python & Django"
-        />
+        <CourseNavigator />
 
       </GridWrapper>
 
