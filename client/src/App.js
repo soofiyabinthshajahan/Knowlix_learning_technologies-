@@ -10,6 +10,7 @@ import TestimonialPage from "./Pages/Testimonial";
 import CoursePage from "./Pages/Components/CoursePage";
 // import CourseGrid from './Pages/Components/CoursePage';
 import CourseDetails from './Pages/Components/CourseInfo/CourseDetails';
+import EnrollPage from "./Pages/Components/CourseEnroll/EnrollPage";
 // import { courses } from './Pages/Data/CourseData';
 
 function App() {
@@ -64,6 +65,8 @@ function App() {
 
         {/* Course details page */}
         <Route path="/courses/:id" element={<CourseDetails />} />
+
+        <Route path="/enroll" element={<EnrollPage />} />
       </Routes>
     </Router>
   );
