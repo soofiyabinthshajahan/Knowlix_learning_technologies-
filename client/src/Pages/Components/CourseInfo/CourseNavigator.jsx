@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const SidebarWrapper = styled.div`
   @media (max-width: 768px) {
@@ -80,9 +82,17 @@ const Button = styled.button`
   }
 ;`
 
-const CourseSidebarCard = ({
-    courseTitle
+const CourseNavigator = ({
+    courseTitle,
+    course,
+    demoId
 }) => {
+
+    const navigate = useNavigate();
+    const handleEnroll = () => {
+      navigate('/enroll', { state: { course } });
+    };
+
     return (
         <SidebarWrapper>
             <SidebarCard>
@@ -100,11 +110,11 @@ const CourseSidebarCard = ({
                 </ul>
                 <ButtonGroup style={{ justifyContent: "flex-end" }}>
                     <Button className="secondary">Book a Demo</Button>
-                    <Button className="primary">Enroll Now</Button>
+                    <Button className="primary" onClick={handleEnroll}>Enroll Now</Button>
                 </ButtonGroup>
             </SidebarCard>
         </SidebarWrapper>
     )
 }
 
-export default CourseSidebarCard;
+export default CourseNavigator;
