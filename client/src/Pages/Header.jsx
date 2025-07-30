@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FiSearch, FiBell, FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
+import BookDemoModal from './Components/BookDemoModal';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import Link, useLocation, useNavigate
 
 const HeaderSection = styled.header`
   height: 10vh;
@@ -24,7 +26,6 @@ const HeaderSection = styled.header`
     background: rgba(255, 255, 255, 0.76);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    height: 6vh;
   }
 `;
 
@@ -152,6 +153,12 @@ const Element = styled.li`
     color: #158a68;
   }
 
+  /* Ensure Link inside Element inherits styles */
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   @media (max-width: 1024px) {
     font-size: 1rem;
   }
@@ -234,22 +241,56 @@ const Overlay = styled.div`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
+
 function Header() {
   const [isDark, setIsDark] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [searchExpanded, setSearchExpanded] = useState(false);
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const searchRef = useRef(null);
 
+  const location = useLocation(); // Get current location
+  const navigate = useNavigate(); // Get navigate function
+
   const scrollToSection = (id) => {
-    const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      setShowMobileMenu(false); // also closes menu on mobile
+    // If we are not on the home page, navigate to home first and then scroll
+    if (location.pathname !== '/') {
+      navigate('/', { state: { scrollTo: id } }); // Pass scroll target via state
+    } else {
+      // If we are already on the home page, just scroll
+      const section = document.getElementById(id);
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
     }
+    setShowMobileMenu(false); // Close mobile menu after clicking
   };
+
+  // Effect to handle scrolling after navigation
+  useEffect(() => {
+    if (location.state && location.state.scrollTo) {
+      const section = document.getElementById(location.state.scrollTo);
+      if (section) {
+        // Use a slight delay to ensure the page has rendered after navigation
+        // before attempting to scroll
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+      // Clear the state so it doesn't try to scroll again on subsequent renders
+      // This is important to prevent infinite scroll loops if state persists
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]); // Re-run when location changes
+
 
   const toggleTheme = () => setIsDark(!isDark);
   const toggleMobileMenu = () => setShowMobileMenu(!showMobileMenu);
+  const handleOpenDemoModal = () => {
+    setIsDemoModalOpen(true);
+    setShowMobileMenu(false);
+  };
+  const handleCloseDemoModal = () => setIsDemoModalOpen(false);
 
   const handleSearchClick = () => {
     if (window.innerWidth <= 1024) {
@@ -265,54 +306,50 @@ function Header() {
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   return (
     <>
       <HeaderSection>
         <Logo>
-          <img src="/Logo.jpg" alt="Logo" className="desktop-logo" />
-          <img
-            src="/Logo-removebg-preview.png"
-            alt="Mobile Logo"
-            className="mobile-logo"
-          />
+          {/* Logo now navigates to home */}
+          <Link to="/">
+            <img src="/Logo.jpg" alt="Logo" className="desktop-logo" />
+            <img src="/Logo-removebg-preview.png" alt="Mobile Logo" className="mobile-logo" />
+          </Link>
         </Logo>
 
-        <SearchBar 
-          ref={searchRef} 
-          isExpanded={searchExpanded}
-          onClick={handleSearchClick}
-        >
+        <SearchBar ref={searchRef} isExpanded={searchExpanded} onClick={handleSearchClick}>
           <FiSearch color="#14432b" size={20} />
-          <SearchInput 
-            type="text" 
-            placeholder="Search..." 
+          <SearchInput
+            type="text"
+            placeholder="Search..."
             onFocus={() => window.innerWidth <= 1024 && setSearchExpanded(true)}
           />
         </SearchBar>
 
         <Navigation>
           <HeaderElements>
+            {/* Links that scroll to sections on the home page */}
             <Element onClick={() => scrollToSection("home")}>Home</Element>
             <Element onClick={() => scrollToSection("about")}>About</Element>
             <Element onClick={() => scrollToSection("courses")}>Courses</Element>
+            {/* Programmes, Career, Contact - assuming these will eventually be separate pages or sections */}
             <Element>Programmes</Element>
-            <Element>Team</Element>
+            {/* Team link - now a proper react-router-dom Link */}
+            <Element>
+              <Link to="/team" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setShowMobileMenu(false)}>
+                Team
+              </Link>
+            </Element>
             <Element>Career</Element>
             <Element>Contact</Element>
           </HeaderElements>
-          <Button>Book a Demo</Button>
+          <Button onClick={handleOpenDemoModal}>Book a Demo</Button>
           <IconWrapper>
             <FiBell />
-            {isDark ? (
-              <FiSun onClick={toggleTheme} />
-            ) : (
-              <FiMoon onClick={toggleTheme} />
-            )}
+            {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}
           </IconWrapper>
         </Navigation>
 
@@ -324,30 +361,31 @@ function Header() {
       {showMobileMenu && (
         <MobileMenu>
           <HeaderElements>
+            {/* Mobile menu links - also use scrollToSection */}
             <Element onClick={() => scrollToSection("home")}>Home</Element>
             <Element onClick={() => scrollToSection("about")}>About</Element>
             <Element onClick={() => scrollToSection("courses")}>Courses</Element>
             <Element>Programmes</Element>
-            <Element>Team</Element>
+            {/* Team link for mobile menu - also a proper react-router-dom Link */}
+            <Element>
+              <Link to="/team" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setShowMobileMenu(false)}>
+                Team
+              </Link>
+            </Element>
             <Element>Career</Element>
             <Element>Contact</Element>
           </HeaderElements>
-          <Button>Book a Demo</Button>
+          <Button onClick={handleOpenDemoModal}>Book a Demo</Button>
           <IconWrapper>
             <FiBell />
-            {isDark ? (
-              <FiSun onClick={toggleTheme} />
-            ) : (
-              <FiMoon onClick={toggleTheme} />
-            )}
+            {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}
           </IconWrapper>
         </MobileMenu>
       )}
 
-      <Overlay 
-        show={searchExpanded} 
-        onClick={() => setSearchExpanded(false)}
-      />
+      <Overlay show={searchExpanded} onClick={() => setSearchExpanded(false)} />
+
+      <BookDemoModal show={isDemoModalOpen} onClose={handleCloseDemoModal} />
     </>
   );
 }
