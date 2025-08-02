@@ -7,8 +7,9 @@ import ServiceSection from "./Pages/Service";
 import Syllabus from "./Pages/Syllabus";
 import TestimonialPage from "./Pages/Testimonial";
 import CoursePage from "./Pages/Components/CoursePage";
+// import CourseGrid from './Pages/Components/CoursePage';
 import CourseDetails from './Pages/Components/CourseDetails';
-import TeamSection from "./Pages/Components/TeamSection"; // ✅ Add this
+// import { courses } from './Pages/Data/CourseData';
 
 function App() {
   return (
@@ -39,6 +40,8 @@ function App() {
 
         {/* Course details page */}
         <Route path="/courses/:id" element={<CourseDetails />} />
+
+        <Route path="/enroll" element={<EnrollPage />} />
       </Routes>
     </Router>
   );

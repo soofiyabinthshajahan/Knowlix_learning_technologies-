@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
   h4 {
     font-size: 1.2rem;
-    color: #006c45;
+    color: #477e6a;
     margin-bottom: 15px;
     font-weight: 600;
   }
