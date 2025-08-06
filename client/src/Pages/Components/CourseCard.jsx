@@ -178,7 +178,9 @@ const CourseCard = ({ course, onViewDetails }) => {
           <Value>{course.students.toLocaleString()}</Value>
         </InfoRow>
         <ButtonGroup>
-          <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}>
+                  {/* <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}> */}
+
+          <Link to={``} style={{ flex: 1, textDecoration: 'none' }}>
             <OutlineButton>View Details</OutlineButton>
           </Link>
           <FillButton>Enroll Now</FillButton>

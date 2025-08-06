@@ -11,14 +11,14 @@ const testimonials = [
       {
         name: "Adil S/O Muhammad",
         comment:
-          "My son faced challenges in Accountancy, but My Tutor’s helpful tutors helped him improve remarkably. He gained confidence within days!",
+          "My son faced challenges in Accountancy, but My Knowlix's helpful tutors helped him improve remarkably. He gained confidence within days!",
         stars: 5,
       },
     ],
   },
   {
     quote:
-      "We are so grateful to My Tutor for making this incredible transformation possible!",
+      "We are so grateful to Team Knowlix for making this incredible transformation possible!",
     name: "Adhila D/O Sajna",
     company: "Science Student",
     image: "https://via.placeholder.com/300x300",
@@ -26,7 +26,7 @@ const testimonials = [
       {
         name: "Adhila D/O Sajna",
         comment:
-          "Physics was tough for my daughter, but thanks to My Tutor's expert tutors and their 24x7 support, she now loves the subject and excels in it.",
+          "Physics was tough for my daughter, but thanks to Knowlix expert tutors and their 24x7 support, she now loves the subject and excels in it.",
         stars: 5,
       },
     ],
@@ -41,7 +41,7 @@ const testimonials = [
       {
         name: "Aflah S/O Sulaiman",
         comment:
-          "My son had a weak base in Hindi, but after joining My Tutor’s Hindi Foundation course, he quickly picked up reading and writing skills.",
+          "My son had a weak base in Hindi, but after joining Knowlix Learning Hindi Foundation course, he quickly picked up reading and writing skills.",
         stars: 5,
       },
     ],
@@ -56,7 +56,7 @@ const testimonials = [
       {
         name: "Fathima",
         comment:
-          "The platform is excellent! Classes are engaging, instructors are knowledgeable, and everything is simple to navigate. I highly recommend it.",
+          "This platform is excellent! Classes are engaging, instructors are knowledgeable, and everything is simple to navigate. I highly recommend it.",
         stars: 5,
       },
     ],

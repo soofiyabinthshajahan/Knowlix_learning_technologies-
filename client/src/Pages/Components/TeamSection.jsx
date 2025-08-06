@@ -17,29 +17,29 @@ const TeamSection = () => {
     {
       id: 3,
       name: "Dr Nijad K K",
-      title: "Asst. Professor",
-      description: "Founding design team at Figma. Former Plex, Stripe, and Tile.",
+      title: "Asst. Professor - CALICULT University",
+      // description: "Founding design team at Figma. Former Plex, Stripe, and Tile.",
       image: "/adv1.jpg"
     },
     {
       id: 4,
       name: "Muhammed Afsal",
-      title: "Erumbadasseri",
-      description: "Former frontend dev for Linear, Coinbase, and Postscript.",
+      title: "MBA",
+      // description: "Former frontend dev for Linear, Coinbase, and Postscript.",
       image: "/adv2.jpg"
     },
     {
       id: 5,
       name: "Hidayathulla",
       title: "MD Zains",
-      description: "International Group",
+      // description: "International Group",
       image: "/adv3.jpg"
     },
     {
       id: 6,
       name: "Suleeb Rahman",
       title: "GM of Pristine",
-      description: "Aligner",
+      // description: "Aligner",
       image: "/adv4.jpg"
     },
     {
@@ -58,22 +58,22 @@ const TeamSection = () => {
     {
       id: 9,
       name: "Chaithra Nair",
-      title: "title",
-      description: "Desc",
+      title: "MA History",
+      
       image: "/core2.jpg"
     },
-    {
-      id: 10,
-      name: "Soofiya Binth Shajahan",
-      title: "title",
-      description: "AI, ML, DS, Full Stack\nIIT Madras - BS",
-      image: "/core3.jpg"
-    },
+    // {
+    //   id: 10,
+    //   name: "",
+    //   title: "",
+    //   description: "",
+    //   image: ""
+    // },
     {
       id: 11,
       name: "Safvana Jasmin",
-      title: "title",
-      description: "desc",
+      title: "Online Tutor Expert",
+      // description: "desc",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010"
     }
   ];
@@ -150,7 +150,7 @@ const TeamSection = () => {
           <h2 style={{
             fontSize: '48px',
             fontWeight: 'bold',
-            color: '#111827',
+            color: '#052e2eff',
             marginBottom: '24px',
             lineHeight: '1.2',
             fontFamily: 'system-ui, -apple-system, sans-serif'
