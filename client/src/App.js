@@ -11,7 +11,10 @@ import TeamSection from "./Pages/Components/TeamSection";
 import EnrollPage from '../src/Pages/Components/CourseEnroll/EnrollPage'
 // import CourseGrid from './Pages/Components/CoursePage';
 import CourseDetails from './Pages/Components/CourseInfo/CourseDetails'
+import CourseDetails from './Pages/Components/CourseInfo/CourseDetails';
 // import { courses } from './Pages/Data/CourseData';
+import TeamSection from "./Pages/Components/TeamSection";
+import EnrollPage from "./Pages/Components/CourseEnroll/EnrollPage";
 
 function App() {
   return (
