@@ -7,8 +7,10 @@ import ServiceSection from "./Pages/Service";
 import Syllabus from "./Pages/Syllabus";
 import TestimonialPage from "./Pages/Testimonial";
 import CoursePage from "./Pages/Components/CoursePage";
+import TeamSection from "./Pages/Components/TeamSection";
+import EnrollPage from '../src/Pages/Components/CourseEnroll/EnrollPage'
 // import CourseGrid from './Pages/Components/CoursePage';
-import CourseDetails from './Pages/Components/CourseDetails';
+import CourseDetails from './Pages/Components/CourseInfo/CourseDetails'
 // import { courses } from './Pages/Data/CourseData';
 
 function App() {

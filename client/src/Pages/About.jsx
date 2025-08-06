@@ -27,6 +27,7 @@ const Heading = styled.h2`
   font-size: 2.7rem;
   font-weight: 500;
   margin-bottom: 20px;
+  color: #2d4236;
 `;
 
 const Subtext = styled.p`
@@ -125,7 +126,7 @@ function AboutSection() {
           </Subtext>
         </TextBlock>
         <Stats>
-        <div>
+          <div>
             <span>10+</span>
             <span>Countries </span>
           </div>
@@ -166,7 +167,6 @@ function AboutSection() {
         View More Photos <FaArrowRight />
       </Button>
     </AboutWrapper>
-    
   );
 }
 
