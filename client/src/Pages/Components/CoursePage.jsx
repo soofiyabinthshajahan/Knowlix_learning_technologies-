@@ -12,10 +12,6 @@ import styled from 'styled-components';
 const CourseWrapper = styled.div`
   scroll-margin-top: 12vh;
   min-height: 100vh;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
 `;
 
 //const CourseSection = styled.section`
@@ -29,8 +25,15 @@ const CourseGrid = styled.div`
   display: grid;
   gap: 2rem;
 
-  grid-template-columns: repeat(2, 1fr);
+  /* Mobile first: 1 card per row */
+  grid-template-columns: 1fr;
 
+  /* Tablet: 2 cards per row */
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Desktop: 4 cards per row */
   @media (min-width: 1024px) {
     grid-template-columns: repeat(4, 1fr);
   }
