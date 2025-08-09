@@ -10,6 +10,12 @@ const CategoryColors = {
   Religious: { bg: '#FEF2F2', border: '#EF4444', text: '#DC2626' },
 };
 
+const HiddenOnMobile = styled.div`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
+
 const Card = styled.div`
   background: white;
   border-radius: 1.5rem;
@@ -77,6 +83,10 @@ const Title = styled.h3`
   font-weight: bold;
   color: #111827;
   margin-bottom: 0.5rem;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 `;
 
 const Description = styled.p`
@@ -160,31 +170,33 @@ const CourseCard = ({ course, onViewDetails }) => {
 
       <Content>
         <Title>{course.title}</Title>
-        <Description>{course.description}</Description>
-        {course.audience && (
+        <HiddenOnMobile>
+          <Description>{course.description}</Description>
+          {course.audience && (
+            <InfoRow>
+              <Label>Audience</Label>
+              <Value>{course.audience}</Value>
+            </InfoRow>
+          )}
+          {course.duration && (
+            <InfoRow>
+              <Label>Duration</Label>
+              <Value>{course.duration}</Value>
+            </InfoRow>
+          )}
           <InfoRow>
-            <Label>Audience</Label>
-            <Value>{course.audience}</Value>
+            <Label>Students</Label>
+            <Value>{course.students.toLocaleString()}</Value>
           </InfoRow>
-        )}
-        {course.duration && (
-          <InfoRow>
-            <Label>Duration</Label>
-            <Value>{course.duration}</Value>
-          </InfoRow>
-        )}
-        <InfoRow>
-          <Label>Students</Label>
-          <Value>{course.students.toLocaleString()}</Value>
-        </InfoRow>
-        <ButtonGroup>
-                  {/* <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}> */}
+          <ButtonGroup>
+                    {/* <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}> */}
 
-          <Link to={``} style={{ flex: 1, textDecoration: 'none' }}>
-            <OutlineButton>View Details</OutlineButton>
-          </Link>
-          <FillButton>Enroll Now</FillButton>
-        </ButtonGroup>
+            <Link to={``} style={{ flex: 1, textDecoration: 'none' }}>
+              <OutlineButton>View Details</OutlineButton>
+            </Link>
+            <FillButton>Enroll Now</FillButton>
+          </ButtonGroup>
+        </HiddenOnMobile>
       </Content>
     </Card>
   );
