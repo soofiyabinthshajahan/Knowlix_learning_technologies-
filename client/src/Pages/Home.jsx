@@ -26,7 +26,7 @@ const HomeSection = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 65vh; /* reduced height for smaller screens */
+    min-height: 65vh; 
   }
 `;
 
