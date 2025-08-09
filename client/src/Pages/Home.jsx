@@ -17,7 +17,8 @@ const HomeSection = styled.div`
   background-position: center;
 
   @media only screen and (max-width: 768px) {
-   height: 85vh; 
+    min-height: auto;
+    padding-bottom: 80px;
   }
  
   @media only screen and (max-width: 480px) {
