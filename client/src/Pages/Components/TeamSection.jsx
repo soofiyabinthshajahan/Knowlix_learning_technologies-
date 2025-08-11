@@ -1,4 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const TeamGrid = styled.div`
+  display: grid;
+  gap: 32px;
+  padding: 0 15px;
+  justify-content: center;
+  margin-bottom: 64px;
+
+  grid-template-columns: ${({ centered }) =>
+    centered ? 'repeat(auto-fit, minmax(280px, 1fr))' : 'repeat(2, 1fr)'};
+
+  @media (min-width: 768px) {
+    grid-template-columns: ${({ centered }) =>
+      centered ? 'repeat(2, 300px)' : 'repeat(4, 1fr)'};
+    justify-content: ${({ centered }) => (centered ? 'center' : 'start')};
+  }
+
+  ${({ centered }) => centered && `
+    @media (max-width: 767px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  `}
+`;
 
 const TeamSection = () => {
   const teamMembers = [
@@ -62,15 +86,8 @@ const TeamSection = () => {
       
       image: "/core2.jpg"
     },
-    // {
-    //   id: 10,
-    //   name: "",
-    //   title: "",
-    //   description: "",
-    //   image: ""
-    // },
     {
-      id: 11,
+      id: 10,
       name: "Safvana Jasmin",
       title: "Online Tutor Expert",
       // description: "desc",
@@ -80,7 +97,7 @@ const TeamSection = () => {
 
   const leadership = teamMembers.slice(0, 2);
   const advisoryBoard = teamMembers.slice(2, 6);
-  const coreTeam = teamMembers.slice(6, 11); // add 2 more if needed
+  const coreTeam = teamMembers.slice(6, 10);
 
   const gridStyle = {
     display: 'grid',
@@ -90,18 +107,9 @@ const TeamSection = () => {
     marginBottom: '64px',
   };
 
-  const renderTeam = (members, columns = 'auto-fit') => {
-    const customGridStyle = {
-      display: 'grid',
-      gridTemplateColumns: `repeat(${columns}, minmax(260px, 1fr))`,
-      gap: '32px',
-      justifyContent: 'center',
-      marginBottom: '64px',
-      padding: '0, 15px'
-    };
-
+  const renderTeam = (members, centered = false) => {
     return (
-      <div style={customGridStyle}>
+      <TeamGrid centered={centered}>
         {members.map((member) => (
           <div key={member.id} style={{ textAlign: 'center', maxWidth: '300px', margin: '0 auto' }}>
             <div style={{ marginBottom: '24px' }}>
@@ -126,18 +134,37 @@ const TeamSection = () => {
                 />
               </div>
             </div>
-            <h3 style={{ fontSize: '22px', fontWeight: '700', color: '#111827', marginBottom: '8px' }}>
+            <h3 style={{
+              fontSize: 'clamp(16px, 5vw, 22px)',
+              fontWeight: '700',
+              color: '#111827',
+              marginBottom: '8px',
+              lineHeight: '1.2'
+            }}>
               {member.name}
             </h3>
-            <p style={{ fontSize: '18px', fontWeight: '680', color: '#111827', marginBottom: '8px' }}>
+
+            <p style={{
+              fontSize: 'clamp(14px, 4.5vw, 18px)',
+              fontWeight: '680',
+              color: '#111827',
+              marginBottom: '8px'
+            }}>
               {member.title}
             </p>
-            <p style={{ fontSize: '18px', color: '#6b7280', lineHeight: '1.5', whiteSpace: 'pre-line' }}>
+
+            <p style={{
+              fontSize: 'clamp(13px, 4vw, 18px)',
+              color: '#6b7280',
+              lineHeight: '1.5',
+              whiteSpace: 'pre-line'
+            }}>
               {member.description}
             </p>
+
           </div>
         ))}
-      </div>
+      </TeamGrid>
     );
   };
 
@@ -171,13 +198,13 @@ const TeamSection = () => {
         </div>
 
         {/* Leadership */}
-        {renderTeam(leadership)}
+        {renderTeam(leadership, true)}
 
         <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Advisory Board</h2>
         {renderTeam(advisoryBoard)}
 
         <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Core Team</h2>
-        {renderTeam(coreTeam, 5)}
+        {renderTeam(coreTeam)}
 
       </div>
     </div>

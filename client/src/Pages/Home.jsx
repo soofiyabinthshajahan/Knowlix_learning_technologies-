@@ -17,7 +17,8 @@ const HomeSection = styled.div`
   background-position: center;
 
   @media only screen and (max-width: 768px) {
-   height: 85vh; 
+    min-height: auto;
+    padding-bottom: 80px;
   }
  
   @media only screen and (max-width: 480px) {
@@ -25,7 +26,7 @@ const HomeSection = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    min-height: 65vh; /* reduced height for smaller screens */
+    min-height: 65vh; 
   }
 `;
 

@@ -7,6 +7,7 @@ const Section = styled.section`
   padding: 80px 10%;
   color: #e4f2ec;
   font-family: 'Inter', sans-serif;
+  margin-bottom: 20px;
 `;
 
 const Title = styled.h2`
