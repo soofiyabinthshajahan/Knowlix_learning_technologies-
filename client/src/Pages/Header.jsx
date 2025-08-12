@@ -336,7 +336,9 @@ function Header() {
             <Element onClick={() => scrollToSection("about")}>About</Element>
             <Element onClick={() => scrollToSection("courses")}>Courses</Element>
             {/* Blog, Career, Contact - assuming these will eventually be separate pages or sections */}
-            <Element>Blog</Element>
+            <Element>
+              <Link to="/blog">Blog</Link>
+            </Element>
             {/* Team link - now a proper react-router-dom Link */}
             <Element>
               <Link to="/team" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setShowMobileMenu(false)}>
