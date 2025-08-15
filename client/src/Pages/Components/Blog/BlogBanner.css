@@ -1,0 +1,88 @@
+.blog-banner {
+  width: 100%;
+  max-width: 1200px; /* Same container width as BlogHeader */
+  margin: 0 auto;
+  padding: 0 12px;
+  margin-top: 10px;
+}
+
+.blog-banner-img {
+  width: 100%;
+  height: auto;
+  max-height: 630px;
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Bottom banner smaller height */
+.blog-banner-img.bottom {
+  max-height: 600px; /* Slightly smaller than top */
+}
+/* Call to Action Styles */
+.cta-section {
+  text-align: center;
+  padding: 40px 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cta-section h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #0d0d0d;
+}
+
+.cta-section em {
+  font-style: italic;
+}
+
+.cta-section p {
+  margin-top: 8px;
+  font-size: 1rem;
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .blog-banner-img {
+    max-height: 400px;
+  }
+  .blog-banner-img.bottom {
+    max-height: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blog-banner-img {
+    max-height: 250px;
+  }
+  .blog-banner-img.bottom {
+    max-height: 200px;
+  }
+}
+
+/* Content section styles */
+.blog-content {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 12px;
+}
+
+.blog-content h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.blog-content h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 32px;
+  margin-bottom: 8px;
+}
+
+.blog-content p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}

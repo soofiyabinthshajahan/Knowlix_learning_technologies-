@@ -11,6 +11,7 @@ import TeamSection from "./Pages/Components/TeamSection";
 import EnrollPage from '../src/Pages/Components/CourseEnroll/EnrollPage'
 // import CourseGrid from './Pages/Components/CoursePage';
 import CourseDetails from './Pages/Components/CourseInfo/CourseDetails';
+import Blog from "./Pages/Components/Blog/Blog";
 // import { courses } from './Pages/Data/CourseData';
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
               <ServiceSection />
               <CoursePage />
               <TestimonialPage />
+            
             </>
           }
         />
@@ -42,6 +44,7 @@ function App() {
         <Route path="/courses/:id" element={<CourseDetails />} />
 
         <Route path="/enroll" element={<EnrollPage />} />
+        <Route path="/blog" element={<Blog />}/>
       </Routes>
     </Router>
   );
