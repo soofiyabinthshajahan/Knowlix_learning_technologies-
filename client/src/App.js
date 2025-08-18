@@ -12,6 +12,7 @@ import EnrollPage from '../src/Pages/Components/CourseEnroll/EnrollPage'
 // import CourseGrid from './Pages/Components/CoursePage';
 import CourseDetails from './Pages/Components/CourseInfo/CourseDetails';
 // import { courses } from './Pages/Data/CourseData';
+import Footer from "./Footer";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <ServiceSection />
               <CoursePage />
               <TestimonialPage />
+              <Footer />
             </>
           }
         />
