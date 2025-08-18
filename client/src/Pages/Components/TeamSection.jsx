@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
+import Footer from '../../Footer';
 
 const TeamGrid = styled.div`
   display: grid;
   gap: 32px;
   padding: 0 15px;
-  justify-content: center;
+  justify-content: center;a
   margin-bottom: 64px;
 
   grid-template-columns: ${({ centered }) =>
@@ -23,6 +24,7 @@ const TeamGrid = styled.div`
     }
   `}
 `;
+
 
 const TeamSection = () => {
   const teamMembers = [
@@ -169,6 +171,7 @@ const TeamSection = () => {
   };
 
   return (
+    <>
     <div style={{ backgroundColor: '#f9fafb', padding: '64px 16px', minHeight: '100vh' }}>
       <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
 
@@ -205,9 +208,10 @@ const TeamSection = () => {
 
         <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Core Team</h2>
         {renderTeam(coreTeam)}
-
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
