@@ -43,6 +43,22 @@ const Address = styled.address`
   color: #a3dcd2;
 `;
 
+const SocialIcons = styled.div`
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.5rem;
+
+  a {
+    margin: 0 10px;
+    color: #9ee3d8;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #ffffff;
+    }
+  }
+`;
+
 const scrollToSection = (id) => {
   const section = document.getElementById(id);
   if (section) {
@@ -61,12 +77,20 @@ const Footer = () => {
       </FooterLinks>
 
       <Address>
-        NEOSPACE II BUILDING KINFRA TECHONO INDUSTRIAL PARK,
+        NEOSPACE II BUILDING KINFRA TECHNO INDUSTRIAL PARK,
         <br />
         Calicut University, Malappuram, Tirurangadi,
         <br />
         Kerala, India, 673635
       </Address>
+
+      <SocialIcons>
+        <a href="https://www.linkedin.com/company/knowlix-learning" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+        <a href="https://www.instagram.com/knowlix_learning/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+        <a href="https://www.facebook.com/KNOWLIXLEARNING/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+        <a href="https://wa.me/YOURPHONE" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+        <a href="mailto:yourmail@example.com"><MdEmail /></a>
+      </SocialIcons>
 
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         © {new Date().getFullYear()} Knowlix Learning. All rights reserved.
