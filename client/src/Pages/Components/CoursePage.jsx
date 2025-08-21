@@ -45,7 +45,7 @@ const CoursePage = () => {
   const visibleCourses = showAll ? courses : courses.slice(0, 4);
 
   return (
-    <CourseWrapper>
+    <CourseWrapper id="courses">
       <div style={{ padding: '2rem' }}>
         <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#111827', marginBottom: '1.5rem' }}>
           Explore Our Courses
