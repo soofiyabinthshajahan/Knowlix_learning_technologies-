@@ -14,6 +14,7 @@ import CourseDetails from './Pages/Components/CourseInfo/CourseDetails';
 import Blog from "./Pages/Components/Blog/Blog";
 // import { courses } from './Pages/Data/CourseData';
 import Footer from "./Footer";
+import RefundPolicy from "./Pages/Components/Policy/RefundPolicy";
 
 function App() {
   return (
@@ -40,7 +41,7 @@ function App() {
 
         {/* ✅ Add this route for the Team section */}
         <Route path="/team" element={<TeamSection />} />
-
+<Route path="/policy" element={<RefundPolicy />} />
         {/* Course details page */}
         <Route path="/courses/:id" element={<CourseDetails />} />
 

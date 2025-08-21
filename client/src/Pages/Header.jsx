@@ -346,6 +346,9 @@ function Header() {
               </Link>
             </Element>
             <Element>Career</Element>
+             <Element>
+               <Link to="/policy">Policy</Link>
+            </Element>
             <Element>Contact</Element>
           </HeaderElements>
           <Button onClick={handleOpenDemoModal}>Book a Demo</Button>
@@ -375,6 +378,9 @@ function Header() {
               </Link>
             </Element>
             <Element>Career</Element>
+            <Element>
+               <Link to="/policy">Policy</Link>
+            </Element>
             <Element>Contact</Element>
           </HeaderElements>
           <Button onClick={handleOpenDemoModal}>Book a Demo</Button>
