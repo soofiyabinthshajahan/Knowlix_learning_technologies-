@@ -88,18 +88,27 @@ const TeamSection = () => {
       
       image: "/core2.jpg"
     },
+  
     {
       id: 10,
       name: "Safvana Jasmin",
       title: "Online Tutor Expert",
       // description: "desc",
       image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010"
-    }
+    },
+    {
+      id: 11,
+      name: "Amurtha",
+      title: "Core Team",
+      
+      image: "/Amurtha.png"
+    },
+      
   ];
 
-  const leadership = teamMembers.slice(0, 2);
-  const advisoryBoard = teamMembers.slice(2, 6);
-  const coreTeam = teamMembers.slice(6, 10);
+const leadership = teamMembers.slice(0, 2);
+const advisoryBoard = teamMembers.slice(2, 6);
+const coreTeam = teamMembers.slice(6, 11); // fixed
 
   const gridStyle = {
     display: 'grid',
