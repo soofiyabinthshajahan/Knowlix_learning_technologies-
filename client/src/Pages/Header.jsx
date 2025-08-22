@@ -380,9 +380,9 @@ function Header() {
             <Element>
                <Link to="/policy">Policy</Link>
             </Element>
-            <Element>Contact</Element>
+          
           </HeaderElements>
-          <Button onClick={handleOpenDemoModal}>Book a Demo</Button>
+          <Button onClick={handleOpenDemoModal}>Contact Us</Button>
           <IconWrapper>
             <FiBell />
             {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}

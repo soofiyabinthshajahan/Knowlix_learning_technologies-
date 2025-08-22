@@ -4,32 +4,29 @@ import "./BlogServices.css";
 const blogData = [
   {
     id: 1,
-    title: "Creative UI Design",
-    price: "$1,500",
+    title: "Webinar",
+  
     image:
-      "https://cdn.dribbble.com/userupload/7534610/file/original-240dbb4a37cdc9448a18b0d3f193d8b4.png?resize=400x0",
+      "/service1.jpeg",
   },
   {
     id: 2,
-    title: "App Interface Concepts",
-    price: "$2,000",
+    title: "Webinar",
+  
     image:
-      "https://cdn.dribbble.com/userupload/7534610/file/original-240dbb4a37cdc9448a18b0d3f193d8b4.png?resize=400x0",
-  },
+"/service2.jpeg",  },
   {
     id: 3,
-    title: "Mobile App UI Design",
-    price: "$2,500",
+    title: "Webinar",
+  
     image:
-      "https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/228862573/original/fa259e4246fa142664f5a9be1ccd6cbf13e1d75d/mobile-app-app-prototype-app-ui-app-design-android-app-ui-design-ui-ux-design.png",
-  },
+"/service3.jpeg",  },
   {
     id: 4,
-    title: "UX & Wireframing",
-    price: "$3,000",
+    title: "Webinar",
+   
     image:
-      "https://res.cloudinary.com/upwork-cloud/image/upload/c_scale,w_1000/v1708025523/catalog/1524082441309937664/v5nrrkpjcsdw8abspkzh.webp",
-  },
+"/service4.jpeg",  },
 ];
 
 const BlogServices = () => {
@@ -46,7 +43,7 @@ const BlogServices = () => {
             <img src={blog.image} alt={blog.title} className="service-image" />
             <div className="service-info">
               <span className="service-title">{blog.title}</span>
-              <span className="service-price">{blog.price}</span>
+             
             </div>
           </div>
         ))}
