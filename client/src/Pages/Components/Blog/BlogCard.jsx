@@ -5,26 +5,23 @@ const BlogCard = () => {
   const cards = [
     {
       id: 1,
-      img: "https://thumbs.dreamstime.com/b/business-man-phone-updates-system-blue-background-businessman-phone-updates-system-blue-background-234900173.jpg"
+      img: "/card1.jpeg"
     },
     {
       id: 2,
-      img: "https://thumbs.dreamstime.com/b/compliance-rule-law-regulation-graphic-interface-business-quality-policy-planning-to-meet-international-standard-184946168.jpg"
-    },
+img: "/card2.jpeg"    },
     {
       id: 3,
-      img: "https://i.ytimg.com/vi/bRrIhgn52m0/maxresdefault.jpg"
-    },
+img: "/card3.jpeg"    },
     {
       id: 4,
-      img: "https://thumbs.dreamstime.com/b/businessman-pressing-button-touch-screen-interface-select-update-icon-businessman-pressing-button-touch-screen-interface-265315151.jpg"
-    }
+img: "/card4.jpeg"    }
   ];
 
   return (
     <div className="blog-card-section">
       <div className="blog-card-header">
-        <h2>More by Dipa Inhouse</h2>
+        <h2>More by Knowlix Learning</h2>
         <a href="#">View profile</a>
       </div>
       <div className="blog-card-grid">

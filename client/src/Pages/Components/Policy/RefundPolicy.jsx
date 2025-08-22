@@ -9,23 +9,47 @@ const RefundPolicy = () => {
   const policySections = {
     general: {
       title: "General Refund Policy",
-      content: "We want you to be completely satisfied with your purchase. If you're not happy for any reason, we offer a 30-day money-back guarantee on all our products."
+      content: (
+        <>
+          <p>1. The Admission Fee and Mentor Allocation Charge are non-refundable.</p>
+          <p>2. If a student is not satisfied within the first three days of joining, the concern will be reviewed, and if found valid, a 10% refund will be provided.</p>
+          <p>3. Any requests made after three days will not be eligible for a refund.</p>
+        </>
+      )
     },
     eligibility: {
       title: "Eligibility Criteria",
-      content: "To be eligible for a refund, your request must be made within 30 days of purchase. The product must not have been used extensively, and all original materials must be returned in their original condition."
+      content: (
+        <>
+          <p>1. If a student is not satisfied within the first three days of joining, the concern will be reviewed, and if found valid, a 10% refund will be provided.
+</p>
+          </>
+      )
     },
     process: {
       title: "Refund Process",
-      content: "To request a refund, please contact our support team with your order details. Once approved, refunds will be processed within 5-7 business days and credited to your original payment method."
+        content: (
+        <>
+          <p>1. In case of any complaint, kindly register it through the company’s official email.</p>
+          <p>2. The complaint will be reviewed, and you will receive an update or reply within 14 working days.</p>
+          <p>3. If the complaint is found to be genuine, a refund will be processed.</p>
+        </>
+      )
     },
     exceptions: {
-      title: "Exceptions",
-      content: "Some products are exempt from refunds including downloadable software, services already rendered, and products marked as final sale. Digital products may only be refunded if they are defective."
+      title: "Refund Method",
+      content: (
+        <>
+          <p>1. All approved refunds will be processed to the original method of payment used at the time of purchase.</p>
+          <p>2. The time required for the refund to appear may vary depending on your bank or card issuer.</p>
+          <p>3. Refunds typically reflect within 5 to 10 business days.</p>
+          <p>4. The company is not responsible for any delays caused by banks or payment providers.</p>
+        </>
+      )
     },
     contact: {
       title: "Contact Us",
-      content: "If you have any questions about our refund policy, please contact us at support@company.com or call us at (555) 123-4567 between 9am-5pm EST, Monday through Friday."
+      content: "If you have any questions about our refund policy, please contact us at knowlixacademics@gmail.com or call us at +91 7025235519 between 9am-5pm EST, Monday through Friday."
     }
   };
 
@@ -57,12 +81,10 @@ const RefundPolicy = () => {
 
           <div className="policy-details">
             <h2>{policySections[activeSection].title}</h2>
-            <p>{policySections[activeSection].content}</p>
-            
-            <div className="additional-info">
-              <h3>Need More Help?</h3>
-              <p>Visit our <a href="/faq">FAQ page</a> or contact our customer support team for additional assistance.</p>
+            <div className="policy-text">
+              {policySections[activeSection].content}
             </div>
+          
           </div>
         </div>
 
