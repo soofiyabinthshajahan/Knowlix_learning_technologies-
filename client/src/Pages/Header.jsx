@@ -345,7 +345,11 @@ function Header() {
                 Team
               </Link>
             </Element>
-            <Element>Career</Element>
+            <Element>
+              <Link to="/careers" style={{ textDecoration: 'none', color: 'inherit' }} onClick={() => setShowMobileMenu(false)}>
+                Careers
+              </Link>
+            </Element>
              <Element>
                <Link to="/policy">Policy</Link>
             </Element>
@@ -376,7 +380,9 @@ function Header() {
                 Team
               </Link>
             </Element>
-            <Element>Career</Element>
+            <Element>
+               <Link to="/careers">Careers</Link>
+            </Element>
             <Element>
                <Link to="/policy">Policy</Link>
             </Element>
