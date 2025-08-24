@@ -15,6 +15,7 @@ import Blog from "./Pages/Components/Blog/Blog";
 // import { courses } from './Pages/Data/CourseData';
 import Footer from "./Footer";
 import RefundPolicy from "./Pages/Components/Policy/RefundPolicy";
+import TutorPage from "./Pages/Components/Tutor/TutorPage";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
 
         <Route path="/enroll" element={<EnrollPage />} />
         <Route path="/blog" element={<Blog />}/>
+        <Route path="/careers" element={<TutorPage />}/>
       </Routes>
     </Router>
   );
