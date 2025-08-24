@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Footer from "../../../Footer";
 import TutorNav from "./TutorNav";
 import TutorHero from "./TutorHero";
-import TutorReg from "./TutorReg";
+import TutorApply from "./TutorApply";
 import TutorProgram from "./TutorProgram";
 import TutorTutorial from "./TutorTutorial";
 import TutorPassion from "./TutorPassion";
@@ -54,7 +54,7 @@ const TutorPage = () => {
       
       <TutorHero />
 
-      <TutorReg />
+      <TutorApply />
 
       <TutorProgram />
 
