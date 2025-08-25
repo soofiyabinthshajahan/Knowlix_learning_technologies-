@@ -90,13 +90,13 @@ const TutorHero = () => {
     return (
         <>
             <HeroSection id="homes">
-                <h1>Online Teaching Job In Kerala! Join Interval Learning As A Tutor</h1>
+                <h1>Online Teaching Job In Kerala! Join Knowlix Learning As A Tutor</h1>
                 <h2>Inspire. Educate. Transform.</h2>
                 <p>
                 Do you love teaching and want to shape young minds for a bright future?
                 We’re looking for passionate and skilled tutors who can make learning fun
                 and effective for students of all levels. Whether you’re an expert in
-                academic subjects, languages, or foundation programs, Interval Learning
+                academic subjects, languages, or foundation programs, Knowlix Learning
                 is the perfect platform to showcase your teaching skills and help
                 students become future-ready.
                 </p>
@@ -109,7 +109,7 @@ const TutorHero = () => {
                 alt="Tutor"
                 />
                 <div>
-                <h2>Why Teach With INTERVAL?</h2>
+                <h2>Why Teach With KNOWLIX?</h2>
                 <Benefits>
                     <li>
                     <span>Teach from Anywhere</span> – Work from the comfort of your home
