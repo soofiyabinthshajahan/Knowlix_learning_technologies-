@@ -52,7 +52,7 @@ const ContactButton = styled.a`
 const TutorNav = () => {
     return (
         <Nav>
-        <Logo src="/Logo-removebg-preview.png" alt="Interval Logo" />
+        <Logo src="/Logo-removebg-preview.png" alt="Knowlix Logo" />
         <NavLinks>
           <a href="#homes">Home</a>
           <a href="#apply">How to Apply</a>
