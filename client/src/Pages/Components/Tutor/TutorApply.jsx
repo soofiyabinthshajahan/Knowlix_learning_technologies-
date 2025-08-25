@@ -72,18 +72,18 @@ const TutorReg = () => {
               </RegisteredBox>
         
               <ApplySection>
-                <h2>Apply For A Tutor And Start Your Teacher Journey With Interval!</h2>
+                <h2>Apply For A Tutor And Start Your Teacher Journey With Knowlix!</h2>
                 <p>
-                  Interval Learning provides a flexible and rewarding platform for tutors
+                  Knowlix Learning provides a flexible and rewarding platform for tutors
                   to teach students from KG class to 12, as well as engage with pre-KG
                   learners. Whether you want to work from home or in a tuition center job,
                 </p>
                 <p>
                   We offer opportunities that suit your schedule. With{" "}
                   <a href="/" style={{ color: "#0072ff", textDecoration: "none", fontWeight: "600" }}>
-                    Interval Learning
+                    Knowlix Learning
                   </a>
-                  , you can explore Interval tutor jobs, Interval careers, and Interval
+                  , you can explore Knowlix tutor jobs, Knowlix careers, and Knowlix
                   Learning careers to grow as an educator.
                 </p>
                 <p>
