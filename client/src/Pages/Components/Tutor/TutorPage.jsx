@@ -32,19 +32,19 @@ const TutorPage = () => {
       name: "Ummu Haleema Ashreena",
       role: "Tutor",
       image: "/ummu.jpg",
-      text: `TEAM INTERVAL is a great platform to learn and grow...`
+      text: `TEAM KNOWLIX is a great platform to learn and grow...`
     },
     {
       name: "Fathima Anas",
       role: "Tutor",
       image: "/ummu.jpg",
-      text: `TEAM INTERVAL is a great platform to learn and grow...`
+      text: `TEAM KNOWLIX is a great platform to learn and grow...`
     },
     {
       name: "Shakira",
       role: "Tutor",
       image: "/ummu.jpg",
-      text: `TEAM INTERVAL is a great platform to learn and grow...`
+      text: `TEAM KNOWLIX is a great platform to learn and grow...`
     },
   ];
 
