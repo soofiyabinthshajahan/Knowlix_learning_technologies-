@@ -73,7 +73,7 @@ const TutorTutorial = () => {
             <h4>Tutorial</h4>
             <h2>How to apply for a Tutor Job?</h2>
             <p>
-            Join Interval Learning and start your teaching journey with ease. Enjoy 
+            Join Knowlix Learning and start your teaching journey with ease. Enjoy 
             flexible working hours and the comfort of teaching from home. Build a 
             rewarding career while shaping young minds in a fun, engaging, and effective way.
             </p>
@@ -82,7 +82,7 @@ const TutorTutorial = () => {
 
         <TutorialVideo>
             <iframe 
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+            src="https://www.youtube.com/embed/_pwWkHgHZbw" 
             title="How to Apply for a Tutor Job"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowFullScreen

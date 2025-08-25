@@ -77,7 +77,7 @@ const TutorBenefits = () => {
     return (
         <WhoCanBecomeSection>
             <h4>Who Can Become</h4>
-            <h2>Be A Part Of The Interval Learning Community</h2>
+            <h2>Be A Part Of The Knowlix Learning Community</h2>
             <p>
                 We are looking for passionate and skilled tutors who can make learning fun, engaging, 
                 and effective for students of all levels. No matter which subject or language you 
@@ -85,13 +85,13 @@ const TutorBenefits = () => {
             </p>
             <p>
                 Join 10000+ tutors across India who are already part of the{" "}
-                <a href="/careers">Interval Learning careers</a> community. Whether you’re interested 
+                <a href="/careers">Knowlix Learning careers</a> community. Whether you’re interested 
                 in online tuition jobs for Class 1 to 5 work from home or prefer a tuition center job, 
                 we have the right opportunity for you.
             </p>
             <p>
                 Teach through one-on-one personalized sessions or group classes, customized to meet 
-                each student’s needs. Be part of the <strong>Interval Tutor community</strong> and 
+                each student’s needs. Be part of the <strong>Knowlix Tutor community</strong> and 
                 make a real impact on students’ learning. Apply now and start your teaching journey today!
             </p>
 

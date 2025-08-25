@@ -107,7 +107,7 @@ const TutorPassion = () => {
         <h2>Your Dream Job Awaits!</h2>
         <p>
             Whether you’re looking for a full-time or part-time tutoring job, or want to gain
-            teaching experience, Interval Learning is the perfect platform. Join us and secure
+            teaching experience, Knowlix Learning is the perfect platform. Join us and secure
             a stable future while making a real impact on students’ learning.
         </p>
 
