@@ -21,8 +21,8 @@ img: "/card4.jpeg"    }
   return (
     <div className="blog-card-section">
       <div className="blog-card-header">
-        <h2>More by Knowlix Learning</h2>
-        <a href="#">View profile</a>
+        <h2>Collaborations and Sessions</h2>
+        {/* <a href="#">View profile</a> */}
       </div>
       <div className="blog-card-grid">
         {cards.map((card) => (
