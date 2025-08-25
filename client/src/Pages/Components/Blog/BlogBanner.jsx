@@ -50,7 +50,7 @@ const BlogBanner = () => {
           Interested to collaborate? Let’s <em>Get in Touch!</em>
         </h2>
         <p>
-          Reach us out through the <strong className="get-in-touch"><u onClick={() => setShowModal(true)}>Get in touch</u></strong> button. Design crafted by Malik.
+          Reach us out through the <strong className="get-in-touch"><u onClick={() => setShowModal(true)}>Get in touch</u></strong> button.
         </p>
       </div>
        {/* Modal */}
