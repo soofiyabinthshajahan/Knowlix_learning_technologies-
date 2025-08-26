@@ -33,8 +33,8 @@ const BlogServices = () => {
   return (
     <div className="blog-services">
       <div className="services-header">
-        <h1 className="section-title">Services</h1>
-        <a href="#">View all services</a>
+        <h1 className="section-title">Talks and Trainnings</h1>
+        {/* <a href="#">View all services</a> */}
       </div>
 
       <div className="service-grid">
