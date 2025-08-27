@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './RefundPolicy.css';
 import Header from '../../Header';
-import Footers from '../Footer/Footers';
+
 
 const RefundPolicy = () => {
   const [activeSection, setActiveSection] = useState('general');
@@ -90,7 +90,6 @@ const RefundPolicy = () => {
 
         
       </div>
-      <Footers />
     </>
   );
 };

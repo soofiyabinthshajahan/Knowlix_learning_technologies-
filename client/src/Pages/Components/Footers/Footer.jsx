@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FaLinkedin, FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-
+import { Link } from "react-router-dom";
 const FooterContainer = styled.footer`
   background: #041f1a;
   color: #cde8e0;
@@ -10,7 +10,7 @@ const FooterContainer = styled.footer`
   font-size: 0.95rem;
   border-top: 1px solid #0d3b31;
   width: 100%;
-  margin-top: 40px;
+ 
 `;
 
 const FooterLinks = styled.div`
@@ -70,9 +70,13 @@ const Footer = () => {
   return (
     <FooterContainer>
       <FooterLinks>
-        <FooterClick onClick={() => scrollToSection("home")}>Home</FooterClick> | 
+        <FooterClick onClick={() => scrollToSection("home")}>
+          Home</FooterClick> | 
         <FooterClick onClick={() => scrollToSection("about")}>About</FooterClick> | 
         <FooterClick onClick={() => scrollToSection("courses")}>Courses</FooterClick> |
+     
+          <Link to="/blog">Blog</Link> | 
+        <Link to="/policy">Policy</Link> | 
         <FooterClick onClick={() => scrollToSection("contact")}>Contact</FooterClick>
       </FooterLinks>
 

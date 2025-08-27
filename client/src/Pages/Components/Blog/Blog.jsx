@@ -4,7 +4,6 @@ import BlogHeader from "./BlogHeader";
 import BlogBanner from "./BlogBanner";
 import BlogCard from "./BlogCard";
 import BlogServices from "./BlogServices";
-import Footers from "../Footer/Footers";
 
 const Blog = () => {
   return (
@@ -17,7 +16,7 @@ const Blog = () => {
   <BlogBanner />
   <BlogCard />
   <BlogServices />
-  <Footers />
+
   
    </div>
   </>

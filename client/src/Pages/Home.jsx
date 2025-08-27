@@ -43,14 +43,15 @@ const HeroWrapper = styled.div`
 `;
 
 const HeroContent = styled.div`
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  // background: rgba(255, 255, 255, 0.15);
+  // backdrop-filter: blur(10px);
+  // -webkit-backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 20px;
   width: 60%;
   color: #fff;
   text-align: center;
+  margin-top:80px;
 
   h1 {
     font-size: 2.5rem;
@@ -65,7 +66,7 @@ const HeroContent = styled.div`
   }
 
   button {
-    padding: 12px 24px;
+    padding: 12px 24px ;
     background-color: #477e6a;
     color: white;
     border: none;
@@ -81,6 +82,7 @@ const HeroContent = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
+    margin-top:2px;
 
     h1 {
       font-size: 1.7rem;
@@ -97,73 +99,73 @@ const HeroContent = styled.div`
   }
 `;
 
-const ImpactSection = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  /* padding: 20px 0; */
-  flex-wrap: wrap;
+// const ImpactSection = styled.div`
+//   width: 100%;
+//   display: flex;
+//   justify-content: flex-start;
+//   gap: 10px;
+//   /* padding: 20px 0; */
+//   flex-wrap: wrap;
 
-  @media (max-width: 768px) {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+//   @media (max-width: 768px) {
+//     overflow-x: auto;
+//     flex-wrap: nowrap;
+//     scroll-snap-type: x mandatory;
+//     -webkit-overflow-scrolling: touch;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
-`;
+//     &::-webkit-scrollbar {
+//       display: none;
+//     }
+//   }
+// `;
 
-const ImpactCard = styled.div`
-  background: rgba(255, 255, 255, 0.76);
-  border-radius: 16px;
-  padding: 30px 20px;
-  min-width: 220px;
-  text-align: center;
-  flex: 0 0 auto;
-  max-width: 220px;
-  margin-left: 10px;
-  scroll-snap-align: start;
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+// const ImpactCard = styled.div`
+//   background: rgba(255, 255, 255, 0.76);
+//   border-radius: 16px;
+//   padding: 30px 20px;
+//   min-width: 220px;
+//   text-align: center;
+//   flex: 0 0 auto;
+//   max-width: 220px;
+//   margin-left: 10px;
+//   scroll-snap-align: start;
+//   backdrop-filter: blur(8px);
+//   border: 1px solid rgba(255, 255, 255, 0.3);
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 
-  &:first-child {
-    margin-left: 20px;
-  }
+//   &:first-child {
+//     margin-left: 20px;
+//   }
 
-  svg {
-    font-size: 2.5rem;
-    color: #004c34;
-    margin-bottom: 10px;
-  }
+//   svg {
+//     font-size: 2.5rem;
+//     color: #004c34;
+//     margin-bottom: 10px;
+//   }
 
-  h2 {
-    font-size: 2rem;
-    color: #006c45;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
+//   h2 {
+//     font-size: 2rem;
+//     color: #006c45;
+//     margin-bottom: 10px;
+//     font-weight: 700;
+//   }
 
-  p {
-    font-size: 1.05rem;
-    color: #006c45;
-    font-weight: 500;
-  }
+//   p {
+//     font-size: 1.05rem;
+//     color: #006c45;
+//     font-weight: 500;
+//   }
 
-  @media (max-width: 768px) {
-    h2 {
-      font-size: 1.6rem;
-    }
+//   @media (max-width: 768px) {
+//     h2 {
+//       font-size: 1.6rem;
+//     }
 
-    p {
-      font-size: 1rem;
-    }
-  }
-`;
+//     p {
+//       font-size: 1rem;
+//     }
+//   }
+// `;
 
 function Home() {
   return (
@@ -180,7 +182,7 @@ function Home() {
           <button>Grab a Demo &nbsp; →</button>
         </HeroContent>
 
-        <ImpactSection>
+        {/* <ImpactSection>
           <ImpactCard>
             <h2>
               <CountUp end={4500} duration={3} />+
@@ -217,7 +219,7 @@ function Home() {
             </h2>
             <p>Years of Experience</p>
           </ImpactCard>
-        </ImpactSection>
+        </ImpactSection> */}
       </HeroWrapper>
     </HomeSection>
   );
