@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { FaUser, FaBookOpen, FaUniversity, FaClock } from "react-icons/fa"; 
 import { useState, useEffect } from "react";
-import Footer from "../../../Footer";
+import Footer from "../Footers/Footer";
 import TutorNav from "./TutorNav";
 import TutorHero from "./TutorHero";
 import TutorApply from "./TutorApply";

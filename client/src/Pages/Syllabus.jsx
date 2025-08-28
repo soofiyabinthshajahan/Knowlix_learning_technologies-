@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 const SyllabusWrapper = styled.section`
   width: 100%;
-  background: rgb(248, 248, 248);
+  background: #ffff;
   padding: 40px 0;
   overflow: hidden;
   font-family: "Inter", sans-serif;
@@ -31,14 +31,14 @@ const Image = styled.img`
   height: 180px;
   object-fit: cover;
   border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  // box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 `;
 
 function Syllabus() {
   // Add or replace with your syllabus image paths
   const syllabusImages = [
-    "Prompt.png",
-    "DA & AI.jpg",
+    // "Prompt.png",
+    // "DA & AI.jpg",
     "/Syllabus1.png",
     "syllabus7.png",
     "/syllabus6.png",

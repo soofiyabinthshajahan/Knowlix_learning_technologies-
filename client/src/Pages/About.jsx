@@ -1,4 +1,3 @@
-// About.tsx
 import styled from "styled-components";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -23,11 +22,24 @@ const Grid = styled.div`
 
 const TextBlock = styled.div``;
 
+const OurStoryLabel = styled.span`
+  display: block;          /* makes text-align and margin work */
+  text-transform: uppercase;
+  font-weight: 600;
+  color: #006c45;
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+`;
+
+
 const Heading = styled.h2`
   font-size: 2.7rem;
   font-weight: 500;
   margin-bottom: 20px;
   color: #2d4236;
+  line-height: 1.2;
 `;
 
 const Subtext = styled.p`
@@ -107,18 +119,10 @@ function AboutSection() {
     <AboutWrapper>
       <Grid>
         <TextBlock>
-          <span
-            style={{
-              textTransform: "uppercase",
-              fontWeight: "600",
-              color: "#006c45",
-            }}
-          >
-            Our Story
-          </span>
+          <OurStoryLabel>Our Story</OurStoryLabel>
           <Heading>Cultivating a space where learning blooms.</Heading>
           <Subtext>
-            Knowlix wasn’t born in a classroom, but from a shared mission. A
+            Knowlix wasn't born in a classroom, but from a shared mission. A
             group of passionate educators and learners came together to break
             traditional boundaries. We created an environment that supports
             flexible learning, expert mentorship, and skill-building for every
@@ -128,7 +132,7 @@ function AboutSection() {
         <Stats>
           <div>
             <span>10+</span>
-            <span>Countries </span>
+            <span>Countries</span>
           </div>
           <div>
             <span>15+</span>

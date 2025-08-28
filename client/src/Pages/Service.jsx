@@ -22,6 +22,7 @@ const SubTitle = styled.h4`
   letter-spacing: 1.5px;
   color: #a8d3c1;
   font-size: 0.9rem;
+  text-align: center;
   margin-bottom: 30px;
   text-transform: uppercase;
 `;

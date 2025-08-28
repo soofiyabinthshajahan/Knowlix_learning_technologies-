@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Footer from '../../Footer';
+import Footer from './Footers/Footer';
 
 const TeamGrid = styled.div`
   display: grid;
