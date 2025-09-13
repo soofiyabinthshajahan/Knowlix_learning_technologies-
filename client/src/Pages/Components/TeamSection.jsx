@@ -1,225 +1,226 @@
-import React from 'react';
-import styled from 'styled-components';
-import Footer from './Footers/Footer';
+import React from "react";
+import styled from "styled-components";
+import Header from "../Header"
+
+// --- Styled Components ---
+const Section = styled.section`
+  padding: 100px 60px 20px;
+  max-width: 1300px;
+  margin: 0 auto;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    padding: 60px 60px 20px;
+  }
+`;
+
+const Title = styled.h2`
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #0b6b40ff;
+
+  @media (max-width: 600px) {
+    font-size: 1.6rem;
+  }
+`;
+
+const Subtitle = styled.p`
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 50px;
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
+`;
+
+const SectionTitle = styled.h3`
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 40px 0 25px;
+
+  @media (max-width: 600px) {
+    font-size: 1.2rem;
+  }
+`;
 
 const TeamGrid = styled.div`
   display: grid;
   gap: 32px;
-  padding: 0 15px;
-  justify-content: center;a
-  margin-bottom: 64px;
+  justify-content: center;
 
-  grid-template-columns: ${({ centered }) =>
-    centered ? 'repeat(auto-fit, minmax(280px, 1fr))' : 'repeat(2, 1fr)'};
+  /* Default grid */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-  @media (min-width: 768px) {
-    grid-template-columns: ${({ centered }) =>
-      centered ? 'repeat(2, 300px)' : 'repeat(4, 1fr)'};
-    justify-content: ${({ centered }) => (centered ? 'center' : 'start')};
+  /* Management & Advisory (center align if < 3) */
+  &.management,
+  &.advisory {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 32px;
   }
 
-  ${({ centered }) => centered && `
-    @media (max-width: 767px) {
-      grid-template-columns: repeat(2, 1fr);
+  /* Academics Core Team */
+  &.core-team {
+    grid-template-columns: repeat(5, 1fr);
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      justify-items: center;
     }
-  `}
+
+    @media (max-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* Councillor (single card center aligned) */
+  &.councillor {
+    display: flex;
+    justify-content: center;
+    > div {
+      max-width: 280px;
+    }
+    @media (max-width: 767px) {
+      > div {
+        max-width: 200px;
+      }
+    }
+  }
 `;
 
+const Card = styled.div`
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #eaeaea;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  width: 100%;
+  max-width: 260px; /* keeps consistent card width */
 
+  @media (max-width: 768px) {
+    max-width: 180px;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 120px;
+    height: auto;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 250px; /* fixed height */
+  object-fit: cover;
+  display: block;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
+  @media (max-width: 480px) {
+    height: 160px;
+  }
+`;
+
+const CardInfo = styled.div`
+  padding: 12px 15px;
+`;
+
+const CardName = styled.h4`
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+
+  @media (max-width: 600px) {
+    font-size: 1rem;
+  }
+`;
+
+const CardTitle = styled.p`
+  font-size: 0.95rem;
+  color: #666;
+  margin: 4px 0 0;
+
+  @media (max-width: 600px) {
+    font-size: 0.8rem;
+  }
+`;
+
+// --- Data ---
+const managementTeam = [
+  { name: "Muhammed Jaseem", title: "MD", img: "/md.jpg" },
+  { name: "Casac Benjali", title: "Director", img: "/director.jpg" },
+];
+
+const advisoryBoard = [
+  { name: "Dr Nijad K K", title: "Asst. Professor - Calicut University", img: "/adv1.jpg" },
+  { name: "Muhammed Afsal", title: "MBA", img: "/adv2.jpg" },
+  { name: "Hidayathulla", title: "MD Zains", img: "/adv3.jpg" },
+  { name: "Suleeb Rahman", title: "GM of Pristine", img: "/adv4.jpg" },
+];
+
+const coreTeam = [
+  { name: "Hiba Sherin", title: "English Dept.", img: "/core1.jpg" },
+  { name: "Chaithra Nair", title: "Hindi Dept.", img: "/core2.jpg" },
+  { name: "Safvana Jasmin", title: "Science Dept.", img: "/Safavana.jpg" },
+  { name: "Amrutha", title: "Maths Dept.", img: "/Amurtha.png" },
+  { name: "Fidha", title: "Arabic Dept.", img: "/Fidha.png" },
+];
+
+const councillor = [
+  { name: "Shurufa Yasmin", title: "Councillor", img: "/councillor.jpg" },
+];
+
+// --- Component ---
 const TeamSection = () => {
-  const teamMembers = [
-    {
-      id: 1,
-      name: "Muhammad Jaseem",
-      title: "MD",
-      image: "/md.jpg"
-    },
-    {
-      id: 2,
-      name: "Casac Benjali",
-      title: "Director",
-      image: "/director.jpg"
-    },
-    {
-      id: 3,
-      name: "Dr Nijad K K",
-      title: "Asst. Professor - CALICULT University",
-      // description: "Founding design team at Figma. Former Plex, Stripe, and Tile.",
-      image: "/adv1.jpg"
-    },
-    {
-      id: 4,
-      name: "Muhammed Afsal",
-      title: "MBA",
-      // description: "Former frontend dev for Linear, Coinbase, and Postscript.",
-      image: "/adv2.jpg"
-    },
-    {
-      id: 5,
-      name: "Hidayathulla",
-      title: "MD Zains",
-      // description: "International Group",
-      image: "/adv3.jpg"
-    },
-    {
-      id: 6,
-      name: "Suleeb Rahman",
-      title: "GM of Pristine",
-      // description: "Aligner",
-      image: "/adv4.jpg"
-    },
-    {
-      id: 7,
-      name: "Shurufa Yasmin",
-      title: "Councillor",
-      image: "/councillor.jpg"
-    },
-    {
-      id: 8,
-      name: "Hiba Sherin",
-      title: "B Ed",
-      description: "BA Communication, Media and History",
-      image: "/core1.jpg"
-    },
-    {
-      id: 9,
-      name: "Chaithra Nair",
-      title: "MA History",
-      
-      image: "/core2.jpg"
-    },
-  
-    {
-      id: 10,
-      name: "Safvana Jasmin",
-      title: "Online Tutor Expert",
-      // description: "desc",
-      image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png?20170328184010"
-    },
-    {
-      id: 11,
-      name: "Amurtha",
-      title: "Core Team",
-      
-      image: "/Amurtha.png"
-    },
-      
-  ];
-
-const leadership = teamMembers.slice(0, 2);
-const advisoryBoard = teamMembers.slice(2, 6);
-const coreTeam = teamMembers.slice(6, 11); // fixed
-
-  const gridStyle = {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '32px',
-    justifyContent: 'center',
-    marginBottom: '64px',
-  };
-
-  const renderTeam = (members, centered = false) => {
-    return (
-      <TeamGrid centered={centered}>
-        {members.map((member) => (
-          <div key={member.id} style={{ textAlign: 'center', maxWidth: '300px', margin: '0 auto' }}>
-            <div style={{ marginBottom: '24px' }}>
-              <div style={{
-                width: '100%',
-                aspectRatio: '1',
-                borderRadius: '16px',
-                overflow: 'hidden',
-                backgroundColor: '#e5e7eb'
-              }}>
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    transition: 'transform 0.3s ease'
-                  }}
-                  onMouseEnter={(e) => e.target.style.transform = 'scale(1.05)'}
-                  onMouseLeave={(e) => e.target.style.transform = 'scale(1)'}
-                />
-              </div>
-            </div>
-            <h3 style={{
-              fontSize: 'clamp(16px, 5vw, 22px)',
-              fontWeight: '700',
-              color: '#111827',
-              marginBottom: '8px',
-              lineHeight: '1.2'
-            }}>
-              {member.name}
-            </h3>
-
-            <p style={{
-              fontSize: 'clamp(14px, 4.5vw, 18px)',
-              fontWeight: '680',
-              color: '#111827',
-              marginBottom: '8px'
-            }}>
-              {member.title}
-            </p>
-
-            <p style={{
-              fontSize: 'clamp(13px, 4vw, 18px)',
-              color: '#6b7280',
-              lineHeight: '1.5',
-              whiteSpace: 'pre-line'
-            }}>
-              {member.description}
-            </p>
-
-          </div>
-        ))}
-      </TeamGrid>
-    );
-  };
+  const renderTeam = (team) =>
+    team.map((member, index) => (
+      <Card key={index}>
+        <CardImage src={member.img} alt={member.name} />
+        <CardInfo>
+          <CardName>{member.name}</CardName>
+          <CardTitle>{member.title}</CardTitle>
+        </CardInfo>
+      </Card>
+    ));
 
   return (
     <>
-    <div style={{ backgroundColor: '#f9fafb', padding: '64px 16px', minHeight: '100vh' }}>
-      <div style={{ maxWidth: '1280px', margin: '0 auto' }}>
+    <Header />
+    <Section>
+      <Title>We are the people who make up Knowlix</Title>
+      <Subtitle>
+        Our philosophy is simple: hire great people and give them the resources
+        and support to do their best work.
+      </Subtitle>
 
-        {/* Main Title */}
-        <div style={{ textAlign: 'center', marginBottom: '64px' }}>
-          <h2 style={{
-            fontSize: '48px',
-            fontWeight: 'bold',
-            color: '#052e2eff',
-            marginBottom: '24px',
-            lineHeight: '1.2',
-            fontFamily: 'system-ui, -apple-system, sans-serif'
-          }}>
-            We are the people who<br />
-            make up Knowlix
-          </h2>
-          <p style={{
-            fontSize: '18px',
-            color: '#6b7280',
-            maxWidth: '512px',
-            margin: '0 auto',
-            lineHeight: '1.6'
-          }}>
-            Our philosophy is simple: hire great people and give them
-            the resources and support to do their best work.
-          </p>
-        </div>
+      {/* Management Team */}
+      <SectionTitle>Management Team</SectionTitle>
+      <TeamGrid className="management">{renderTeam(managementTeam)}</TeamGrid>
 
-        {/* Leadership */}
-        {renderTeam(leadership, true)}
+      {/* Advisory Board */}
+      <SectionTitle>Advisory Board</SectionTitle>
+      <TeamGrid className="advisory">{renderTeam(advisoryBoard)}</TeamGrid>
 
-        <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Advisory Board</h2>
-        {renderTeam(advisoryBoard)}
+      {/* Academics Core Team */}
+      <SectionTitle>Academics Core Team</SectionTitle>
+      <TeamGrid className="core-team">{renderTeam(coreTeam)}</TeamGrid>
 
-        <h2 style={{ textAlign: 'center', fontSize: '32px', fontWeight: 'bold', marginBottom: '32px', color: '#111827' }}>Core Team</h2>
-        {renderTeam(coreTeam)}
-      </div>
-    </div>
-    <Footer />
+      {/* Councillor */}
+      <SectionTitle>Councillor</SectionTitle>
+      <TeamGrid className="councillor">{renderTeam(councillor)}</TeamGrid>
+    </Section>
     </>
   );
 };
