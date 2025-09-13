@@ -137,6 +137,7 @@ const cards = [
   { img: "/service2.jpeg", desc: "Webinar" },
   { img: "/service3.jpeg", desc: "Webinar" },
   { img: "/service4.jpeg", desc: "Webinar" },
+  { img: "/service5.jpg", desc: "Webinar" }
 ];
 
 // Custom arrows
