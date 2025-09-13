@@ -151,6 +151,18 @@ const FillButton = styled.button`
   }
 `;
 
+const StyledLink = styled(Link)`
+  flex: 1;
+  text-decoration: none;
+
+  display: flex;      /* Make Link a flex container */
+  
+  /* Stretch child button to fill */
+  & > button {
+    flex: 1;
+  }
+`;
+
 const CourseCard = ({ course, onViewDetails }) => {
   const color = CategoryColors[course.category];
 
@@ -188,15 +200,13 @@ const CourseCard = ({ course, onViewDetails }) => {
             <Label>Students</Label>
             <Value>{course.students.toLocaleString()}</Value>
           </InfoRow>
+          </HiddenOnMobile>
           <ButtonGroup>
-                    {/* <Link to={`/courses/${course.id}`} style={{ flex: 1, textDecoration: 'none' }}> */}
-
-            <Link to={``} style={{ flex: 1, textDecoration: 'none' }}>
-              <OutlineButton>View Details</OutlineButton>
-            </Link>
-            <FillButton>Enroll Now</FillButton>
-          </ButtonGroup>
-        </HiddenOnMobile>
+          <StyledLink to={``}>
+            <OutlineButton>View Details</OutlineButton>
+          </StyledLink>
+          <FillButton>Enroll Now</FillButton>
+        </ButtonGroup>
       </Content>
     </Card>
   );
