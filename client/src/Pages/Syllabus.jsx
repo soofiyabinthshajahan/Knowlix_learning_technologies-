@@ -93,7 +93,7 @@ function Syllabus() {
 
   return (
     <SyllabusWrapper>
-      <div style={{ overflow: "visible" }}>
+      <div style={{ overflow: "hidden" }}>
         <SyllabusSlider>
           <SyllabusTrack>
             {scrollingImages.map((item, index) => (
