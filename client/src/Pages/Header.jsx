@@ -258,6 +258,10 @@ const MobileMenu = styled.div`
   flex-direction: column;
   align-items: center;
 
+  @media (min-width: 1025px) {
+    display: none; // hide on desktop
+  }
+
   @media (max-width: 768px) {
     top: 6vh;
     padding: 15px 5%;
@@ -369,7 +373,7 @@ function Header() {
           <IconsContainer>
           
             
-            <Button onClick={handleOpenDemoModal}>Contact us</Button>
+            <Button onClick="">Contact us</Button>
               <SearchContainer ref={searchContainerRef} show={showSearch}>
               <SearchIcon onClick={toggleSearch}>
                 <FiSearch />
@@ -384,10 +388,10 @@ function Header() {
                 <FiX size={18} />
               </CloseSearch>
             </SearchContainer>
-            <IconWrapper>
+            {/*<IconWrapper>
               {token == null ? '' : <FiBell />}
               {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}
-            </IconWrapper>
+            </IconWrapper>*/}
           </IconsContainer>
         </Navigation>
 
@@ -414,15 +418,13 @@ function Header() {
               <Link to="/policy">Policy</Link>
             </Element>
           </HeaderElements>
-          <Button onClick={handleOpenDemoModal}>Contact Us</Button>
-          <IconWrapper>
+          <Button onClick="">Contact Us</Button>
+          {/*<IconWrapper>
             {token == null ? '' : <FiBell />}
             {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}
-          </IconWrapper>
+          </IconWrapper>*/}
         </MobileMenu>
       )}
-
-      <BookDemoModal show={isDemoModalOpen} onClose={handleCloseDemoModal} />
     </>
   );
 }
