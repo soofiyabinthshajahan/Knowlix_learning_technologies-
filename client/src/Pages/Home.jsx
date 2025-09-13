@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
+import { FaWhatsapp } from "react-icons/fa";
 import CountUp from "react-countup";
+import { useState } from "react";
+import BookDemoModal from "./Components/BookDemoModal";
 
 const HomeSection = styled.div`
   width: 100%;
@@ -9,6 +12,7 @@ const HomeSection = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 30px;
 
   background-image: url("/Home.png");
@@ -16,13 +20,21 @@ const HomeSection = styled.div`
   background-repeat: no-repeat;
   background-position: center;
 
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0; /* top/right/bottom/left = 0 */
+    background: rgba(0, 0, 0, 0.2); /* very slight dark overlay */
+    z-index: 0;
+  }
+
   @media only screen and (max-width: 768px) {
     min-height: auto;
     padding-bottom: 80px;
   }
  
   @media only screen and (max-width: 480px) {
-    background-image: url("https://images.pexels.com/photos/8923045/pexels-photo-8923045.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-image: url("https://images.pexels.com/photos/8259949/pexels-photo-8259949.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -32,6 +44,7 @@ const HomeSection = styled.div`
 
 
 const HeroWrapper = styled.div`
+position: relative;
   width: 100%;
   height: auto;
   padding: 80px 20px 40px;
@@ -43,30 +56,30 @@ const HeroWrapper = styled.div`
 `;
 
 const HeroContent = styled.div`
-  // background: rgba(255, 255, 255, 0.15);
-  // backdrop-filter: blur(10px);
-  // -webkit-backdrop-filter: blur(10px);
   padding: 40px;
   border-radius: 20px;
   width: 60%;
   color: #fff;
   text-align: center;
-  margin-top:80px;
+  margin-top: 100px;
 
   h1 {
+    padding-top: 140px;
     font-size: 2.5rem;
     margin-bottom: 15px;
     font-weight: 700;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
   }
 
   p {
     font-size: 1.1rem;
     margin-bottom: 25px;
     line-height: 1.6;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
   }
 
   button {
-    padding: 12px 24px ;
+    padding: 12px 24px;
     background-color: #477e6a;
     color: white;
     border: none;
@@ -74,6 +87,7 @@ const HeroContent = styled.div`
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    z-index: 10;
 
     &:hover {
       background-color: #158a68;
@@ -82,20 +96,59 @@ const HeroContent = styled.div`
 
   @media (max-width: 768px) {
     width: 90%;
-    margin-top:2px;
+    margin-top: 2px;
 
     h1 {
-      font-size: 1.7rem;
+      font-size: 1.5rem; /* smaller title on tablet/mobile */
     }
 
     p {
-      font-size: 1rem;
+      font-size: 0.95rem; /* slightly smaller paragraph */
     }
 
     button {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       padding: 10px 20px;
     }
+  }
+
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 1.3rem; /* smallest on small mobile */
+    }
+
+    p {
+      font-size: 0.85rem;
+    }
+
+    button {
+      font-size: 0.85rem;
+      padding: 8px 16px;
+    }
+  }
+`;
+
+const WhatsAppButton = styled.a`
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 1000;
+  transition: transform 0.2s ease, background-color 0.3s ease;
+
+  &:hover {
+    transform: scale(1.1);
+    background-color: #20ba57;
   }
 `;
 
@@ -168,6 +221,12 @@ const HeroContent = styled.div`
 // `;
 
 function Home() {
+  const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
+
+  const handleOpenDemoModal = () => {
+    setIsDemoModalOpen(true);
+  };
+  const handleCloseDemoModal = () => setIsDemoModalOpen(false);
   return (
     <HomeSection>
       <Header />
@@ -179,7 +238,7 @@ function Home() {
             Personalized, flexible, and interactive learning designed to help
             students thrive from the comfort of their home.
           </p>
-          <button>Grab a Demo &nbsp; →</button>
+          <button onClick={handleOpenDemoModal}>Grab a Demo &nbsp; →</button>
         </HeroContent>
 
         {/* <ImpactSection>
@@ -221,6 +280,14 @@ function Home() {
           </ImpactCard>
         </ImpactSection> */}
       </HeroWrapper>
+      <BookDemoModal show={isDemoModalOpen} onClose={handleCloseDemoModal} />
+      <WhatsAppButton
+        href="https://wa.me/7025235519"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FaWhatsapp />
+      </WhatsAppButton>
     </HomeSection>
   );
 }
