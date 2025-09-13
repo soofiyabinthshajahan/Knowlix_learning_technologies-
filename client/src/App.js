@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Global.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import AboutSection from "./Pages/About";
@@ -49,7 +49,7 @@ function App() {
         </div>
 
         {/* ✅ Footer outside Routes */}
-        <Footer />
+        
       </div>
     </Router>
   );
