@@ -1,6 +1,6 @@
 import React from "react";
 import "./Blog.css";
-import BlogHeader from "./BlogHeader";
+import Header from "../../Header";
 import BlogBanner from "./BlogBanner";
 import BlogCard from "./BlogCard";
 import BlogServices from "./BlogServices";
@@ -12,7 +12,7 @@ const Blog = () => {
  <div>
 
 
-  <BlogHeader />
+  <Header />
   <BlogBanner />
   <BlogCard />
   <BlogServices />
