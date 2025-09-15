@@ -2,7 +2,7 @@
 /* Overlay background (always on top of header) */
 .modal-overlay {
   position: fixed;
-  top: 0;   
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -10,7 +10,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 20000;   
+  z-index: 20000;
   padding: 15px;
   animation: fadeIn 0.3s ease-in-out;
 }
@@ -93,7 +93,7 @@
 /* Submit button */
 .submit-btn {
   padding: 12px;
-  background: #15c26e;
+  background: #477e6a;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -104,7 +104,7 @@
 }
 
 .submit-btn:hover {
-  background: #14d8ce;
+  background: #15c26e;
 }
 
 /* Responsive for mobile */
@@ -121,11 +121,21 @@
 
 /* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes scaleUp {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

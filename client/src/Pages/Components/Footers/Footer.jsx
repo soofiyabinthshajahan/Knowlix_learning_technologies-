@@ -92,8 +92,14 @@ const Footer = () => {
         <a href="https://www.linkedin.com/company/knowlix-learning" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
         <a href="https://www.instagram.com/knowlix_learning/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
         <a href="https://www.facebook.com/KNOWLIXLEARNING/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-        <a href="https://wa.me/YOURPHONE" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
-        <a href="mailto:yourmail@example.com"><MdEmail /></a>
+        <a href="https://wa.me/7025235519" target="_blank" rel="noopener noreferrer"><FaWhatsapp /></a>
+        <a
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=knowlixlearning@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <MdEmail />
+        </a>
       </SocialIcons>
 
       <div style={{ textAlign: "center", marginTop: "10px" }}>

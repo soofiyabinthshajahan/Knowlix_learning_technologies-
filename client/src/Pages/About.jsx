@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FaArrowRight } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const AboutWrapper = styled.section`
   width: 100%;
@@ -11,19 +11,16 @@ const AboutWrapper = styled.section`
 
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 80px;
   margin-bottom: 60px;
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
+  justify-content: center;
 `;
 
-const TextBlock = styled.div``;
+const TextBlock = styled(motion.div)``;
 
 const OurStoryLabel = styled.span`
-  display: block;          /* makes text-align and margin work */
+  display: block;
   text-transform: uppercase;
   font-weight: 600;
   color: #006c45;
@@ -32,7 +29,6 @@ const OurStoryLabel = styled.span`
   font-size: 1rem;
   letter-spacing: 1px;
 `;
-
 
 const Heading = styled.h2`
   font-size: 2.7rem;
@@ -47,6 +43,8 @@ const Subtext = styled.p`
   color: #2d4236;
   line-height: 1.8;
   max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
 `;
 
 const Stats = styled.div`
@@ -54,63 +52,52 @@ const Stats = styled.div`
   flex-direction: column;
   gap: 18px;
 
-  div {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.1rem;
-    font-weight: 500;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 10px;
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+`;
+
+const StatCard = styled(motion.div)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* ✅ pushes text to right edge */
+  padding: 16px 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+
+  span:first-child {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #004c34;
+    flex-shrink: 0; /* keeps number size fixed */
+  }
+
+  span:last-child {
+    color: #444;
+    font-size: 0.95rem;
+    margin-left: auto; /* ✅ ensures it hugs right edge */
+  }
+
+  /* ✅ Desktop overrides */
+  @media (min-width: 992px) {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
 
     span:first-child {
-      font-size: 1.6rem;
-      font-weight: bold;
-      color: #004c34;
+      margin-bottom: 5px;
     }
 
     span:last-child {
-      color: #444;
+      margin-left: 0;
     }
-  }
-`;
-
-const ImageGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 30px;
-
-  img {
-    border-radius: 15px;
-    object-fit: cover;
-    width: 100%;
-    height: 220px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-  }
-
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-`;
-
-const Button = styled.button`
-  display: flex;
-  align-items: center;
-  margin-top: 40px;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: #004c34;
-  font-weight: 600;
-  cursor: pointer;
-
-  svg {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover svg {
-    transform: translateX(5px);
   }
 `;
 
@@ -118,7 +105,12 @@ function AboutSection() {
   return (
     <AboutWrapper>
       <Grid>
-        <TextBlock>
+        <TextBlock
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
           <OurStoryLabel>Our Story</OurStoryLabel>
           <Heading>Cultivating a space where learning blooms.</Heading>
           <Subtext>
@@ -129,47 +121,30 @@ function AboutSection() {
             student.
           </Subtext>
         </TextBlock>
-        <Stats>
-          <div>
-            <span>10+</span>
-            <span>Countries</span>
-          </div>
-          <div>
-            <span>15+</span>
-            <span>states across India</span>
-          </div>
-          <div>
-            <span>2+</span>
-            <span>years of tutoring experience</span>
-          </div>
-          <div>
-            <span>400+</span>
-            <span>dedicated mentors</span>
-          </div>
-          <div>
-            <span>10+</span>
-            <span>Curriculum</span>
-          </div>
-          <div>
-            <span>4.5k+</span>
-            <span>students enrolled</span>
-          </div>
-          <div>
-            <span>15+</span>
-            <span>live interactive courses</span>
-          </div>
-        </Stats>
       </Grid>
 
-      <ImageGrid>
-        <img src="/Home.png" alt="About 1" />
-        <img src="/About2.jpg" alt="About 2" />
-        <img src="/About3.png" alt="About 3" />
-      </ImageGrid>
-
-      <Button>
-        View More Photos <FaArrowRight />
-      </Button>
+      <Stats>
+        {[
+          ["10+", "Countries"],
+          ["15+", "States across India"],
+          ["2+", "Years of tutoring experience"],
+          ["400+", "Dedicated mentors"],
+          ["10+", "Curriculum"],
+          ["4.5k+", "Students enrolled"],
+          ["15+", "Live interactive courses"],
+        ].map(([number, label], i) => (
+          <StatCard
+            key={i}
+            initial={{ opacity: 0, y: 40 }}  // ✅ fade-up, no side slide
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: i * 0.1 }}
+          >
+            <span>{number}</span>
+            <span>{label}</span>
+          </StatCard>
+        ))}
+      </Stats>
     </AboutWrapper>
   );
 }

@@ -3,7 +3,7 @@ import styled, { keyframes } from "styled-components";
 
 const SyllabusWrapper = styled.section`
   width: 100%;
-  background: #ffff;
+  background: #fff;
   padding: 40px 0;
   overflow: hidden;
   font-family: "Inter", sans-serif;
@@ -18,50 +18,91 @@ const SyllabusSlider = styled.div`
   display: flex;
   width: 200%;
   animation: ${scroll} 30s linear infinite;
+
+  @media (max-width: 768px) {
+    animation: ${scroll} 40s linear infinite; /* slower scroll on mobile */
+  }
 `;
 
 const SyllabusTrack = styled.div`
   display: flex;
   gap: 30px;
-  width: 100%;
+
+  @media (max-width: 768px) {
+    gap: 8px; /* smaller gap on mobile */
+  }
+`;
+
+const ImageContainer = styled.div`
+  width: 300px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+
+  @media (max-width: 768px) {
+    width: 100px;
+    height: 90px;
+  }
 `;
 
 const Image = styled.img`
-  width: 300px;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 12px;
-  // box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Label = styled.span`
+  margin-top: 6px;
+  font-size: 0.875rem;
+  color: #374151;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    font-size: 0.65rem; /* smaller text on mobile */
+  }
 `;
 
 function Syllabus() {
-  // Add or replace with your syllabus image paths
-  const syllabusImages = [
-    // "Prompt.png",
-    // "DA & AI.jpg",
-    "/Syllabus1.png",
-    "syllabus7.png",
-    "/syllabus6.png",
-    "/Syllabus2.jpg",
-    "/Syllabus3.jpeg",
-    "Syllabus4.png",
-    "/Syllabus8.jpg",
-    "/syllabus5.png",
-    "Syllabus9.png",
-    "syllabus10.jpg",
-    "syllabus11.jpeg",
-    "syllabus12.png"
+  const syllabusItems = [
+    { src: "/Syllabus1.png", name: "Cambridge Assessment International Education" },
+    { src: "syllabus7.png", name: "International General Certificate of Secondary Education (IGCSE)" },
+    { src: "/syllabus6.png", name: "National Institute of Open Schooling" },
+    { src: "/ib_syllabus.png", name: "International Baccalaureate (IB) World School" },
+    { src: "/Syllabus3.jpeg", name: "Government of Kerala" },
+    { src: "Syllabus4.png", name: "Karnataka Secondary Education Examination Board" },
+    { src: "/Syllabus8.jpg", name: "Government of Tamil Nadu" },
+    { src: "/syllabus5.png", name: "Council for the Indian School Certificate Examinations" },
+    { src: "Syllabus9.png", name: "Maharashtra State Board of Secondary and Higher Secondary Education" },
+    { src: "syllabus10.jpg", name: "Telengana State Board of Intermediate Education" },
+    { src: "syllabus11.jpeg", name: "State Board of Technical Education & Training, Andhra Pradesh" },
+    { src: "syllabus12.png", name: "Board of Secondary & Intermediate Education Andhra Pradesh" }
   ];
 
-  const scrollingImages = [...syllabusImages, ...syllabusImages];
+  // duplicate for infinite scrolling
+  const scrollingImages = [...syllabusItems, ...syllabusItems];
 
   return (
     <SyllabusWrapper>
       <div style={{ overflow: "hidden" }}>
         <SyllabusSlider>
           <SyllabusTrack>
-            {scrollingImages.map((src, index) => (
-              <Image src={src} alt={`Syllabus ${index + 1}`} key={index} />
+            {scrollingImages.map((item, index) => (
+              <ImageWrapper key={index}>
+                <ImageContainer>
+                  <Image src={item.src} alt={item.name} />
+                </ImageContainer>
+                <Label>{item.name}</Label>
+              </ImageWrapper>
             ))}
           </SyllabusTrack>
         </SyllabusSlider>
