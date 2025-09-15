@@ -1,10 +1,147 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import styled from "styled-components";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import Footer from "./Components/Footers/Footer"
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import Footer from "./Components/Footers/Footer";
+
+const Wrapper = styled.section`
+  background: #062e26;
+  color: #fff;
+  padding: 60px 2%;
+  font-family: sans-serif;
+  position: relative;
+  overflow: hidden;
+
+   .swiper {
+    overflow: visible !important;
+  }
+
+  .swiper-wrapper {
+    overflow: visible !important;
+  }
+
+  .swiper-slide {
+    overflow: visible !important;
+  }
+`;
+
+const SlideInner = styled.div`
+  overflow: visible; /* allow hover expansion */
+  height: 100%;
+  display: flex;
+  justify-content: center; /* center the card in slide */
+`;
+
+const TestimonialCard = styled.div`
+  background: #0a3e33;
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  min-width: 250px;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  position: relative;
+
+  &:hover {
+    height: auto;
+    min-height: 350px;
+    transform: scale(1.03);
+    z-index: 50;
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 480px) {
+    max-width: 250px;
+    height: 300px;
+    padding: 15px;
+  }
+
+  .testimonial-swiper {
+    overflow: visible !important;
+  }
+
+  .testimonial-swiper .swiper-slide {
+    overflow: visible !important;
+  }
+`;
+
+const Quote = styled.blockquote`
+  font-size: 0.9rem;
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  flex-shrink: 0;
+`;
+
+const Feedback = styled.div`
+  background: #0a3e33;
+  padding: 12px;
+  border-radius: 10px;
+  color: #dff5f0;
+  margin-top: auto;
+  font-size: 0.85rem;
+  max-height: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  ${TestimonialCard}:hover & {
+    max-height: none;
+    overflow: visible;
+  }
+`;
+
+const Author = styled.div`
+  font-weight: bold;
+  color: #9ee3d8;
+  margin-top: 10px;
+`;
+
+const Country = styled.div`
+  font-size: 0.85rem;
+  color: #b5e9df;
+  margin-top: 4px;
+`;
+
+const StarRating = styled.div`
+  color: gold;
+  font-size: 1rem;
+  margin-top: 5px;
+`;
+
+const Arrow = styled.div`
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  z-index: 20;
+  position: absolute;
+  top: 50%; /* center relative to wrapper */
+  transform: translateY(-50%);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.4);
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.95);
+    background: rgba(255, 255, 255, 0.6);
+  }
+`;
 
 const testimonials = [
   {
@@ -185,197 +322,73 @@ const testimonials = [
   },
 ];
 
-const Wrapper = styled.section`
-  background: #062e26;
-  color: #fff;
-  padding: 60px 2%;
-  font-family: sans-serif;
-  position: relative;
-
-  /* ✅ allow expanded card to show fully */
-  .slick-list {
-    overflow: visible;
-  }
-`;
-
-const CardWrapper = styled.div`
-  padding: 0 15px; /* ✅ gap between cards */
-`;
-
-const TestimonialCard = styled.div`
-  background: #0a3e33;
-  padding: 20px;
-  border-radius: 15px;
-  text-align: center;
-  min-width: 250px; /* safe minimum */
-  width: 100%; /* let slick control width */
-  height: 350px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  position: relative;
-
-  &:hover {
-    height: auto;
-    min-height: 350px;
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
-  }
-`;
-
-const Quote = styled.blockquote`
-  font-size: 0.9rem;
-  font-style: italic;
-  line-height: 1.4;
-  margin-bottom: 10px;
-  flex-shrink: 0;
-`;
-
-const Feedback = styled.div`
-  background: #0a3e33;
-  padding: 12px;
-  border-radius: 10px;
-  color: #dff5f0;
-  margin-top: auto;
-  font-size: 0.85rem;
-  max-height: 100px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-
-  ${TestimonialCard}:hover & {
-    max-height: none;
-    overflow: visible;
-  }
-`;
-
-const Author = styled.div`
-  font-weight: bold;
-  color: #9ee3d8;
-  margin-top: 10px;
-`;
-
-const Country = styled.div`
-  font-size: 0.85rem;
-  color: #b5e9df;
-  margin-top: 4px;
-`;
-
-const StarRating = styled.div`
-  color: gold;
-  font-size: 1rem;
-  margin-top: 5px;
-`;
-
-const Arrow = styled.div`
-  width: 40px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  cursor: pointer;
-  z-index: 20;
-  position: absolute;
-
-  top: 175px; 
-  transform: translateY(-50%);
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.4);
-    transform: translateY(-50%) scale(1.15);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  }
-
-  &:active {
-    transform: translateY(-50%) scale(0.95);
-    background: rgba(255, 255, 255, 0.6);
-  }
-
-   @media (max-width: 768px) {
-    &.next {
-      right: -10px;
-    }
-    &.prev {
-      left: -10px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    &.next {
-      right: -5px;
-    }
-    &.prev {
-      left: -5px;
-    }
-  }
-`;
-
-const NextArrow = ({ onClick }) => (
-  <Arrow className="next" onClick={onClick}>
-    <FaChevronRight size={18} />
-  </Arrow>
-);
-
-const PrevArrow = ({ onClick }) => (
-  <Arrow className="prev" onClick={onClick}>
-    <FaChevronLeft size={18} />
-  </Arrow>
-);
-
-const settings = {
-  dots: false,
-  infinite: false,
-  speed: 500,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  nextArrow: <NextArrow />,
-  prevArrow: <PrevArrow />,
-  responsive: [
-    {
-      breakpoint: 1024, // tablets
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 600, // phones
-      settings: {
-        slidesToShow: 1,
-      },
-    },
-  ],
-};
-
 const TestimonialPage = () => {
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [swiperInstance, setSwiperInstance] = React.useState(null);
+  const cardRefs = useRef([]);
+
+  React.useEffect(() => {
+  if (swiperInstance && prevRef.current && nextRef.current) {
+    swiperInstance.params.navigation.prevEl = prevRef.current;
+    swiperInstance.params.navigation.nextEl = nextRef.current;
+    swiperInstance.navigation.init();
+    swiperInstance.navigation.update();
+  }
+}, [swiperInstance]);
+
   return (
     <>
-    <Wrapper>
-      <Slider {...settings}>
-        {testimonials.map((t, idx) => (
-          <CardWrapper key={idx}>
-            <TestimonialCard>
-              <Quote>"{t.quote}"</Quote>
-              {t.feedbacks.map((fb, i) => (
-                <React.Fragment key={i}>
-                  <Feedback>
-                    <p>{fb.comment}</p>
-                  </Feedback>
-                  <Author>{t.name}, {t.company}</Author>
-                  <Country>{t.country}</Country>
-                  <StarRating>{"★".repeat(fb.stars)}</StarRating>
-                </React.Fragment>
-              ))}
-            </TestimonialCard>
-          </CardWrapper>
-        ))}
-      </Slider>
-    </Wrapper>
-    <Footer />
+      <Wrapper>
+  <Arrow ref={prevRef} style={{ left: "2px", top: "235px" }}>
+    <FaChevronLeft size={18} />
+  </Arrow>
+  <Arrow ref={nextRef} style={{ right: "2px", top: "235px" }}>
+    <FaChevronRight size={18} />
+  </Arrow>
+
+  <Swiper
+    onSwiper={(swiper) => {
+      setSwiperInstance(swiper);
+      // attach navigation buttons after refs are set
+      swiper.params.navigation.prevEl = prevRef.current;
+      swiper.params.navigation.nextEl = nextRef.current;
+      swiper.navigation.init();
+      swiper.navigation.update();
+    }}
+    modules={[Navigation]}
+    spaceBetween={30}
+    navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+    breakpoints={{
+      1024: { slidesPerView: 4 },
+      768: { slidesPerView: 2 },
+      480: { slidesPerView: 1 },
+    }}
+  >
+    {testimonials.map((t, idx) => (
+      <SwiperSlide key={idx}>
+  <SlideInner>
+    <TestimonialCard tabIndex={0} ref={(el) => (cardRefs.current[idx] = el)}>
+      <Quote>"{t.quote}"</Quote>
+      {t.feedbacks.map((fb, i) => (
+        <React.Fragment key={i}>
+          <Feedback>
+            <p>{fb.comment}</p>
+          </Feedback>
+          <Author>
+            {t.name}, {t.company}
+          </Author>
+          <Country>{t.country}</Country>
+          <StarRating>{"★".repeat(fb.stars)}</StarRating>
+        </React.Fragment>
+      ))}
+    </TestimonialCard>
+  </SlideInner>
+</SwiperSlide>
+    ))}
+  </Swiper>
+</Wrapper>
+      <Footer />
     </>
   );
 };
