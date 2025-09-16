@@ -11,6 +11,9 @@ const FooterContainer = styled.footer`
   border-top: 1px solid #0d3b31;
   width: 100%;
  
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const FooterLinks = styled.div`
