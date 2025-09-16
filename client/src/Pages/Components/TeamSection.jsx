@@ -173,7 +173,7 @@ const advisoryBoard = [
 const coreTeam = [
   { name: "Hiba Sherin", title: "English Dept.", img: "/core1.jpg" },
   { name: "Chaithra Nair", title: "Hindi Dept.", img: "/core2.jpg" },
-  { name: "Safvana Jasmin", title: "Science Dept.", img: "/Safavana.jpg" },
+  { name: "Safvana Jasmin", title: "Science Dept.", img: "/Safvana.png" },
   { name: "Amrutha", title: "Maths Dept.", img: "/Amurtha.png" },
   { name: "Fidha", title: "Arabic Dept.", img: "/Fidha.png" },
 ];
