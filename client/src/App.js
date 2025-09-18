@@ -29,7 +29,7 @@ function App() {
                     <Home />
                   </div>
                   <Syllabus />
-                  <div id="about" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
+                  <div id="about" style={{ scrollMarginTop: "12vh" }}>
                     <AboutSection />
                   </div>
                   <ServiceSection />

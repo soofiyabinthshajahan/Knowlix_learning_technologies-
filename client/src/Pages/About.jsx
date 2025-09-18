@@ -62,11 +62,11 @@ const Stats = styled.div`
 `;
 
 const StatCard = styled(motion.div)`
+  /* Small / mobile screens: horizontal layout */
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: space-between; /* ✅ pushes text to right edge */
-  padding: 16px 20px;
+  align-items: center; /* vertically center both spans */
+  padding: 20px 40px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -76,27 +76,37 @@ const StatCard = styled(motion.div)`
     font-size: 1.6rem;
     font-weight: bold;
     color: #004c34;
-    flex-shrink: 0; /* keeps number size fixed */
+    flex-shrink: 0;
+    width: 60px;
+    text-align: left;
   }
 
   span:last-child {
     color: #444;
     font-size: 0.95rem;
-    margin-left: auto; /* ✅ ensures it hugs right edge */
+    margin-left: auto; /* pushes label to right */
+    text-align: right;
+    flex-shrink: 0;
   }
 
-  /* ✅ Desktop overrides */
+  /* Desktop layout: vertical stack, centered */
   @media (min-width: 992px) {
     flex-direction: column;
     justify-content: center;
+    align-items: center; /* center horizontally */
     text-align: center;
+    padding: 20px 20px;
 
     span:first-child {
+      width: auto;
       margin-bottom: 5px;
+      text-align: center;
     }
 
     span:last-child {
       margin-left: 0;
+      font-size: 0.75rem;
+      text-align: center;
     }
   }
 `;

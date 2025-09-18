@@ -1,30 +1,30 @@
-import React from "react";
-import Slider from "react-slick";
+import React, { useRef, useState, useEffect } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import styled from "styled-components";
-import { useRef } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
-const Section = styled.div`
-  max-width: 1300px;
+const Section = styled.section`
+  max-width: 1300px; /* same as BlogServices */
   margin: 0 auto;
   padding: 40px 0;
   position: relative;
 
-  @media (max-width: 768px) {
-    padding: 40px 15px; /* extra horizontal padding on smaller screens */
+  @media (max-width: 1024px) {
+    padding: 40px 15px;
   }
 
   @media (max-width: 480px) {
-    padding: 40px 10px; /* even more padding on very small screens */
+    padding: 40px 10px;
   }
 `;
 
 const Title = styled.h2`
   font-size: 2rem;
   font-weight: bold;
-  color: #222; /* dark grey/black */
+  color: #222;
   margin-bottom: 20px;
   text-align: left;
 
@@ -33,18 +33,22 @@ const Title = styled.h2`
   }
 `;
 
+const SliderContainer = styled.div`
+  position: relative;
+`;
+
 const CardWrapper = styled.div`
   perspective: 1000px;
   padding: 10px;
 
   @media (max-width: 768px) {
-    padding: 5px; /* slightly smaller padding on mobile */
+    padding: 5px;
   }
 `;
 
 const Card = styled.div`
   width: 100%;
-  height: 320px;
+  height: 350px; /* match previous Slick size exactly */
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.8s;
@@ -89,7 +93,7 @@ const CardBack = styled.div`
   line-height: 1.4;
 `;
 
-const ArrowButton = styled.div`
+const Arrow = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -98,7 +102,9 @@ const ArrowButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
 
   &:hover {
@@ -108,6 +114,38 @@ const ArrowButton = styled.div`
   svg {
     color: white;
     font-size: 18px;
+  }
+`;
+
+const PrevArrow = styled(Arrow)`
+  left: -30px; /* default for desktop */
+
+  @media (max-width: 1024px) {
+    left: -1px; /* tablet */
+  }
+
+  @media (max-width: 768px) {
+    left: 5px; /* smaller tablets */
+  }
+
+  @media (max-width: 480px) {
+    left: 0px; /* mobile */
+  }
+`;
+
+const NextArrow = styled(Arrow)`
+  right: -30px; /* default for desktop */
+
+  @media (max-width: 1024px) {
+    right: 1px; /* tablet */
+  }
+
+  @media (max-width: 768px) {
+    right: 5px; /* smaller tablets */
+  }
+
+  @media (max-width: 480px) {
+    right: 0px; /* mobile */
   }
 `;
 
@@ -121,7 +159,7 @@ const cards = [
     desc: "Great meeting Dr. Nijad KK, HoD of Commerce at AIA College, Kuniyil, to discuss bringing Knowlix’s Data Analytics with Generative AI course to more students! Excited for what’s ahead!",
   },
   {
-    img: "/card3.jpeg",
+    img: "/card3.jpg",
     desc: "A strategic session at Al-Shifa College focused on business growth, enhancement, and future-oriented strategies, fostering meaningful dialogue with aspiring professionals.",
   },
   {
@@ -130,101 +168,56 @@ const cards = [
   },
 ];
 
-const PrevArrowButton = styled(ArrowButton)`
-  position: absolute;
-  top: 50%;
-  left: -50px;
-  transform: translateY(-50%);
-  z-index: 10;
-
-  @media (max-width: 768px) {
-    left: -10px;
-  }
-
-  @media (max-width: 480px) {
-    left: -5px;
-  }
-`;
-
-const NextArrowButton = styled(ArrowButton)`
-  position: absolute;
-  top: 50%;
-  right: -50px;
-  transform: translateY(-50%);
-  z-index: 10;
-
-  @media (max-width: 768px) {
-    right: -10px;
-  }
-
-  @media (max-width: 480px) {
-    right: -5px;
-  }
-`;
-
-const PrevArrow = ({ onClick }) => (
-  <PrevArrowButton onClick={onClick}>
-    <FaChevronLeft />
-  </PrevArrowButton>
-);
-
-const NextArrow = ({ onClick }) => (
-  <NextArrowButton onClick={onClick}>
-    <FaChevronRight />
-  </NextArrowButton>
-);
-
-const SliderWrapper = styled.div`
-  position: relative;
-`;
-
 const BlogCard = () => {
-  const sliderRef = useRef(null); // <--- add this
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [swiperInstance, setSwiperInstance] = useState(null);
 
-  const settings = {
-  dots: true,
-  infinite: false,
-  speed: 600,
-  slidesToShow: 4,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1024,
-      settings: { slidesToShow: 3 }, // optional intermediate breakpoint
-    },
-    {
-      breakpoint: 768,
-      settings: { slidesToShow: 2, slidesToScroll: 1 }, // now smaller cards
-    },
-    {
-      breakpoint: 480,
-      settings: { slidesToShow: 1, slidesToScroll: 1 }, // single card on very small screens
-    },
-  ],
-};
+  useEffect(() => {
+    if (swiperInstance) {
+      swiperInstance.params.navigation.prevEl = prevRef.current;
+      swiperInstance.params.navigation.nextEl = nextRef.current;
+      swiperInstance.navigation.init();
+      swiperInstance.navigation.update();
+    }
+  }, [swiperInstance]);
 
   return (
-<Section>
+    <Section>
       <Title>Collaborations</Title>
+      <SliderContainer>
+        <PrevArrow ref={prevRef}>
+          <FaChevronLeft />
+        </PrevArrow>
+        <NextArrow ref={nextRef}>
+          <FaChevronRight />
+        </NextArrow>
 
-      <SliderWrapper>
-        <Slider ref={sliderRef} {...settings}>
+        <Swiper
+          onSwiper={(swiper) => setSwiperInstance(swiper)}
+          modules={[Navigation]}
+          spaceBetween={20}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            480: { slidesPerView: 1 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 4 },
+          }}
+        >
           {cards.map((card, i) => (
-            <CardWrapper key={i}>
-              <Card>
-                <CardFront>
-                  <img src={card.img} alt={`card-${i}`} />
-                </CardFront>
-                <CardBack>{card.desc}</CardBack>
-              </Card>
-            </CardWrapper>
+            <SwiperSlide key={i}>
+              <CardWrapper>
+                <Card>
+                  <CardFront>
+                    <img src={card.img} alt={`card-${i}`} />
+                  </CardFront>
+                  <CardBack>{card.desc}</CardBack>
+                </Card>
+              </CardWrapper>
+            </SwiperSlide>
           ))}
-        </Slider>
-
-        {/* Custom arrows outside the Slider */}
-        <PrevArrow onClick={() => sliderRef.current.slickPrev()} />
-        <NextArrow onClick={() => sliderRef.current.slickNext()} />
-      </SliderWrapper>
+        </Swiper>
+      </SliderContainer>
     </Section>
   );
 };

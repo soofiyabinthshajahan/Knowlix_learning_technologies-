@@ -373,8 +373,8 @@ function Header() {
           <IconsContainer>
           
             
-            <Button onClick="">Contact us</Button>
-              <SearchContainer ref={searchContainerRef} show={showSearch}>
+            {/*<Button onClick="">Contact us</Button>*/}
+              {/*<SearchContainer ref={searchContainerRef} show={showSearch}>
               <SearchIcon onClick={toggleSearch}>
                 <FiSearch />
               </SearchIcon>
@@ -387,7 +387,7 @@ function Header() {
               <CloseSearch show={showSearch} onClick={() => setShowSearch(false)}>
                 <FiX size={18} />
               </CloseSearch>
-            </SearchContainer>
+            </SearchContainer>*/}
             {/*<IconWrapper>
               {token == null ? '' : <FiBell />}
               {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}

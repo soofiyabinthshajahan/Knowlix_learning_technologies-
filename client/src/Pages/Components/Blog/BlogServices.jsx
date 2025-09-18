@@ -1,23 +1,23 @@
-import React, { useRef } from "react";
-import Slider from "react-slick";
+import React, { useRef, useEffect, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 import styled from "styled-components";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 
-// Section container
 const Section = styled.div`
   max-width: 1300px;
   margin: 0 auto;
   padding: 40px 0;
   position: relative;
 
-  @media (max-width: 768px) {
-    padding: 40px 15px; /* extra horizontal padding on smaller screens */
+  @media (max-width: 1024px) {
+    padding: 40px 15px;
   }
 
   @media (max-width: 480px) {
-    padding: 40px 10px; /* even more padding on very small screens */
+    padding: 40px 10px;
   }
 `;
 
@@ -33,16 +33,10 @@ const Title = styled.h2`
   }
 `;
 
-// Card wrapper
 const CardWrapper = styled.div`
   padding: 10px;
-
-  @media (max-width: 768px) {
-    padding: 5px;
-  }
 `;
 
-// Service Card styling
 const Card = styled.div`
   background: #fff;
   border-radius: 12px;
@@ -59,14 +53,13 @@ const Card = styled.div`
 
 const CardImage = styled.img`
   width: 100%;
-  height: 200px; /* fixed height */
+  height: 300px;
   object-fit: cover;
-  display: block;
 `;
 
 const CardInfo = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 12px 15px;
   font-size: 0.95rem;
@@ -77,7 +70,7 @@ const CardTitle = styled.span`
 `;
 
 // Arrows
-const ArrowButton = styled.div`
+const Arrow = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -86,7 +79,9 @@ const ArrowButton = styled.div`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 10;
 
   &:hover {
@@ -99,102 +94,95 @@ const ArrowButton = styled.div`
   }
 `;
 
-const PrevArrowButton = styled(ArrowButton)`
-  position: absolute;
-  top: 50%;
-  left: -50px;
-  transform: translateY(-50%);
-  z-index: 10;
+const PrevArrow = styled(Arrow)`
+  left: -30px; /* default for desktop */
+
+  @media (max-width: 1024px) {
+    left: -1px; /* tablet */
+  }
 
   @media (max-width: 768px) {
-    left: -10px;
+    left: 5px; /* smaller tablets */
   }
 
   @media (max-width: 480px) {
-    left: -5px;
+    left: 0px; /* mobile */
   }
 `;
 
-const NextArrowButton = styled(ArrowButton)`
-  position: absolute;
-  top: 50%;
-  right: -50px;
-  transform: translateY(-50%);
-  z-index: 10;
+const NextArrow = styled(Arrow)`
+  right: -30px; /* default for desktop */
+
+  @media (max-width: 1024px) {
+    right: 1px; /* tablet */
+  }
 
   @media (max-width: 768px) {
-    right: -10px;
+    right: 5px; /* smaller tablets */
   }
 
   @media (max-width: 480px) {
-    right: -5px;
+    right: 0px; /* mobile */
   }
 `;
 
-// Card data
 const cards = [
-  { img: "/service1.jpeg", desc: "Webinar" },
-  { img: "/service2.jpeg", desc: "Webinar" },
-  { img: "/service3.jpeg", desc: "Webinar" },
-  { img: "/service4.jpeg", desc: "Webinar" },
-  { img: "/service5.jpg", desc: "Webinar" }
+  { img: "/service1.jpeg", desc: "A webinar that encouraged students to transform challenges into opportunities." },
+  { img: "/service2.jpeg", desc: "Inspiring future leaders to embrace creativity, resilience, and growth." },
+  { img: "/service3.jpeg", desc: "Empowering educators through AI: A webinar on making teaching smarter and easier." },
+  { img: "/service5.jpg", desc: "Enhancing the art of tutoring with simple, effective strategies." },
 ];
 
-// Custom arrows
-const PrevArrow = ({ onClick }) => (
-  <PrevArrowButton onClick={onClick}>
-    <FaChevronLeft />
-  </PrevArrowButton>
-);
-
-const NextArrow = ({ onClick }) => (
-  <NextArrowButton onClick={onClick}>
-    <FaChevronRight />
-  </NextArrowButton>
-);
-
-// Slider wrapper
-const SliderWrapper = styled.div`
-  position: relative;
-  overflow: visible;
-`;
-
 const BlogServices = () => {
-  const sliderRef = useRef(null);
+  const prevRef = useRef(null);
+  const nextRef = useRef(null);
+  const [swiperInstance, setSwiperInstance] = useState(null);
 
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 600,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    responsive: [
-      { breakpoint: 1024, settings: { slidesToShow: 3 } },
-      { breakpoint: 768, settings: { slidesToShow: 2 } },
-      { breakpoint: 480, settings: { slidesToShow: 1 } },
-    ],
-  };
+  useEffect(() => {
+    if (swiperInstance) {
+      swiperInstance.params.navigation.prevEl = prevRef.current;
+      swiperInstance.params.navigation.nextEl = nextRef.current;
+      swiperInstance.navigation.init();
+      swiperInstance.navigation.update();
+    }
+  }, [swiperInstance]);
 
   return (
     <Section>
       <Title>Talks and Trainings</Title>
-      <SliderWrapper>
-        <Slider ref={sliderRef} {...settings}>
-          {cards.map((card, i) => (
-            <CardWrapper key={i}>
-              <Card className="service-card">
-                <CardImage src={card.img} alt={`card-${i}`} className="service-image" />
-                <CardInfo className="service-info">
-                  <CardTitle className="service-title">{card.desc}</CardTitle>
+
+      <PrevArrow ref={prevRef}>
+        <FaChevronLeft />
+      </PrevArrow>
+      <NextArrow ref={nextRef}>
+        <FaChevronRight />
+      </NextArrow>
+
+      <Swiper
+        onSwiper={setSwiperInstance}
+        modules={[Navigation]}
+        spaceBetween={20}
+        slidesPerView={4} // default for desktop
+        breakpoints={{
+          0: { slidesPerView: 1 },     // mobile
+          480: { slidesPerView: 1 },   // small phones
+          768: { slidesPerView: 2 },   // tablets
+          1024: { slidesPerView: 4 },  // desktop
+        }}
+      >
+        {cards.map((card, i) => (
+          <SwiperSlide key={i}>
+            <CardWrapper>
+              <Card>
+                <CardImage src={card.img} alt={`card-${i}`} />
+                <CardInfo>
+                  <CardTitle>{card.desc}</CardTitle>
                 </CardInfo>
               </Card>
             </CardWrapper>
-          ))}
-        </Slider>
-
-        <PrevArrow onClick={() => sliderRef.current.slickPrev()} />
-        <NextArrow onClick={() => sliderRef.current.slickNext()} />
-      </SliderWrapper>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </Section>
   );
 };
