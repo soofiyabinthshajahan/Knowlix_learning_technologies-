@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Header from "./Header";
 import { FaWhatsapp } from "react-icons/fa";
-import CountUp from "react-countup";
+import { Helmet } from "react-helmet";
 import { useState } from "react";
 import BookDemoModal from "./Components/BookDemoModal";
 
@@ -228,6 +228,44 @@ function Home() {
   };
   const handleCloseDemoModal = () => setIsDemoModalOpen(false);
   return (
+    <>
+    <Helmet>
+  <title>Knowlix Learning – Personalized Smart Online Learning for Students</title>
+  <meta
+    name="description"
+    content="Knowlix Learning offers personalized, flexible, and interactive online learning to help students thrive from the comfort of their home."
+  />
+  <meta name="robots" content="index, follow" />
+
+  {/* Open Graph */}
+  <meta property="og:title" content="Knowlix Learning – Personalized Smart Online Learning for Students" />
+  <meta property="og:description" content="Knowlix Learning offers personalized, flexible, and interactive online learning to help students thrive from the comfort of their home." />
+  <meta property="og:image" content="https://www.knowlixlearning.com/home-banner.png" />
+  <meta property="og:url" content="https://www.knowlixlearning.com/" />
+  <meta property="og:type" content="website" />
+
+  {/* Twitter Card */}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Knowlix Learning – Personalized Smart Online Learning for Students" />
+  <meta name="twitter:description" content="Knowlix Learning offers personalized, flexible, and interactive online learning to help students thrive from the comfort of their home." />
+  <meta name="twitter:image" content="https://www.knowlixlearning.com/home-banner.png" />
+
+  {/* JSON-LD structured data */}
+  <script type="application/ld+json">
+    {`
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Knowlix Learning",
+      "description": "Knowlix Learning offers personalized, flexible, and interactive online learning to help students thrive from the comfort of their home.",
+      "url": "https://www.knowlixlearning.com"
+    }
+    `}
+  </script>
+
+  {/* Canonical */}
+  <link rel="canonical" href="https://www.knowlixlearning.com/" />
+</Helmet>
     <HomeSection>
       <Header />
 
@@ -289,6 +327,7 @@ function Home() {
         <FaWhatsapp />
       </WhatsAppButton>
     </HomeSection>
+    </>
   );
 }
 
