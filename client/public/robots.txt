@@ -1,0 +1,6 @@
+# robots.txt for Knowlix Learning
+User-agent: *
+Allow: /
+
+# Point to sitemap
+Sitemap: https://www.knowlixlearning.com/sitemap.xml
