@@ -36,6 +36,10 @@ const Heading = styled.h2`
   margin-bottom: 20px;
   color: #2d4236;
   line-height: 1.2;
+
+  @media (max-width: 600px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const Subtext = styled.p`
