@@ -25,7 +25,7 @@ function App() {
               path="/"
               element={
                 <>
-                  <div id="home" style={{ scrollMarginTop: "12vh", minHeight: "100vh" }}>
+                  <div id="home" style={{ scrollMarginTop: "12vh" }}>
                     <Home />
                   </div>
                   <Syllabus />
