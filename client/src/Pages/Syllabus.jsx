@@ -4,7 +4,7 @@ import styled, { keyframes } from "styled-components";
 const SyllabusWrapper = styled.section`
   width: 100%;
   background: #fff;
-  padding: 40px 0;
+  padding: 30px 0;
   overflow: hidden;
   font-family: "Inter", sans-serif;
 `;
@@ -20,7 +20,7 @@ const SyllabusSlider = styled.div`
   animation: ${scroll} 30s linear infinite;
 
   @media (max-width: 768px) {
-    animation: ${scroll} 40s linear infinite; /* slower scroll on mobile */
+    animation: ${scroll} 20s linear infinite; /* slower scroll on mobile */
   }
 `;
 
