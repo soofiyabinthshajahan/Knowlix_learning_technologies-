@@ -61,7 +61,7 @@ const BlogBanner = () => {
       {/* Call to Action Section */}
       <div className="cta-section">
         <h2>
-          Interested to collaborate? Let’s <em>Get in Touch!</em>
+          Interested to collaborate?<br className="mobile-break"/> Let’s <em>Get in Touch!</em>
         </h2>
         <div className="cta-button-wrapper">
           <button className="get-in-touch-btn" onClick={() => setShowModal(true)}>
