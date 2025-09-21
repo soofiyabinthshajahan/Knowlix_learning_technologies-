@@ -35,6 +35,13 @@ const SlideInner = styled.div`
   justify-content: center; /* center the card in slide */
 `;
 
+const SubmittedDate = styled.div`
+  font-size: 0.8rem;
+  color: #ccc;
+  margin-top: 6px;
+  font-style: italic;
+`;
+
 const TestimonialCard = styled.div`
   background: #0a3e33;
   padding: 20px;
@@ -151,6 +158,7 @@ const testimonials = [
     country: "Kerala,India",
     company: "Commerce Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 5,
     feedbacks: [
       {
         name: "Adil S/O Muhammad",
@@ -167,6 +175,7 @@ const testimonials = [
     country: "UAE",
     company: "KG 2 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 8,
     feedbacks: [
       {
         name: "Ayra Mehrin D/O Sana",
@@ -183,6 +192,7 @@ const testimonials = [
     country: "Kerala, India",
     company: "Science Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 10,
     feedbacks: [
       {
         name: "Adhila D/O Sajna",
@@ -199,6 +209,7 @@ const testimonials = [
     country: "Riyadh, Saudi Arabia",
     company: "KG 2 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 12,
     feedbacks: [
       {
         name: "Thufail S/O Saleena",
@@ -215,6 +226,7 @@ const testimonials = [
     country: "India",
     company: "Class 9 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 13,
     feedbacks: [
       {
         name: "Aflah S/O Sulaiman",
@@ -231,6 +243,7 @@ const testimonials = [
     country: "India",
     company: "Plus One Science Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 14,
     feedbacks: [
       {
         name: "Fathima",
@@ -247,6 +260,7 @@ const testimonials = [
     country: "Kerala, India",
     company: "Class 3 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 18,
     feedbacks: [
       {
         name: "Devdarsh S/O Athira",
@@ -263,6 +277,7 @@ const testimonials = [
     country: "Kerala, India",
     company: "Class 8 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 20,
     feedbacks: [
       {
         name: "Fadwa D/O Vaheed",
@@ -279,6 +294,7 @@ const testimonials = [
     country: "Kerala,India",
     company: "Class 5 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 24,
     feedbacks: [
       {
         name: "Ameya D/O Babitha",
@@ -295,6 +311,7 @@ const testimonials = [
     country: "Kerala, India",
     company: "Class 5 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 26,
     feedbacks: [
       {
         name: "Rayinaath D/O Jumana",
@@ -311,6 +328,7 @@ const testimonials = [
     country: "Bahrain",
     company: "Class 3 Student",
     image: "https://via.placeholder.com/300x300",
+    daysAgo: 28,
     feedbacks: [
       {
         name: "Jiyajin D/O Drishiya",
@@ -380,6 +398,7 @@ const TestimonialPage = () => {
           </Author>
           <Country>{t.country}</Country>
           <StarRating>{"★".repeat(fb.stars)}</StarRating>
+          <SubmittedDate>{t.daysAgo} days ago</SubmittedDate>
         </React.Fragment>
       ))}
     </TestimonialCard>

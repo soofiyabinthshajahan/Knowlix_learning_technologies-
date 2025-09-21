@@ -16,11 +16,15 @@
 }
 
 .blog-banner-row p {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #444;
   line-height: 1.7;
   margin-bottom: 25px;
   text-align: center;
+
+  @media (max-width: 600px) {
+    font-size: 0.75rem;
+  }
 }
 
 .blog-intro {
@@ -40,7 +44,7 @@
   margin-bottom: 20px;
 
   @media (max-width: 768px) {
-    font-size: 2rem;
+    font-size: 1.75rem;
   }
 }
 
@@ -49,6 +53,7 @@
   color: #444;
   line-height: 1.5;
   margin-bottom: 25px;
+  text-align: justify;
 
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -89,6 +94,19 @@
   font-size: 1.8rem;
   font-weight: bold;
   color: #0d0d0d;
+}
+
+/* default: don't break on desktop */
+.cta-section h2 .mobile-break {
+  display: none;
+}
+
+/* on mobile: break line */
+@media (max-width: 600px) {
+  .cta-section h2 .mobile-break {
+    display: block;
+    font-size: 1.3rem;
+  }
 }
 
 .cta-section em {

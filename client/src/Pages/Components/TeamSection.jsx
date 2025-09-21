@@ -10,7 +10,7 @@ const Section = styled.section`
   text-align: center;
 
   @media (max-width: 768px) {
-    padding: 60px 60px 20px;
+    padding: 60px 12px 20px;
   }
 `;
 
@@ -21,7 +21,7 @@ const Title = styled.h2`
   color: #0b6b40ff;
 
   @media (max-width: 600px) {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 `;
 
@@ -31,7 +31,7 @@ const Subtitle = styled.p`
   margin-bottom: 50px;
 
   @media (max-width: 600px) {
-    font-size: 1rem;
+    font-size: 0.75rem;
   }
 `;
 
@@ -53,18 +53,42 @@ const TeamGrid = styled.div`
   /* Default grid */
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
-  /* Management & Advisory (center align if < 3) */
-  &.management,
-  &.advisory {
+  /* Management */
+  &.management {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 32px;
+
+    @media (max-width: 768px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      gap: 8px; /* 👈 reduce gap on mobile */
+    }
+  }
+
+  /* Advisory Board */
+  &.advisory {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    gap: 32px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px; /* 👈 reduce gap on mobile */
+    }
   }
 
   /* Academics Core Team */
   &.core-team {
     grid-template-columns: repeat(5, 1fr);
+    gap: 32px;
 
     @media (max-width: 991px) {
       grid-template-columns: repeat(3, 1fr);
@@ -76,10 +100,11 @@ const TeamGrid = styled.div`
       grid-template-columns: repeat(2, 1fr);
       justify-items: center;
       justify-content: center;
+      gap: 8px; /* 👈 reduce gap on mobile */
     }
   }
 
-  /* Councillor (single card center aligned) */
+  /* Councillor */
   &.councillor {
     display: flex;
     justify-content: center;
@@ -104,11 +129,11 @@ const Card = styled.div`
   max-width: 260px; /* keeps consistent card width */
 
   @media (max-width: 768px) {
-    max-width: 180px;
+    max-width: 260px;
   }
 
   @media (max-width: 480px) {
-    max-width: 120px;
+    max-width: 260px;
     height: auto;
   }
 
