@@ -6,6 +6,11 @@ import TutorHero from './TutorHero';
 import RequirementsSect from './Requirements';
 import Process from './Process';
 import ProgramSect from './ProgramSect';
+import Footer from '../Footers/Footer';
+
+const Wrapper = styled.section`
+  background: linear-gradient(to bottom, rgba(0,0,0,0.03), #ffffff);
+`;
 
 const PageContainer = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -86,6 +91,7 @@ const TutorCareersPage = () => {
         <meta name="twitter:description" content="Become an online tutor with Knowlix Learning. Shape the future of education in Kerala with our professional advancement program and AI-driven teaching tools." />
         <meta name="twitter:image" content="https://www.knowlixlearning.com/careers-banner.png" />
       </Helmet>
+      <Wrapper>
     <Header />
     <PageContainer>
       <TutorHero />
@@ -104,6 +110,8 @@ const TutorCareersPage = () => {
         </p>
       </ApplySection>
     </PageContainer>
+    <Footer />
+    </Wrapper>
     </>
   );
 };
