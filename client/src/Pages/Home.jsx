@@ -80,7 +80,7 @@ const HeroContent = styled.div`
 
   button {
     padding: 12px 24px;
-    background-color: #477e6a;
+    background-color: #158a68;
     color: white;
     border: none;
     border-radius: 30px;
@@ -90,7 +90,7 @@ const HeroContent = styled.div`
     z-index: 10;
 
     &:hover {
-      background-color: #158a68;
+      background-color: #125844ff;
     }
   }
 
