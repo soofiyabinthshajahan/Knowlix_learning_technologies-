@@ -248,3 +248,102 @@ h2 {
   border-radius: 6px;
   outline: none;
 }
+
+/* --- Contact Modal Enhancements --- */
+
+.contact-modal {
+  text-align: center;
+  padding: 2.5rem 2rem;
+  border-radius: 1.5rem;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.contact-modal h2 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.contact-subtext {
+  color: #475569;
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.contact-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.contact-card {
+  background: #f8fafc;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  width: 260px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  background: #f1f5f9;
+}
+
+.contact-card h3 {
+  color: #0f172a;
+  font-size: 1.1rem;
+  margin-top: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.contact-card p {
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+/* Icon Circle Styling */
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.icon-circle img {
+  width: 26px;
+  height: 26px;
+}
+
+/* Custom Colors for Icons */
+.call-icon {
+  background: #10b981; /* Green */
+}
+
+.whatsapp-icon {
+  background: #10b981; /* WhatsApp Green */
+}
+
+.email-icon {
+  background: #10b981; /* Gmail Red */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-card {
+    width: 100%;
+  }
+
+  .contact-options {
+    gap: 1rem;
+  }
+}
