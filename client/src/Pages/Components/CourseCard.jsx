@@ -116,6 +116,16 @@ const ButtonGroup = styled.div`
   display: flex;
   gap: 0.75rem;
   margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+
+    & > * {
+      width: 80%; /* makes buttons centered & same width */
+    }
+  }
 `;
 
 const OutlineButton = styled.button`
@@ -164,7 +174,11 @@ const StyledLink = styled(Link)`
 `;
 
 const CourseCard = ({ course, onViewDetails }) => {
-  const color = CategoryColors[course.category];
+  const color = CategoryColors[course.category] || {
+    bg: '#f3f4f6',      // light gray
+    border: '#d1d5db',
+    text: '#374151'
+  };
 
   return (
     <Card>
