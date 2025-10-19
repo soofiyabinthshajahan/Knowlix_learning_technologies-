@@ -1,8 +1,13 @@
 import React from "react";
 import styled from "styled-components";
 import Header from "../Header"
+import Footer from "./Footers/Footer";
 
 // --- Styled Components ---
+const Wrapper = styled.section`
+  background: linear-gradient(to bottom, rgba(0,0,0,0.03), #ffffff);
+`;
+
 const Section = styled.section`
   padding: 100px 60px 20px;
   max-width: 1300px;
@@ -39,6 +44,9 @@ const SectionTitle = styled.h3`
   font-size: 1.6rem;
   font-weight: 600;
   margin: 40px 0 25px;
+  color: #0b6b40; /* same as homepage accent */
+  padding-bottom: 8px;
+
 
   @media (max-width: 600px) {
     font-size: 1.2rem;
@@ -62,7 +70,6 @@ const TeamGrid = styled.div`
 
     @media (max-width: 768px) {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
       justify-items: center;
       gap: 8px; /* 👈 reduce gap on mobile */
     }
@@ -70,17 +77,19 @@ const TeamGrid = styled.div`
 
   /* Advisory Board */
   &.advisory {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
+    grid-template-columns: repeat(5, 1fr);
     gap: 32px;
 
     @media (max-width: 991px) {
       grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      justify-items: center;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
       grid-template-columns: repeat(2, 1fr);
+      justify-items: center;
+      justify-content: center;
       gap: 8px; /* 👈 reduce gap on mobile */
     }
   }
@@ -184,11 +193,11 @@ const CardTitle = styled.p`
 
 // --- Data ---
 const managementTeam = [
-  { name: "Muhammed Jaseem", title: "MD", img: "/md.jpg" },
-  { name: "Casac Benjali", title: "Director", img: "/director.jpg" },
+  { name: "Muhammed Jaseem", title: "CEO", img: "/md.jpg" }
 ];
 
 const advisoryBoard = [
+  { name: "Casac Benjali", img: "/director.jpg" },
   { name: "Dr Nijad K K", title: "Asst. Professor - Calicut University", img: "/adv1.jpg" },
   { name: "Muhammed Afsal", title: "MBA", img: "/adv2.jpg" },
   { name: "Hidayathulla", title: "MD Zains", img: "/adv3.jpg" },
@@ -204,7 +213,7 @@ const coreTeam = [
 ];
 
 const councillor = [
-  { name: "Shurufa Yasmin", title: "Councillor", img: "/councillor.jpg" },
+  { name: "Shurufa Yasmin", title: "Counsellor", img: "/councillor.jpg" },
 ];
 
 // --- Component ---
@@ -221,7 +230,7 @@ const TeamSection = () => {
     ));
 
   return (
-    <>
+    <Wrapper>
     <Header />
     <Section>
       <Title>We are the people who make up Knowlix</Title>
@@ -231,7 +240,7 @@ const TeamSection = () => {
       </Subtitle>
 
       {/* Management Team */}
-      <SectionTitle>Management Team</SectionTitle>
+      <SectionTitle>Founder</SectionTitle>
       <TeamGrid className="management">{renderTeam(managementTeam)}</TeamGrid>
 
       {/* Advisory Board */}
@@ -243,10 +252,11 @@ const TeamSection = () => {
       <TeamGrid className="core-team">{renderTeam(coreTeam)}</TeamGrid>
 
       {/* Councillor */}
-      <SectionTitle>Councillor</SectionTitle>
+      <SectionTitle>Counsellor</SectionTitle>
       <TeamGrid className="councillor">{renderTeam(councillor)}</TeamGrid>
     </Section>
-    </>
+    <Footer />
+    </Wrapper>
   );
 };
 
