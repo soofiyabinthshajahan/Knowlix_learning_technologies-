@@ -56,7 +56,7 @@ const BookDemoModal = ({ show, onClose }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const selectedCountry = countryData[formData.country];
@@ -69,26 +69,41 @@ const BookDemoModal = ({ show, onClose }) => {
       syllabus: formData.syllabus === "Other" ? formData.customSyllabus : formData.syllabus,
       country: formData.country === "Other" ? formData.customCountry : formData.country,
       state: formData.state === "Other" ? formData.customState : formData.state,
-      contactNo: finalContact, // ✅ with country code
+      contactNo: finalContact, // with country code
     };
 
-    console.log("Form Submitted:", finalData);
-    alert("Demo request submitted! We will contact you soon.");
-    onClose();
+    try {
+      const res = await fetch("https://script.google.com/macros/s/AKfycbwR8zCWLQh6eB5m86cpBMmNnvfH282S_UR1f4IhU3jAgnHFeKFQanWjwPQdZULDGbbBmg/exec", { // <-- placeholder for backend URL
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(finalData),
+      });
 
-    // Reset
-    setFormData({
-      studentName: "",
-      studentClass: "",
-      syllabus: "",
-      customSyllabus: "",
-      country: "",
-      customCountry: "",
-      state: "",
-      customState: "",
-      parentName: "",
-      contactNo: "",
-    });
+      const data = await res.json();
+
+      if (data.success) {
+        alert(data.message);
+        onClose();
+        // Reset form
+        setFormData({
+          studentName: "",
+          studentClass: "",
+          syllabus: "",
+          customSyllabus: "",
+          country: "",
+          customCountry: "",
+          state: "",
+          customState: "",
+          parentName: "",
+          contactNo: "",
+        });
+      } else {
+        alert("Failed to submit form. Try again later.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong. Please try again.");
+    }
   };
 
   if (!show) return null;
