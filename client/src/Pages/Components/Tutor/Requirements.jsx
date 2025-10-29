@@ -1,5 +1,8 @@
+import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
+// Styled Components
 const RequirementsSection = styled.section`
   max-width: 1200px;
   margin: 60px auto;
@@ -24,7 +27,7 @@ const RequirementsSection = styled.section`
   }
 `;
 
-const RequirementsImage = styled.img`
+const RequirementsImage = styled(motion.img)`
   width: 500px;
   max-width: 100%;
   height: auto;
@@ -51,7 +54,7 @@ const RequirementsList = styled.div`
   }
 `;
 
-const Requirements = styled.ul`
+const Requirements = styled(motion.ul)`
   list-style: none;
   padding: 0;
   margin-bottom: 20px;
@@ -59,6 +62,7 @@ const Requirements = styled.ul`
   li {
     margin-bottom: 12px;
     font-size: 16px;
+    color: #555;
     
     span {
       font-weight: 700;
@@ -73,43 +77,100 @@ const Requirements = styled.ul`
   }
 `;
 
+// Motion Variants
+const containerVariants = {
+  hidden: {},
+  show: { 
+    transition: { staggerChildren: 0.15 } 
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeOut" } }
+};
+
+const imageVariants = {
+  hidden: { opacity: 0, x: 50 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
+};
+
 const RequirementsSect = () => {
-    return (
-        <RequirementsSection>
-        <div>
-          <h2>What We're Looking For</h2>
-          
-          <RequirementsList>
-            <h3>Educational Qualifications</h3>
-            <Requirements>
-              <li><span>Minimum Bachelor's degree</span> (Master's preferred for higher grades)</li>
-              <li><span>Subject expertise</span> in your teaching area</li>
-              <li><span>Teaching certifications</span> are a plus</li>
-            </Requirements>
+  const sections = [
+    {
+      title: "Educational Qualifications",
+      items: [
+        "Minimum Bachelor's degree (Master's preferred for higher grades)",
+        "Subject expertise in your teaching area",
+        "Teaching certifications are a plus"
+      ]
+    },
+    {
+      title: "Experience & Skills",
+      items: [
+        "Teaching experience (online/offline preferred but not mandatory)",
+        "Language proficiency in English, Hindi, or Malayalam",
+        "Clear communication skills and engaging teaching style"
+      ]
+    },
+    {
+      title: "Technical Setup",
+      items: [
+        "Laptop/Desktop with good webcam",
+        "Stable internet connection (high-speed recommended)",
+        "Headset with microphone for clear audio",
+        "Familiarity with Zoom, Google Meet, or Teams"
+      ]
+    }
+  ];
 
-            <h3>Experience & Skills</h3>
-            <Requirements>
-              <li><span>Teaching experience</span> (online/offline preferred but not mandatory)</li>
-              <li><span>Language proficiency</span> in English, Hindi, or Malayalam</li>
-              <li><span>Clear communication skills</span> and engaging teaching style</li>
-            </Requirements>
+  return (
+    <RequirementsSection
+      as={motion.div}
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      <div>
+        <motion.h2
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          What We're Looking For
+        </motion.h2>
 
-            <h3>Technical Setup</h3>
-            <Requirements>
-              <li><span>Laptop/Desktop</span> with good webcam</li>
-              <li><span>Stable internet connection</span> (high-speed recommended)</li>
-              <li><span>Headset with microphone</span> for clear audio</li>
-              <li><span>Familiarity</span> with Zoom, Google Meet, or Teams</li>
-            </Requirements>
-          </RequirementsList>
-        </div>
-        
-        <RequirementsImage
-          src="https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg"
-          alt="Online Teaching Setup"
-        />
-      </RequirementsSection>
-    )
-}
+        <RequirementsList>
+          {sections.map((section, i) => (
+            <div key={i}>
+              <motion.h3
+                variants={itemVariants}
+              >
+                {section.title}
+              </motion.h3>
+              <Requirements
+                variants={containerVariants}
+              >
+                {section.items.map((item, j) => (
+                  <motion.li key={j} variants={itemVariants}>
+                    {item}
+                  </motion.li>
+                ))}
+              </Requirements>
+            </div>
+          ))}
+        </RequirementsList>
+      </div>
+
+      <RequirementsImage
+        src="https://images.pexels.com/photos/4145190/pexels-photo-4145190.jpeg"
+        alt="Online Teaching Setup"
+        variants={imageVariants}
+      />
+    </RequirementsSection>
+  );
+};
 
 export default RequirementsSect;

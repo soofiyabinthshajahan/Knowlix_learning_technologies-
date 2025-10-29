@@ -28,6 +28,106 @@ const Wrapper = styled.section`
   }
 `;
 
+
+const VideoSection = styled.section`
+  background: linear-gradient(135deg, #062e26 0%, #08372d 100%);
+  color: #fff;
+  padding: 60px;
+  text-align: center;
+  font-family: sans-serif;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #fff;
+    font-weight: 700;
+  }
+
+  p {
+    color: #9ee3d8;
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .video-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+
+  .video-wrapper {
+    margin: 0 10px;
+  }
+
+  .video-wrapper {
+    position: relative;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-8px);
+    }
+  }
+
+  video {
+    width: 280px;
+    height: 500px;
+    margin-right: 30px;
+    margin-left: 30px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(158, 227, 216, 0.2);
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 25px 70px rgba(0, 0, 0, 0.4);
+      border-color: rgba(158, 227, 216, 0.4);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .video-container {
+      gap: 35px;
+    }
+
+    video {
+      width: 240px;
+      height: 426px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    padding: 60px 5% 80px;
+    
+    h2 { 
+      font-size: 1.8rem; 
+    }
+
+    p {
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+    }
+
+    .video-container {
+      gap: 30px;
+    }
+
+    video {
+      width: 200px;
+      height: 355px;
+      border-radius: 15px;
+    }
+  }
+`;
+
 const SlideInner = styled.div`
   overflow: visible; /* allow hover expansion */
   height: 100%;
@@ -41,6 +141,50 @@ const SubmittedDate = styled.div`
   margin-top: 6px;
   font-style: italic;
 `;
+
+const SectionTitle = styled.div`
+  text-align: center;
+  margin-bottom: 40px;
+
+  h2 {
+    font-size: 2.5rem;
+    color: #9ee3d8;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  p {
+    color: #b5e9df;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    h2 {
+      font-size: 2rem;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    h2 {
+      font-size: 1.6rem;
+    }
+    p {
+      font-size: 0.95rem;
+    }
+  }
+`;
+
+const TestimonialContainer = styled.div`
+  position: relative; /* arrows will now be relative to this */
+  width: 100%;
+  padding: 20px 0;
+`;
+
 
 const TestimonialCard = styled.div`
   background: #0a3e33;
@@ -358,55 +502,76 @@ const TestimonialPage = () => {
   return (
     <>
       <Wrapper>
-  <Arrow ref={prevRef} style={{ left: "2px", top: "235px" }}>
-    <FaChevronLeft size={18} />
-  </Arrow>
-  <Arrow ref={nextRef} style={{ right: "2px", top: "235px" }}>
-    <FaChevronRight size={18} />
-  </Arrow>
+        <SectionTitle>
+          <h2>What Our Parents Say</h2>
+          <p>Read the experiences and feedback from parents who trust Knowlix for their children’s learning.</p>
+        </SectionTitle>
+        <TestimonialContainer>
+        <Arrow ref={prevRef} style={{ left: "2px", top: "200px" }}>
+          <FaChevronLeft size={18} />
+        </Arrow>
+        <Arrow ref={nextRef} style={{ right: "2px", top: "200px" }}>
+          <FaChevronRight size={18} />
+        </Arrow>
+        <Swiper
+          onSwiper={(swiper) => {
+            setSwiperInstance(swiper);
+            // attach navigation buttons after refs are set
+            swiper.params.navigation.prevEl = prevRef.current;
+            swiper.params.navigation.nextEl = nextRef.current;
+            swiper.navigation.init();
+            swiper.navigation.update();
+          }}
+          modules={[Navigation]}
+          spaceBetween={30}
+          navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
+          breakpoints={{
+            1024: { slidesPerView: 4 },
+            768: { slidesPerView: 2 },
+            480: { slidesPerView: 1 },
+          }}
+        >
+          {testimonials.map((t, idx) => (
+            <SwiperSlide key={idx}>
+        <SlideInner>
+          <TestimonialCard tabIndex={0} ref={(el) => (cardRefs.current[idx] = el)}>
+            <Quote>"{t.quote}"</Quote>
+            {t.feedbacks.map((fb, i) => (
+              <React.Fragment key={i}>
+                <Feedback>
+                  <p>{fb.comment}</p>
+                </Feedback>
+                <Author>
+                  {t.name}, {t.company}
+                </Author>
+                <Country>{t.country}</Country>
+                <StarRating>{"★".repeat(fb.stars)}</StarRating>
+                <SubmittedDate>{t.daysAgo} days ago</SubmittedDate>
+              </React.Fragment>
+            ))}
+          </TestimonialCard>
+        </SlideInner>
+      </SwiperSlide>
+          ))}
+        </Swiper>
+        </TestimonialContainer>
+      </Wrapper>
+      <VideoSection>
+        <h2>Hear From Our Parents</h2>
+        <p>Listen to what our parents have to say about their Knowlix experience.</p>
 
-  <Swiper
-    onSwiper={(swiper) => {
-      setSwiperInstance(swiper);
-      // attach navigation buttons after refs are set
-      swiper.params.navigation.prevEl = prevRef.current;
-      swiper.params.navigation.nextEl = nextRef.current;
-      swiper.navigation.init();
-      swiper.navigation.update();
-    }}
-    modules={[Navigation]}
-    spaceBetween={30}
-    navigation={{ prevEl: prevRef.current, nextEl: nextRef.current }}
-    breakpoints={{
-      1024: { slidesPerView: 4 },
-      768: { slidesPerView: 2 },
-      480: { slidesPerView: 1 },
-    }}
-  >
-    {testimonials.map((t, idx) => (
-      <SwiperSlide key={idx}>
-  <SlideInner>
-    <TestimonialCard tabIndex={0} ref={(el) => (cardRefs.current[idx] = el)}>
-      <Quote>"{t.quote}"</Quote>
-      {t.feedbacks.map((fb, i) => (
-        <React.Fragment key={i}>
-          <Feedback>
-            <p>{fb.comment}</p>
-          </Feedback>
-          <Author>
-            {t.name}, {t.company}
-          </Author>
-          <Country>{t.country}</Country>
-          <StarRating>{"★".repeat(fb.stars)}</StarRating>
-          <SubmittedDate>{t.daysAgo} days ago</SubmittedDate>
-        </React.Fragment>
-      ))}
-    </TestimonialCard>
-  </SlideInner>
-</SwiperSlide>
-    ))}
-  </Swiper>
-</Wrapper>
+        <div className="video-grid">
+          <video controls>
+            <source src="parent1.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+
+          <video controls>
+            <source src="parent2.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </VideoSection>
       <Footer />
     </>
   );

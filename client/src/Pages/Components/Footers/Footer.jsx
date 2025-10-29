@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaLinkedin, FaInstagram, FaFacebook, FaWhatsapp } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
+import ContactUsModal from '../Contact';
+
 const FooterContainer = styled.footer`
   background: #041f1a;
   color: #cde8e0;
@@ -62,25 +64,28 @@ const SocialIcons = styled.div`
   }
 `;
 
-const scrollToSection = (id) => {
-  const section = document.getElementById(id);
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
-  }
-};
-
 const Footer = () => {
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+
+  const scrollToSection = (id) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleOpenContactModal = () => setIsContactModalOpen(true);
+  const handleCloseContactModal = () => setIsContactModalOpen(false);
+
   return (
     <FooterContainer>
       <FooterLinks>
-        <FooterClick onClick={() => scrollToSection("home")}>
-          Home</FooterClick> | 
+        <FooterClick onClick={() => scrollToSection("home")}>Home</FooterClick> | 
         <FooterClick onClick={() => scrollToSection("about")}>About</FooterClick> | 
-        <FooterClick onClick={() => scrollToSection("courses")}>Courses</FooterClick> |
-     
-          <Link to="/blog">Blog</Link> | 
+        <FooterClick onClick={() => scrollToSection("courses")}>Courses</FooterClick> | 
+        <Link to="/blog">Blog</Link> | 
         <Link to="/policy">Policy</Link> | 
-        <FooterClick onClick={() => scrollToSection("contact")}>Contact</FooterClick>
+        <FooterClick onClick={handleOpenContactModal}>Contact</FooterClick>
       </FooterLinks>
 
       <Address>
@@ -108,6 +113,9 @@ const Footer = () => {
       <div style={{ textAlign: "center", marginTop: "10px" }}>
         © {new Date().getFullYear()} Knowlix Learning. All rights reserved.
       </div>
+
+      {/* Contact Modal */}
+      <ContactUsModal show={isContactModalOpen} onClose={handleCloseContactModal} />
     </FooterContainer>
   );
 };

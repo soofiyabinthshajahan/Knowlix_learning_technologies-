@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { FiSearch, FiBell, FiSun, FiMoon, FiMenu, FiX } from "react-icons/fi";
 import BookDemoModal from './Components/BookDemoModal';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import ContactUsModal from "./Components/Contact";
 
 const HeaderSection = styled.header`
   height: 10vh;
@@ -246,10 +247,11 @@ const MobileMenuIcon = styled.div`
 `;
 
 const MobileMenu = styled.div`
-  position: absolute;
-  top: 8vh;
+  position: fixed;
+  top: 8vh; /* below the header */
   left: 0;
   right: 0;
+  bottom: 0;
   background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   padding: 20px 5%;
@@ -257,14 +259,22 @@ const MobileMenu = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-height: 35vh;
 
   @media (min-width: 1025px) {
-    display: none; // hide on desktop
+    display: none; /* hide on desktop */
+  }
+
+  @media (min-width: 768px) {
+    top: 6vh; /* match mobile header height */
+    padding: 15px 5%;
+    max-height: 34vh;
   }
 
   @media (max-width: 768px) {
-    top: 6vh;
+    top: 6vh; /* match mobile header height */
     padding: 15px 5%;
+    max-height: 30vh;
   }
 `;
 
@@ -286,6 +296,7 @@ function Header() {
   const [isDemoModalOpen, setIsDemoModalOpen] = useState(false);
   const searchInputRef = useRef(null);
   const searchContainerRef = useRef(null);
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -342,6 +353,15 @@ function Header() {
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  const handleOpenContactModal = () => {
+    setIsContactModalOpen(true);
+    setShowMobileMenu(false); // if you have a mobile menu open
+  };
+
+  const handleCloseContactModal = () => {
+    setIsContactModalOpen(false);
+  };
 
   return (
     <>
@@ -414,17 +434,15 @@ function Header() {
             <Element>
               <Link to="/careers">Careers</Link>
             </Element>
-            <Element>
-              <Link to="/policy">Policy</Link>
-            </Element>
           </HeaderElements>
-          <Button onClick="">Contact Us</Button>
+          <Button onClick={handleOpenContactModal}>Contact Us</Button>
           {/*<IconWrapper>
             {token == null ? '' : <FiBell />}
             {isDark ? <FiSun onClick={toggleTheme} /> : <FiMoon onClick={toggleTheme} />}
           </IconWrapper>*/}
         </MobileMenu>
       )}
+      <ContactUsModal show={isContactModalOpen} onClose={handleCloseContactModal} />
     </>
   );
 }
