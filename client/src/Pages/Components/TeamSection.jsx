@@ -248,7 +248,7 @@ const TeamSection = () => {
       <TeamGrid className="advisory">{renderTeam(advisoryBoard)}</TeamGrid>
 
       {/* Academics Core Team */}
-      <SectionTitle>Academics Core Team</SectionTitle>
+      <SectionTitle>Academics Leadership Team</SectionTitle>
       <TeamGrid className="core-team">{renderTeam(coreTeam)}</TeamGrid>
 
       {/* Councillor */}
