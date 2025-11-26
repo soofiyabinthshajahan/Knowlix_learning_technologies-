@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import "./Modal.css";
+import React, { useState, useCallback, useRef } from "react";
+import "./Modal.css"
+
+// --- Configuration Data ---
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzbLwA-FpD3uYamOyDgq8g2lrvnIFuYSEuSWPNGKi37aUeOXoLGPRD4QqsD5z7q3EVN/exec"; 
 
 const statesByCountry = {
   India: [
@@ -22,95 +25,159 @@ const statesByCountry = {
 };
 
 const countryData = {
-  India: { code: "+91" },
-  US: { code: "+1" },
-  UAE: { code: "+971"  },
-  Bahrain: { code: "+973" },
-  Kuwait: { code: "+965" },
-  Oman: { code: "+968" },
-  Qatar: { code: "+974" },
-  "Saudi Arabia": { code: "+966" },
-  UK: { code: "+44" },
+  India: { code: "+91", flag: "🇮🇳" },
+  US: { code: "+1", flag: "🇺🇸" },
+  UAE: { code: "+971", flag: "🇦🇪" },
+  Bahrain: { code: "+973", flag: "🇧🇭" },
+  Kuwait: { code: "+965", flag: "🇰🇼" },
+  Oman: { code: "+968", flag: "🇴🇲" },
+  Qatar: { code: "+974", flag: "🇶🇦" },
+  "Saudi Arabia": { code: "+966", flag: "🇸🇦" },
+  UK: { code: "+44", flag: "🇬🇧" },
+  Other: { code: "", flag: "" }, // Placeholder for custom country
+};
+// --- End Configuration Data ---
+
+
+const initialFormData = {
+  studentName: "",
+  studentClass: "",
+  syllabus: "",
+  customSyllabus: "",
+  country: "",
+  customCountry: "",
+  state: "",
+  customState: "",
+  parentName: "",
+  contactNo: "",
 };
 
+
 const BookDemoModal = ({ show, onClose }) => {
-  const [formData, setFormData] = useState({
-    studentName: "",
-    studentClass: "",
-    syllabus: "",
-    customSyllabus: "",
-    country: "",
-    customCountry: "",
-    state: "",
-    customState: "",
-    parentName: "",
-    contactNo: "",
-  });
+  const [formData, setFormData] = useState(initialFormData);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  // Ref for the hidden iframe
+  const iframeRef = useRef(null);
 
-   const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     const { name, value } = e.target;
+    
+    setFormData((prevData) => {
+      const newData = { ...prevData, [name]: value };
+      
+      // Reset state/customState if country changes
+      if (name === 'country' && prevData.country !== value) {
+        newData.state = '';
+        newData.customState = '';
+      }
+      return newData;
+    });
+  }, []);
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const selectedCountry = countryData[formData.country];
-    const finalContact = selectedCountry
-      ? `${selectedCountry.code}${formData.contactNo}`
+    // Prevent re-submission
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    console.log("Submission started...");
+
+    const selectedCountry = countryData[formData.country] || countryData['Other'];
+    
+    // 1. Prepare Contact Number with Country Code
+    const finalContact = selectedCountry.code
+      ? `${selectedCountry.code} ${formData.contactNo}`
       : formData.contactNo;
 
+    // 2. Resolve 'Other' inputs and gather all data
     const finalData = {
-      ...formData,
+      studentName: formData.studentName,
+      studentClass: formData.studentClass,
       syllabus: formData.syllabus === "Other" ? formData.customSyllabus : formData.syllabus,
       country: formData.country === "Other" ? formData.customCountry : formData.country,
-      state: formData.state === "Other" ? formData.customState : formData.state,
-      contactNo: finalContact, // with country code
+      // If country is 'Other', use customState for 'state' column. If country is known but state is 'Other', use customState. Otherwise, use state.
+      state: formData.country === "Other" ? formData.customState : (formData.state === "Other" ? formData.customState : formData.state),
+      parentName: formData.parentName,
+      contactNo: finalContact, // Final contact number with country code/prefix
+    };
+    
+    // --- GUARANTEED SUBMISSION LOGIC (HIDDEN FORM) ---
+    const formId = "apps-script-submit-form";
+    let form = document.getElementById(formId);
+
+    // Create form if it doesn't exist
+    if (!form) {
+      form = document.createElement('form');
+      form.id = formId;
+      form.action = APPS_SCRIPT_URL;
+      form.method = 'POST';
+      form.target = 'hidden_iframe_target'; // Targets the hidden iframe
+      form.style.display = 'none';
+      document.body.appendChild(form);
+    } else {
+      // Clear previous inputs
+      form.innerHTML = '';
+    }
+
+    // Add data fields as hidden inputs to the form
+    Object.keys(finalData).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = finalData[key];
+      form.appendChild(input);
+    });
+
+    // Function to handle the form completion (Success or Timeout)
+    const handleCompletion = (isSuccess) => {
+      if (isSuccess) {
+        console.log("Submission successful via iframe onload.");
+        // Use user's preferred alert method
+        alert("Demo request successfully submitted! We will contact you shortly.");
+        setFormData(initialFormData); // Reset form
+        onClose(); 
+      } else {
+        console.warn("Submission timed out or failed to trigger onload.");
+        alert("Submission timed out. The request might have been sent, but please check the data sheet or try again.");
+      }
+      
+      // Cleanup and UI reset
+      if (iframeRef.current) {
+        iframeRef.current.onload = null; // Remove listener
+      }
+      clearTimeout(timeoutId); // Clear the hanging timeout
+      setIsSubmitting(false); // Stop the spinner/message
     };
 
-    try {
-      const res = await fetch("https://script.google.com/macros/s/AKfycbwR8zCWLQh6eB5m86cpBMmNnvfH282S_UR1f4IhU3jAgnHFeKFQanWjwPQdZULDGbbBmg/exec", { // <-- placeholder for backend URL
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(finalData),
-      });
+    let timeoutId;
 
-      const data = await res.json();
-
-      if (data.success) {
-        alert(data.message);
-        onClose();
-        // Reset form
-        setFormData({
-          studentName: "",
-          studentClass: "",
-          syllabus: "",
-          customSyllabus: "",
-          country: "",
-          customCountry: "",
-          state: "",
-          customState: "",
-          parentName: "",
-          contactNo: "",
-        });
-      } else {
-        alert("Failed to submit form. Try again later.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Something went wrong. Please try again.");
+    // Setup onload listener on the iframe
+    if (iframeRef.current) {
+      // Important: Use an arrow function to preserve 'this' and ensure fresh state access (though in this implementation, handleCompletion handles the cleanup)
+      iframeRef.current.onload = () => handleCompletion(true);
     }
+
+    // Setup Timeout (e.g., 10 seconds)
+    timeoutId = setTimeout(() => {
+        // Only run timeout if the onload listener is still active (i.e., hasn't fired yet)
+        if (iframeRef.current && iframeRef.current.onload !== null) { 
+            handleCompletion(false);
+        }
+    }, 10000); // 10 seconds
+
+    // Submit the hidden form
+    form.submit();
+    console.log("Hidden form submitted to iframe.");
+    // --- END GUARANTEED SUBMISSION LOGIC ---
   };
 
   if (!show) return null;
 
   const classes = ["1","2","3","4","5","6","7","8","9","10","11","12"];
   const syllabusOptions = ["CBSE","ICSE","State Board","IB","Cambridge","Other"];
-  const countryOptions = Object.keys(statesByCountry);
+  const countryOptions = Object.keys(statesByCountry).filter(c => c !== "Other"); // Exclude internal 'Other'
   const selectedCountry = countryData[formData.country];
 
   return (
@@ -119,6 +186,7 @@ const BookDemoModal = ({ show, onClose }) => {
         <span className="close-button" onClick={onClose}>&times;</span>
         <h2>Book a Demo Session</h2>
         <form onSubmit={handleSubmit}>
+          
           {/* Student Name */}
           <div className="form-group">
             <label htmlFor="studentName">Student Name:</label>
@@ -191,6 +259,7 @@ const BookDemoModal = ({ show, onClose }) => {
               {countryOptions.map((c) => (
                 <option key={c} value={c}>{c}</option>
               ))}
+              <option value="Other">Other</option>
             </select>
             {formData.country === "Other" && (
               <input
@@ -214,14 +283,31 @@ const BookDemoModal = ({ show, onClose }) => {
               value={formData.state}
               onChange={handleChange}
               required
-              disabled={!formData.country}
+              disabled={!formData.country || formData.country === "Other"}
             >
               <option value="">Select your State</option>
-              {formData.country &&
-                statesByCountry[formData.country]?.map((state, index) => (
-                  <option key={index} value={state}>{state}</option>
-                ))}
+              {/* Only show states if a known country is selected */}
+              {formData.country && statesByCountry[formData.country] && formData.country !== "Other" && (
+                <>
+                  {statesByCountry[formData.country].map((state, index) => (
+                    <option key={index} value={state}>{state}</option>
+                  ))}
+                  <option value="Other">Other</option>
+                </>
+              )}
             </select>
+            {/* Show custom state input if 'Other' state is selected OR if 'Other' country is selected */}
+            {((formData.state === "Other" && formData.country && formData.country !== "Other") || formData.country === "Other") && (
+              <input
+                type="text"
+                name="customState"
+                className="custom-input"
+                placeholder="Enter your state/region"
+                value={formData.customState}
+                onChange={handleChange}
+                required
+              />
+            )}
           </div>
 
           {/* Parent Name */}
@@ -241,7 +327,8 @@ const BookDemoModal = ({ show, onClose }) => {
           <div className="form-group">
             <label htmlFor="contactNo">Contact No:</label>
             <div className="phone-input">
-              {selectedCountry && (
+              {/* Added a fallback check for selectedCountry to avoid errors */}
+              {selectedCountry && selectedCountry.code && (
                 <span className="phone-prefix">
                   {selectedCountry.flag} {selectedCountry.code}
                 </span>
@@ -255,12 +342,26 @@ const BookDemoModal = ({ show, onClose }) => {
                 pattern="[0-9]{10}"
                 title="Please enter a 10-digit contact number"
                 required
+                // Note: The original submission logic will prefix this number with the code regardless of pattern
               />
             </div>
           </div>
 
-          <button type="submit" className="submit-button">Book a Demo</button>
+          <button type="submit" className="submit-button" disabled={isSubmitting}>
+            {isSubmitting ? 'Submitting...' : 'Book a Demo'}
+          </button>
         </form>
+
+        {/* This hidden iframe is the key to reliable cross-origin form submission */}
+        {/* The onload event on this iframe is used to detect completion. */}
+        <iframe 
+          id="hidden_iframe_target" 
+          name="hidden_iframe_target" 
+          ref={iframeRef}
+          style={{ display: 'none' }}
+          title="Google Apps Script Submission Target"
+        ></iframe>
+
       </div>
     </div>
   );
